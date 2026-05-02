@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cloud Declutter</string>
+    <string name="wird_gescannt">%s wird gescannt.</string>
+    <string name="file_progress">Datei %d von %d</string>
 </resources>
