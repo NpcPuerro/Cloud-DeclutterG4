@@ -89,6 +89,9 @@ public class scanningActivity extends AppCompatActivity {
                     // Scanning finished
                     running = false;
                     spinner.setVisibility(View.GONE);
+                    //REPLACE: file deletion is missing in between.
+                    Intent intent = new Intent(this, ReportActivity.class);
+                    startActivity(intent);
                     return;
                 }
             }

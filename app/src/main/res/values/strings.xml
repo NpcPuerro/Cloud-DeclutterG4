@@ -2,4 +2,6 @@
     <string name="app_name">Cloud Declutter</string>
     <string name="wird_gescannt">%s wird gescannt.</string>
     <string name="file_progress">Datei %d von %d</string>
+    <string name="files_deleted">Du hast heute %d Dateien mit einer Gesamtgröße von %.2f %s gelöscht.</string>
+    <string name="see_recycle_bin">Die gelöschten Dateien können innerhalb der nächsten <b>14</b> Tage aus dem <b>Papierkorb</b> wiederhergestellt werden.</string>
 </resources>
