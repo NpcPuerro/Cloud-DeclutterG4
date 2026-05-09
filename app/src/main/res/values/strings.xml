@@ -4,4 +4,37 @@
     <string name="file_progress">Datei %d von %d</string>
     <string name="files_deleted">Du hast heute %d Dateien mit einer Gesamtgröße von %.2f %s gelöscht.</string>
     <string name="see_recycle_bin">Die gelöschten Dateien können innerhalb der nächsten <b>14</b> Tage aus dem <b>Papierkorb</b> wiederhergestellt werden.</string>
+    <string name="select_all">Alle auswählen</string>
+    <string name="select_file_types">Dateitypen auswählen</string>
+    <string name="clear_all">Alle löschen</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="ok">OK</string>
+
+    <string name="scan_starten">Scan starten</string>
+    <string name="clouds">Clouds</string>
+    <string name="dateigroesse">Dateigröße</string>
+    <string name="von">von</string>
+    <string name="bis">bis</string>
+    <string name="dateityp">Dateityp</string>
+    <string name="dateiname_enthaelt">Dateiname enthält</string>
+    <string name="hint_comma_separated">Begriffe mit Beistrichen trennen</string>
+    <string name="zeitraum_erstelldatum">Erstelldatum (Zeitraum)</string>
+    <string name="zeitraum_waehlen">Zeitraum wählen</string>
+    <string name="error_no_cloud">Mindestens eine Cloud muss ausgewählt sein</string>
+
+    <string-array name="size_units">
+        <item>B</item>
+        <item>kB</item>
+        <item>MB</item>
+        <item>GB</item>
+    </string-array>
+
+    <string-array name="file_types">
+        <item>Bilder</item>
+        <item>Videos</item>
+        <item>Dokumente</item>
+        <item>Audio</item>
+        <item>Archive</item>
+        <item>Sonstige</item>
+    </string-array>
 </resources>

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Scan(View v){
-        Intent intent = new Intent(this, scanningActivity.class);
+        Intent intent = new Intent(this, ScanSettingsActivity.class);
         startActivity(intent);
     }
 

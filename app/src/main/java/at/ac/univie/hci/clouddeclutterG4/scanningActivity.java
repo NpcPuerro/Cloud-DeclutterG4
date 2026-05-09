@@ -15,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class scanningActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class scanningActivity extends AppCompatActivity {
     private ProgressBar spinner;
 
     //clouds in scanning queue and files per cloud
-    private String[] clouds;
+    private ArrayList<String> clouds;
     private int[] filesPerCloud;
     private boolean running;
     private int currentFile = 0;
@@ -57,14 +58,22 @@ public class scanningActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+
+        Intent intent = getIntent();
+        clouds = intent.getStringArrayListExtra("clouds");
         // Initialize data if needed
         if (clouds == null) {
-            clouds = new String[]{"iCloud", "Google Drive"};
-            filesPerCloud = new int[]{5, 7};
+            ArrayList<String> clouds = new ArrayList<>();
+            filesPerCloud = new int[]{};
+        }else {
+            filesPerCloud = new int[clouds.size()];
+            for (int i = 0;i < clouds.size();i++){
+                filesPerCloud[i] = rng.nextInt(5,20);
+            }
         }
 
         running = true;
-        cloudText.setText(getString(R.string.wird_gescannt, clouds[currentCloudIdx]));
+        cloudText.setText(getString(R.string.wird_gescannt, clouds.get(currentCloudIdx)));
         fileText.setText(getString(R.string.file_progress, currentFile, filesPerCloud[currentCloudIdx]));
 
         // Start the scanning process
@@ -81,10 +90,10 @@ public class scanningActivity extends AppCompatActivity {
             if (currentFile < filesPerCloud[currentCloudIdx]) {
                 currentFile++;
             } else {
-                if (currentCloudIdx + 1 < clouds.length) {
+                if (currentCloudIdx + 1 < clouds.size()) {
                     currentCloudIdx++;
                     currentFile = 0; // Reset for the next cloud
-                    cloudText.setText(getString(R.string.wird_gescannt, clouds[currentCloudIdx]));
+                    cloudText.setText(getString(R.string.wird_gescannt, clouds.get(currentCloudIdx)));
                 } else {
                     // Scanning finished
                     running = false;
