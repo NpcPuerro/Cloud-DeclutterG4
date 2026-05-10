@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private Button goScan;
+    private Button goLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +28,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         goScan = findViewById(R.id.button);
+        goLogin = findViewById(R.id.btGoLogin);
+
+        goLogin.setOnClickListener(this::gotoLogin);
     }
 
     public void Scan(View v){
         Intent intent = new Intent(this, ScanSettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void gotoLogin(View v) {
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 

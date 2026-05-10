@@ -37,4 +37,16 @@
         <item>Archive</item>
         <item>Sonstige</item>
     </string-array>
+    
+    <string name="loginEmailHint">Email</string>
+    <string name="loginPasswordHint">Passwort</string>
+    <string name="loginConfirmPasswordHint">Passwort bestätigen</string>
+    <string name="loginSubmitLogin">Anmelden</string>
+    <string name="loginSubmitSignup">Registrieren</string>
+    <string name="loginNoAccount">Hast du noch kein Konto? %s</string>
+    <string name="loginNoAccountLink">Jetzt Registrieren</string>
+    <string name="loginYesAccount">Hast du bereits ein Konto? %s</string>
+    <string name="loginYesAccountLink">Anmelden</string>
+    <string name="loginPwdNoMatch"><font color="#FF0000">&#x2718; Passwörter stimmen nicht überein</font></string>
+    <string name="loginPwdYesMatch"><font color="#008000">&#x2714; Passwörter stimmen überein</font></string>
 </resources>
