@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button goScan;
     private Button goLogin;
+    private Button goFAQ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
         goScan = findViewById(R.id.button);
         goLogin = findViewById(R.id.btGoLogin);
+        goFAQ = findViewById(R.id.btGoFAQ);
 
         goLogin.setOnClickListener(this::gotoLogin);
+        goFAQ.setOnClickListener(this::gotoFAQ);
     }
 
     public void Scan(View v){
@@ -40,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void gotoLogin(View v) {
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void gotoFAQ(View v) {
+        Intent intent = new Intent(this, FAQActivity.class);
         startActivity(intent);
     }
 

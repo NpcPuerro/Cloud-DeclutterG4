@@ -37,7 +37,7 @@
         <item>Archive</item>
         <item>Sonstige</item>
     </string-array>
-    
+
     <string name="loginEmailHint">Email</string>
     <string name="loginPasswordHint">Passwort</string>
     <string name="loginConfirmPasswordHint">Passwort bestätigen</string>
