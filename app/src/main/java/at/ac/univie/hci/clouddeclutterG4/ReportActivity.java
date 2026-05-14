@@ -21,12 +21,12 @@ import com.anychart.charts.Pie;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ReportActivity extends AppCompatActivity {
 
     private TextView deletionData;
     private Button doneButton;
-    private HashMap<String,Double> chartData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +42,35 @@ public class ReportActivity extends AppCompatActivity {
         deletionData = findViewById(R.id.textView4);
         doneButton = findViewById(R.id.button2);
 
-        //replace with intent from file deletion:
-        deletionData.setText(getString(R.string.files_deleted,4,1.2,"GB"));
-        chartData = new HashMap<String,Double>();
-        chartData.put("Bilder",0.2);
-        chartData.put("Videos",0.7);
-        chartData.put("Textdateien",0.2);
-        chartData.put("Sonstige",0.1);
+        List<FileItem> trashItems = MockDataManager.getInstance().trashItems;
+        int count = trashItems.size();
+        long totalBytes = 0;
+        Map<String, Long> typeBytesMap = new HashMap<>();
+
+        for (FileItem item : trashItems) {
+            totalBytes += item.sizeBytes;
+            String type = (item.type != null && !item.type.isEmpty()) ? item.type : "Sonstige";
+            typeBytesMap.merge(type, item.sizeBytes, Long::sum);
+        }
+
+        double sizeToShow;
+        String unit;
+        if (totalBytes >= 1024L * 1024L * 1024L) {
+            sizeToShow = totalBytes / (1024.0 * 1024.0 * 1024.0);
+            unit = "GB";
+        } else {
+            sizeToShow = totalBytes / (1024.0 * 1024.0);
+            unit = "MB";
+        }
+
+        deletionData.setText(getString(R.string.files_deleted, count, sizeToShow, unit));
 
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
         Pie pie = AnyChart.pie();
 
         List<DataEntry> data = new ArrayList<>();
-        for (String key : chartData.keySet()) {
-            data.add(new ValueDataEntry(key, chartData.get(key)));
+        for (Map.Entry<String, Long> entry : typeBytesMap.entrySet()) {
+            data.add(new ValueDataEntry(entry.getKey(), entry.getValue()));
         }
 
         pie.data(data);
