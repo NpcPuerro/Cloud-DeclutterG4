@@ -55,6 +55,13 @@
     <string name="loginPwdNoMatch"><font color="#FF0000">&#x2718; Passwörter stimmen nicht überein</font></string>
     <string name="loginPwdYesMatch"><font color="#008000">&#x2714; Passwörter stimmen überein</font></string>
 
+    <string name="accChangeEmail">Email ändern</string>
+    <string name="accChangePassword">Passwort ändern</string>
+    <string name="accOldPwd">Altes Passwort</string>
+    <string name="accNewPwd">Neues Passwort</string>
+    <string name="accConfirmNewPwd">Neues Passwort bestätigen</string>
+    <string name="accChangedPwd">Passwort geändert</string>
+
     <string name="nav_main">Main Page</string>
     <string name="nav_cloud">Cloud Dienste</string>
     <string name="nav_usage">Speichernutzung</string>

@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(this, FAQActivity.class));
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
+        } else if (id == R.id.nav_account) {
+            startActivity(new Intent(this, AccountActivity.class));
         }
 
         drawerLayout.closeDrawer(GravityCompat.START); //new File Naomi

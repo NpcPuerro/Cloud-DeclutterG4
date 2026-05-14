@@ -57,6 +57,23 @@ public class SignupFragment extends Fragment {
         txNoAccount.setText(spannable);
         txNoAccount.setMovementMethod(LinkMovementMethod.getInstance());
 
+        etSignupPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                updatePwdConfirm();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         etSignupPasswordConfirm.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
