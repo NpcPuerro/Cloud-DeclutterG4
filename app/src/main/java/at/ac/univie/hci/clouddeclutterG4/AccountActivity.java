@@ -157,7 +157,7 @@ public class AccountActivity extends AppCompatActivity {
             else {
                 Snackbar.make(
                         v,
-                        "Not a valid Email",
+                        R.string.invalidEmailWarning,
                         Snackbar.LENGTH_SHORT
                 ).show();
             }

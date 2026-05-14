@@ -42,13 +42,22 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(this::submit);
 
         TextView txNoAccount = view.findViewById(R.id.txNoAccount);
-        String linkText = getString(R.string.loginNoAccountLink);
-        String fullText = getString(R.string.loginNoAccount, linkText);
+        String accLinkText = getString(R.string.loginNoAccountLink);
+        String accFullText = getString(R.string.loginNoAccount, accLinkText);
 
-        Spannable spannable = LoginUtils.getSpannable(fullText, linkText, this::showSignup);
+        Spannable accSpannable = LoginUtils.getSpannable(accFullText, accLinkText, this::showSignup);
 
-        txNoAccount.setText(spannable);
+        txNoAccount.setText(accSpannable);
         txNoAccount.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView txForgotPassword = view.findViewById(R.id.txForgotPassword);
+        String fpwdLinkText = getString(R.string.loginForgotPasswordLink);
+        String fpwdFullText = getString(R.string.loginForgotPassword, fpwdLinkText);
+
+        Spannable fpwdSpannable = LoginUtils.getSpannable(fpwdFullText, fpwdLinkText, this::showForgotPassword);
+
+        txForgotPassword.setText(fpwdSpannable);
+        txForgotPassword.setMovementMethod(LinkMovementMethod.getInstance());
 
         return view;
     }
@@ -56,6 +65,11 @@ public class LoginFragment extends Fragment {
     private void showSignup(View v) {
         LoginActivity activity = (LoginActivity) requireActivity();
         activity.showSignupFragment();
+    }
+
+    private void showForgotPassword(View v) {
+        LoginActivity activity = (LoginActivity) requireActivity();
+        activity.showForgotPasswordFragment();
     }
 
     // TODO: change submit logic

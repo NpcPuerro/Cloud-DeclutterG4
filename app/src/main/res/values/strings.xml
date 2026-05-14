@@ -43,6 +43,8 @@
         <item>Sonstige</item>
     </string-array>
 
+    <string name="invalidEmailWarning">Die eingegebene Email Adresse ist nicht gültig.</string>
+
     <string name="loginEmailHint">Email</string>
     <string name="loginPasswordHint">Passwort</string>
     <string name="loginConfirmPasswordHint">Passwort bestätigen</string>
@@ -54,6 +56,12 @@
     <string name="loginYesAccountLink">Anmelden</string>
     <string name="loginPwdNoMatch"><font color="#FF0000">&#x2718; Passwörter stimmen nicht überein</font></string>
     <string name="loginPwdYesMatch"><font color="#008000">&#x2714; Passwörter stimmen überein</font></string>
+    <string name="loginFpwdDescription1">Gib die Email deines Accounts ein</string>
+    <string name="loginFpwdSendMail">Bestätigen</string>
+    <string name="loginFpwdGoBack">Zurück zu Login</string>
+    <string name="loginFpwdDescription2">Ein Zurücksetzungslink wurde an deine Email gesendet.</string>
+    <string name="loginForgotPassword">Passwort vergessen? %s</string>
+    <string name="loginForgotPasswordLink">Passwort zurücksetzen</string>
 
     <string name="accChangeEmail">Email ändern</string>
     <string name="accChangePassword">Passwort ändern</string>

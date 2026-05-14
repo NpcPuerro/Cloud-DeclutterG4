@@ -18,8 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import at.ac.univie.hci.clouddeclutterG4.LoginActivity;
 import at.ac.univie.hci.clouddeclutterG4.MainActivity;
 import at.ac.univie.hci.clouddeclutterG4.R;
@@ -102,7 +100,7 @@ public class SignupFragment extends Fragment {
 
     private void showLogin(View v) {
         LoginActivity activity = (LoginActivity) requireActivity();
-        activity.showLoginFragment();
+        activity.returnToPrevFragment();
     }
 
     // TODO: change submit logic

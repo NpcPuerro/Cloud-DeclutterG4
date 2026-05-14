@@ -8,7 +8,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
 
+import at.ac.univie.hci.clouddeclutterG4.ui.login.ForgotPasswordConfirmFragment;
+import at.ac.univie.hci.clouddeclutterG4.ui.login.ForgotPasswordFragment;
 import at.ac.univie.hci.clouddeclutterG4.ui.login.LoginFragment;
 import at.ac.univie.hci.clouddeclutterG4.ui.login.SignupFragment;
 
@@ -31,9 +34,46 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void showLoginFragment() {
+    public void returnToPrevFragment() {
         getSupportFragmentManager()
                 .popBackStack();
+    }
+
+    public void returnToLogin() {
+        getSupportFragmentManager().popBackStack(
+                null,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+        );
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(
+                        R.id.fragment_container_login,
+                        new LoginFragment()
+                )
+                .commit();
+    }
+
+    public void showForgotPasswordFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(
+                        R.id.fragment_container_login,
+                        new ForgotPasswordFragment()
+                )
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void showForgotPasswordConfirmFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(
+                        R.id.fragment_container_login,
+                        new ForgotPasswordConfirmFragment()
+                )
+                .addToBackStack(null)
+                .commit();
     }
 
     public void showSignupFragment() {
