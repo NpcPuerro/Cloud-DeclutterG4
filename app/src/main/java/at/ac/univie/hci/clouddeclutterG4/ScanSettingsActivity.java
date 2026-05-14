@@ -150,7 +150,6 @@ public class ScanSettingsActivity extends AppCompatActivity {
             intent.putExtra("fileTypes", fileTypeSelector.getText().toString()); //Comma separated list, has to be converted to real list or parsed
             intent.putExtra("nameContains", nameContains.getText().toString()); //Comma separated list, has to be converted to real list or parsed
             intent.putExtra("dateRange", selectedDateRange);
-
             startActivity(intent);
         }
     }

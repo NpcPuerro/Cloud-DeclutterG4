@@ -127,5 +127,6 @@
     <string name="sort_title">Sortieren nach</string>
     <string name="msg_no_files_cleanup_hint">Keine Dateien zum Bereinigen gefunden (Prüfen Sie Ihre Cloud-Einstellungen).</string>
 
+    <string name="btn_done">Fertig</string>
     <string name="btn_next">Weiter</string>
 </resources>

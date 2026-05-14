@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/nav_main"
+        android:title="@string/nav_main"/>
+    <item
+        android:id="@+id/nav_cloud"
+        android:title="@string/nav_cloud" />
+    <item
+        android:id="@+id/nav_usage"
+        android:title="@string/nav_usage" />
+    <item
+        android:id="@+id/nav_cleanup"
+        android:title="@string/nav_cleanup" />
+    <item
+        android:id="@+id/nav_thrash"
+        android:title="@string/nav_thrash" />
+    <item
+        android:id="@+id/nav_account"
+        android:title="@string/nav_account" />
+    <item
+        android:id="@+id/nav_settings"
+        android:title="@string/nav_settings" />
+    <item
+        android:id="@+id/nav_faq"
+        android:title="@string/nav_faq" />
+</menu>
