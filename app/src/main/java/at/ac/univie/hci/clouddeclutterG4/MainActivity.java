@@ -2,53 +2,58 @@ package at.ac.univie.hci.clouddeclutterG4;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem; //new File Naomi
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.GravityCompat; //new File Naomi
+import androidx.drawerlayout.widget.DrawerLayout; //new File Naomi
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView; //new File Naomi
 
-    private Button goScan;
-    private Button goLogin;
-    private Button goFAQ;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //new File Naomi
+    private DrawerLayout drawerLayout; //new File Naomi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        goScan = findViewById(R.id.button);
-        goLogin = findViewById(R.id.btGoLogin);
-        goFAQ = findViewById(R.id.btGoFAQ);
+        drawerLayout = findViewById(R.id.drawer_layout); //new File Naomi
+        NavigationView navigationView = findViewById(R.id.nav_view); //new File Naomi
+        navigationView.setNavigationItemSelectedListener(this); //new File Naomi
 
-        goLogin.setOnClickListener(this::gotoLogin);
-        goFAQ.setOnClickListener(this::gotoFAQ);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar); //new File Naomi
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_main, R.string.nav_main); //new File Naomi
+        drawerLayout.addDrawerListener(toggle); //new File Naomi
+        toggle.syncState(); //new File Naomi
+
+        findViewById(R.id.btn_cleanup).setOnClickListener(v -> startActivity(new Intent(this, scanningActivity.class))); //new File Naomi
+        findViewById(R.id.btn_usage).setOnClickListener(v -> startActivity(new Intent(this, UsageActivity.class))); //new File Naomi
     }
 
-    public void Scan(View v){
-        Intent intent = new Intent(this, ScanSettingsActivity.class);
-        startActivity(intent);
-    }
+    @Override  //new File Naomi
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
 
-    public void gotoLogin(View v) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
+        if (id == R.id.nav_cloud) {
+            startActivity(new Intent(this, CloudActivity.class));
+        } else if (id == R.id.nav_usage) {
+            startActivity(new Intent(this, UsageActivity.class));
+        } else if (id == R.id.nav_cleanup) {
+            startActivity(new Intent(this, scanningActivity.class));
+        } else if (id == R.id.nav_thrash) {
+            startActivity(new Intent(this, TrashActivity.class));
+        } else if (id == R.id.nav_faq) {
+            startActivity(new Intent(this, FAQActivity.class));
+        } else if (id == R.id.nav_settings) {
+            startActivity(new Intent(this, ScanSettingsActivity.class));
+        }
 
-    public void gotoFAQ(View v) {
-        Intent intent = new Intent(this, FAQActivity.class);
-        startActivity(intent);
+        drawerLayout.closeDrawer(GravityCompat.START); //new File Naomi
+        return true; //new File Naomi
     }
-
 }

@@ -11,6 +11,9 @@
     <string name="ok">OK</string>
 
     <string name="scan_starten">Scan starten</string>
+    <string name="scan_running">Scan läuft…</string>
+    <string name="pause">Pausieren</string>
+    <string name="resume">Fortsetzen</string>
     <string name="clouds">Clouds</string>
     <string name="dateigroesse">Dateigröße</string>
     <string name="von">von</string>
@@ -49,4 +52,80 @@
     <string name="loginYesAccountLink">Anmelden</string>
     <string name="loginPwdNoMatch"><font color="#FF0000">&#x2718; Passwörter stimmen nicht überein</font></string>
     <string name="loginPwdYesMatch"><font color="#008000">&#x2714; Passwörter stimmen überein</font></string>
+
+    <string name="nav_main">Main Page</string>
+    <string name="nav_cloud">Cloud Dienste</string>
+    <string name="nav_usage">Speichernutzung</string>
+    <string name="nav_cleanup">Speicherbereinigung</string>
+    <string name="nav_thrash">Papierkorb</string>
+    <string name="nav_account">Account</string>
+    <string name="nav_settings">Einstellungen</string>
+    <string name="nav_faq">FAQ</string>
+
+    <string name="status_label">Der Status ist:</string>
+    <string name="status_ok">Alles ist Funktionsbereit!</string>
+
+    <string name="trash_title">Papierkorb</string>
+    <string name="trash_info_14_days">Dateien werden nach 14 Tagen gelöscht.</string>
+    <string name="btn_empty_trash">Papierkorb jetzt leeren</string>
+    <string name="btn_restore">Wiederherstellen</string>
+    <string name="btn_delete">Löschen</string>
+
+    <string name="msg_no_files_selected">Keine Dateien ausgewählt</string>
+    <string name="msg_restored">Dateien wiederhergestellt</string>
+    <string name="msg_deleted_forever">Dateien endgültig gelöscht</string>
+    <string name="trash_empty_confirm_msg">Möchten Sie alle Dateien endgültig löschen?</string>
+    <string name="btn_cancel">Abbrechen</string>
+    <string name="account_label">Konto: %1$s</string>
+    <string name="msg_no_files_found">Keine Dateien gefunden.</string>
+
+    <string name="usage_title">Speichernutzung</string>
+    <string name="storage_internal">Gerätespeicher</string>
+    <string name="storage_total">64 GB Gesamtkapazität</string>
+    <string name="storage_used">Belegt: 48 GB (75%)</string>
+    <string name="type_images">Bilder: 20 GB (31%)</string>
+    <string name="type_videos">Videos: 15 GB (23%)</string>
+    <string name="type_apps">Apps: 10 GB (16%)</string>
+    <string name="type_other">Sonstiges: 3 GB (5%)</string>
+    <string name="btn_add_cloud">Cloud-Dienst hinzufügen</string>
+
+    <string name="cloud_title">Cloud Dienste</string>
+    <string name="status_connected">Status: Verbunden</string>
+    <string name="status_not_connected">Status: Nicht verbunden</string>
+    <string name="active_for_scans">Aktiv für Scans</string>
+    <string name="btn_connect">Verbinden</string>
+
+    <string name="dropbox_login_title">Dropbox Login</string>
+    <string name="login_header">Anmelden</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Passwort</string>
+    <string name="btn_login">Einloggen</string>
+    <string name="msg_dropbox_success">Erfolgreich mit Dropbox verbunden</string>
+
+    <string name="cleanup_title">Speicherbereinigung</string>
+    <string name="btn_filter">Filter</string>
+    <string name="btn_sort">Sortieren</string>
+    <string name="msg_confirm_move_to_trash">Möchten Sie %1$d Elemente in den Papierkorb verschieben?</string>
+    <string name="btn_yes">Ja</string>
+    <string name="msg_moved_to_trash">Elemente in den Papierkorb verschoben</string>
+
+    <string name="filter_name_label">Dateiname beinhaltet:</string>
+    <string name="filter_name_hint">z.B. Foto</string>
+    <string name="filter_type_label">Dateityp:</string>
+    <string name="filter_min_size_label">Min. Größe (MB):</string>
+    <string name="filter_max_size_label">Max. Größe (MB):</string>
+    <string name="filter_title">Filter einstellen</string>
+    <string name="btn_apply">Anwenden</string>
+    <string name="msg_invalid_size">Ungültige Größe</string>
+    <string name="btn_reset">Zurücksetzen</string>
+    <string name="sort_name_az">Name (A-Z)</string>
+    <string name="sort_name_za">Name (Z-A)</string>
+    <string name="sort_size_desc">Größe (Groß zuerst)</string>
+    <string name="sort_size_asc">Größe (Klein zuerst)</string>
+    <string name="sort_date_desc">Datum (Neu zuerst)</string>
+    <string name="sort_date_asc">Datum (Alt zuerst)</string>
+    <string name="sort_title">Sortieren nach</string>
+    <string name="msg_no_files_cleanup_hint">Keine Dateien zum Bereinigen gefunden (Prüfen Sie Ihre Cloud-Einstellungen).</string>
+
+    <string name="btn_next">Weiter</string>
 </resources>

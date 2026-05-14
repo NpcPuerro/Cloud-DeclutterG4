@@ -1,5 +1,6 @@
 package at.ac.univie.hci.clouddeclutterG4.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import at.ac.univie.hci.clouddeclutterG4.LoginActivity;
+import at.ac.univie.hci.clouddeclutterG4.MainActivity;
 import at.ac.univie.hci.clouddeclutterG4.R;
 
 public class LoginFragment extends Fragment {
@@ -60,10 +62,9 @@ public class LoginFragment extends Fragment {
     private void submit(View v) {
         if (etLoginEmail == null) return;
         String email = etLoginEmail.getText().toString();
-        Snackbar.make(
-                v,
-                String .format("Login for: %s", email),
-                Snackbar.LENGTH_SHORT
-        ).show();
+        
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 }

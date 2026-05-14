@@ -2,7 +2,28 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.CloudDeclutter" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/koenigsblau</item>
+    </style>
+
+    <style name="BigButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:textSize">24sp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:minHeight">80dp</item>
+    </style>
+
+    <style name="BigTextStyle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="HeaderTextStyle">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/koenigsblau</item>
+    </style>
+
+    <style name="NavMenuItemStyle">
+        <item name="android:textSize">22sp</item>
     </style>
 
     <style name="Theme.CloudDeclutter" parent="Base.Theme.CloudDeclutter" />

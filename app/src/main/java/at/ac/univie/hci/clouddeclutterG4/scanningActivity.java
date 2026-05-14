@@ -42,6 +42,7 @@ public class scanningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_scanning);
+        
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -57,15 +58,30 @@ public class scanningActivity extends AppCompatActivity {
         // Initialize data once in onCreate
         Intent intent = getIntent();
         clouds = intent.getStringArrayListExtra("clouds");
+        
+        MockDataManager dm = MockDataManager.getInstance();
+        
         if (clouds == null || clouds.isEmpty()) {
             clouds = new ArrayList<>();
-            clouds.add("Unknown Cloud"); // Fallback
-            filesPerCloud = new int[]{1};
-        } else {
-            filesPerCloud = new int[clouds.size()];
-            for (int i = 0; i < clouds.size(); i++) {
-                filesPerCloud[i] = rng.nextInt(5, 20);
+            for (String cloudName : dm.cloudServices.keySet()) {  //new File Naomi
+                if (dm.cloudServices.get(cloudName).isConnected) {
+                    clouds.add(cloudName);
+                }
             }
+        }
+        
+        if (clouds.isEmpty()) {
+            clouds.add("Gerätespeicher");
+        }
+
+        filesPerCloud = new int[clouds.size()];
+        for (int i = 0; i < clouds.size(); i++) {
+            // Count actual items for this cloud if possible, otherwise random
+            int count = 0;
+            for (FileItem item : dm.cleanupItems) {
+                if (item.source.equals(clouds.get(i))) count++;  //new File Naomi
+            }
+            filesPerCloud[i] = count > 0 ? count : rng.nextInt(5, 15);
         }
         
         currentFile = 0;
@@ -115,7 +131,7 @@ public class scanningActivity extends AppCompatActivity {
                     spinner.setVisibility(View.GONE);
                     
                     // Start ReportActivity and finish this one so it doesn't stay in backstack
-                    Intent intent = new Intent(this, ReportActivity.class);
+                    Intent intent = new Intent(this, CleanupActivity.class);
                     startActivity(intent);
                     finish(); 
                     return;
@@ -134,11 +150,11 @@ public class scanningActivity extends AppCompatActivity {
             spinner.setVisibility(View.INVISIBLE);
             running = false;
             handler.removeCallbacksAndMessages(null); // Stop scheduled updates
-            buttonPause.setText("Fortsetzen"); // Optional UX improvement
+            buttonPause.setText(getString(R.string.resume)); 
         } else {
             spinner.setVisibility(View.VISIBLE);
             running = true;
-            buttonPause.setText("Pausieren");
+            buttonPause.setText(getString(R.string.pause));
             scan(); // Resume updates
         }
     }
