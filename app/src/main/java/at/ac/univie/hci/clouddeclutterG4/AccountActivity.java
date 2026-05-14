@@ -40,6 +40,8 @@ public class AccountActivity extends AppCompatActivity {
             return insets;
         });
 
+        findViewById(R.id.toolbar).setOnClickListener(v -> finish());
+
         txPwMatch = findViewById(R.id.txPwMatch);
         etEmail = findViewById(R.id.etAccEmail);
         etOldPwd = findViewById(R.id.etAccOldPwd);
