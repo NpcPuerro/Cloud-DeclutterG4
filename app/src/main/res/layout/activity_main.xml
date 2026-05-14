@@ -53,12 +53,20 @@
                 android:text="@string/nav_cleanup" />
 
             <Button
+                android:id="@+id/btn_main_scan"
+                style="@style/BigButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/btn_main_scan" />
+
+            <Button
                 android:id="@+id/btn_usage"
                 style="@style/BigButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="@string/nav_usage"/>
+                android:text="@string/nav_usage" />
 
         </LinearLayout>
 

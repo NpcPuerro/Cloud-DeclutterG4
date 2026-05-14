@@ -56,7 +56,7 @@
     <string name="nav_main">Main Page</string>
     <string name="nav_cloud">Cloud Dienste</string>
     <string name="nav_usage">Speichernutzung</string>
-    <string name="nav_cleanup">Speicherbereinigung</string>
+    <string name="nav_cleanup">Schneller Scan</string>
     <string name="nav_thrash">Papierkorb</string>
     <string name="nav_account">Account</string>
     <string name="nav_settings">Einstellungen</string>
@@ -129,4 +129,11 @@
 
     <string name="btn_done">Fertig</string>
     <string name="btn_next">Weiter</string>
+
+    <string name="btn_main_scan">Erweiterter Scan</string>
+
+    <string name="btn_scan_settings">Scan Einstellungen</string>
+    <string name="btn_cloud_dienste">Cloud Dienste Einstellungen</string>
+    <string name="settings_title">Einstellungen</string>
+
 </resources>

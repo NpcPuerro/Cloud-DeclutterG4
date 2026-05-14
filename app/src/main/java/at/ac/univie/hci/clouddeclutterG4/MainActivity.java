@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         findViewById(R.id.btn_cleanup).setOnClickListener(v -> startActivity(new Intent(this, scanningActivity.class))); //new File Naomi
         findViewById(R.id.btn_usage).setOnClickListener(v -> startActivity(new Intent(this, UsageActivity.class))); //new File Naomi
+        findViewById(R.id.btn_main_scan).setOnClickListener(v -> startActivity(new Intent(this, ScanSettingsActivity.class)));
     }
 
     @Override  //new File Naomi
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_faq) {
             startActivity(new Intent(this, FAQActivity.class));
         } else if (id == R.id.nav_settings) {
-            startActivity(new Intent(this, ScanSettingsActivity.class));
+            startActivity(new Intent(this, SettingsActivity.class));
         }
 
         drawerLayout.closeDrawer(GravityCompat.START); //new File Naomi

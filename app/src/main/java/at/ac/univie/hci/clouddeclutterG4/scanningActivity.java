@@ -58,9 +58,9 @@ public class scanningActivity extends AppCompatActivity {
         // Initialize data once in onCreate
         Intent intent = getIntent();
         clouds = intent.getStringArrayListExtra("clouds");
-        
+
         MockDataManager dm = MockDataManager.getInstance();
-        
+
         if (clouds == null || clouds.isEmpty()) {
             clouds = new ArrayList<>();
             for (String cloudName : dm.cloudServices.keySet()) {  //new File Naomi
@@ -69,7 +69,7 @@ public class scanningActivity extends AppCompatActivity {
                 }
             }
         }
-        
+
         if (clouds.isEmpty()) {
             clouds.add("Gerätespeicher");
         }
