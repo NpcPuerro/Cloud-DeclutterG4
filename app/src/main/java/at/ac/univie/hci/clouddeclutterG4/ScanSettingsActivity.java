@@ -41,6 +41,8 @@ public class ScanSettingsActivity extends AppCompatActivity {
     private String selectedDateRange = "";
     private CheckBox iCloud;
     private CheckBox googleDrive;
+    private CheckBox dropbox;
+    private CheckBox oneDrive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,13 @@ public class ScanSettingsActivity extends AppCompatActivity {
         dateRangeSelector = findViewById(R.id.dateRangeSelector);
         iCloud = findViewById(R.id.checkBox);
         googleDrive = findViewById(R.id.checkBox2);
+        dropbox = findViewById(R.id.checkBox_dropbox);
+        oneDrive = findViewById(R.id.checkBox_onedrive);
+
+        setupCloudCheckbox(iCloud, "iCloud");
+        setupCloudCheckbox(googleDrive, "Google Drive");
+        setupCloudCheckbox(dropbox, "Dropbox");
+        setupCloudCheckbox(oneDrive, "OneDrive");
 
         fileTypeSelector = findViewById(R.id.multi_spinner_file_types);
         fileTypesArray = getResources().getStringArray(R.array.file_types);
@@ -126,23 +135,32 @@ public class ScanSettingsActivity extends AppCompatActivity {
         });
     }
 
+    private void setupCloudCheckbox(CheckBox cb, String name) {
+        MockDataManager dm = MockDataManager.getInstance();
+        MockDataManager.CloudService service = dm.cloudServices.get(name);
+        if (service != null && service.isActive) {
+            cb.setVisibility(View.VISIBLE);
+        } else {
+            cb.setVisibility(View.GONE);
+        }
+    }
+
     private ArrayList<String> getClouds(){
         ArrayList<String> toRet = new ArrayList<>();
-        if (iCloud.isChecked()){
-            toRet.add("iCloud");
-        }
-        if (googleDrive.isChecked()){
-            toRet.add("Google Drive");
-        }
+        if (iCloud.getVisibility() == View.VISIBLE && iCloud.isChecked()) toRet.add("iCloud");
+        if (googleDrive.getVisibility() == View.VISIBLE && googleDrive.isChecked()) toRet.add("Google Drive");
+        if (dropbox.getVisibility() == View.VISIBLE && dropbox.isChecked()) toRet.add("Dropbox");
+        if (oneDrive.getVisibility() == View.VISIBLE && oneDrive.isChecked()) toRet.add("OneDrive");
         return toRet;
     }
 
     public void startScan(View v) {
-        if (!iCloud.isChecked() && !googleDrive.isChecked()){
+        ArrayList<String> selectedClouds = getClouds();
+        if (selectedClouds.isEmpty()){
             Snackbar.make(v, R.string.error_no_cloud, Snackbar.LENGTH_LONG).show();
         } else {
             Intent intent = new Intent(this, scanningActivity.class);
-            intent.putExtra("clouds", getClouds());
+            intent.putExtra("clouds", selectedClouds);
             intent.putExtra("minSize", minNumber.getText().toString());
             intent.putExtra("maxSize", maxNumber.getText().toString());
             intent.putExtra("minUnit", minUnit.getSelectedItem().toString());

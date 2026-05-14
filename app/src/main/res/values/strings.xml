@@ -23,6 +23,8 @@
     <string name="hint_comma_separated">Begriffe mit Beistrichen trennen</string>
     <string name="zeitraum_erstelldatum">Erstelldatum (Zeitraum)</string>
     <string name="zeitraum_waehlen">Zeitraum wählen</string>
+    <string name="dropbox">Dropbox</string>
+    <string name="onedrive">OneDrive</string>
     <string name="error_no_cloud">Mindestens eine Cloud muss ausgewählt sein</string>
 
     <string-array name="size_units">
