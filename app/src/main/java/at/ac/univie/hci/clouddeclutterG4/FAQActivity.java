@@ -41,6 +41,8 @@ public class FAQActivity extends AppCompatActivity {
             return insets;
         });
 
+        findViewById(R.id.toolbar).setOnClickListener(v -> finish());
+
         rvFAQCategoryList = findViewById(R.id.rvFAQCategoryList);
 
         FAQCategory[] arrFAQ = loadFAQ();
