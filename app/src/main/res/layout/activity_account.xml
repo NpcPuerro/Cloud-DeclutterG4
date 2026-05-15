@@ -40,15 +40,10 @@
                 android:id="@+id/etAccEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:ems="10"
                 android:inputType="textEmailAddress" />
 
-            <ImageView
-                android:id="@+id/ivBtEditConf"
-                android:layout_width="32dp"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/ic_menu_edit" />
         </LinearLayout>
 
         <TextView
@@ -58,6 +53,13 @@
             android:gravity="right"
             android:text="@string/loginEmailNoMatch"
             android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btEditConf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/accEditEmail" />
 
         <Space
             android:layout_width="match_parent"

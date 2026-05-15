@@ -75,6 +75,8 @@
     <string name="accChangedPwd">Passwort geändert</string>
     <string name="accWrongPassword">Altes Passwort ist nicht korrekt.</string>
     <string name="accDeleteAccount">Account Löschen</string>
+    <string name="accEditEmail">Email ändern</string>
+    <string name="accSaveEmail">Speichern</string>
 
     <string name="nav_main">Hauptseite</string>
     <string name="nav_cloud">Cloud Dienste</string>

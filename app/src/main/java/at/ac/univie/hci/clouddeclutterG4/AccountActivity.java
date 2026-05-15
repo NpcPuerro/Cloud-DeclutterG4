@@ -3,7 +3,6 @@ package at.ac.univie.hci.clouddeclutterG4;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -21,11 +20,12 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class AccountActivity extends AppCompatActivity {
     private TextView txPwMatch;
+    private TextView txAccEmailMatch;
     private EditText etEmail;
     private EditText etOldPwd;
     private EditText etNewPwd;
     private EditText etNewPwdConf;
-    private ImageView ivBtEditConf;
+    private Button btEditConf;
     private Button btChangePwd;
 
     @Override
@@ -46,8 +46,9 @@ public class AccountActivity extends AppCompatActivity {
         etOldPwd = findViewById(R.id.etAccOldPwd);
         etNewPwd = findViewById(R.id.etAccNewPwd);
         etNewPwdConf = findViewById(R.id.etAccNewPwd2);
-        ivBtEditConf = findViewById(R.id.ivBtEditConf);
+        btEditConf = findViewById(R.id.btEditConf);
         btChangePwd = findViewById(R.id.btAccChangePwd);
+        txAccEmailMatch = findViewById(R.id.txAccEmailMatch);
 
         etEmail.setText(LoginData.getLogin());
         etEmail.setEnabled(false);
@@ -55,16 +56,18 @@ public class AccountActivity extends AppCompatActivity {
         btChangePwd.setOnClickListener(this::changePwd);
         btChangePwd.setEnabled(false);
 
-        ivBtEditConf.setOnClickListener(this::editButton);
+        btEditConf.setOnClickListener(this::editButton);
 
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void afterTextChanged(Editable editable) {
                 updateEditButton();
+                txAccEmailMatch.setVisibility(Patterns.EMAIL_ADDRESS.matcher(editable.toString()).matches() ? View.INVISIBLE : View.VISIBLE);
+
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -144,7 +147,7 @@ public class AccountActivity extends AppCompatActivity {
             String email = etEmail.getText().toString();
             if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && LoginData.changeEmail(email)) {
                 etEmail.setEnabled(false);
-                ivBtEditConf.setImageResource(android.R.drawable.ic_menu_edit);
+                btEditConf.setText(R.string.accEditEmail);
             }
             else {
                 Snackbar.make(
@@ -156,12 +159,12 @@ public class AccountActivity extends AppCompatActivity {
         }
         else {
             etEmail.setEnabled(true);
-            ivBtEditConf.setImageResource(android.R.drawable.ic_menu_save);
+            btEditConf.setText(R.string.accSaveEmail);
         }
     }
 
     private void updateEditButton() {
-        ivBtEditConf.setEnabled(Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString()).matches());
+        btEditConf.setEnabled(Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString()).matches());
     }
 
     private void changePwd(View v) {
