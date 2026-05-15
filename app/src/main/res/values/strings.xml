@@ -62,6 +62,9 @@
     <string name="loginFpwdDescription2">Ein Zurücksetzungslink wurde an deine Email gesendet.</string>
     <string name="loginForgotPassword">Passwort vergessen? %s</string>
     <string name="loginForgotPasswordLink">Passwort zurücksetzen</string>
+    <string name="loginWrongLoginData">Falsche Email oder Passwort. Versuche es erneut.</string>
+    <string name="loginEmailNoMatch">&#x2718; Keine gültige Email Adresse</string>
+    <string name="loginEmailAlreadyExists">Email Adresse Existiert bereits, wähle eine andere.</string>
 
     <string name="accChangeEmail">Email ändern</string>
     <string name="accChangePassword">Passwort ändern</string>
@@ -69,6 +72,7 @@
     <string name="accNewPwd">Neues Passwort</string>
     <string name="accConfirmNewPwd">Neues Passwort bestätigen</string>
     <string name="accChangedPwd">Passwort geändert</string>
+    <string name="accWrongPassword">Altes Passwort ist nicht korrekt.</string>
 
     <string name="nav_main">Main Page</string>
     <string name="nav_cloud">Cloud Dienste</string>

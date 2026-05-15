@@ -7,12 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
 import android.text.Spannable;
+import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.util.Patterns;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,11 +25,14 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import at.ac.univie.hci.clouddeclutterG4.LoginActivity;
+import at.ac.univie.hci.clouddeclutterG4.LoginData;
 import at.ac.univie.hci.clouddeclutterG4.MainActivity;
 import at.ac.univie.hci.clouddeclutterG4.R;
 
 public class LoginFragment extends Fragment {
     private EditText etLoginEmail;
+    private EditText etLoginPassword;
+    private TextView txLoginEmailMatch;
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -37,6 +45,8 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         etLoginEmail = view.findViewById(R.id.etLoginEmail);
+        etLoginPassword = view.findViewById(R.id.etLoginPassword);
+        txLoginEmailMatch = view.findViewById(R.id.txLoginEmailMatch);
 
         Button loginButton = view.findViewById(R.id.btLoginSubmit);
         loginButton.setOnClickListener(this::submit);
@@ -59,6 +69,32 @@ public class LoginFragment extends Fragment {
         txForgotPassword.setText(fpwdSpannable);
         txForgotPassword.setMovementMethod(LinkMovementMethod.getInstance());
 
+        etLoginEmail.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent != null && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                if (keyEvent != null && keyEvent.getAction() == KeyEvent.ACTION_DOWN) return true;
+                submit(textView);
+                return true;
+            }
+            return false;
+        });
+
+        etLoginEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                txLoginEmailMatch.setVisibility(Patterns.EMAIL_ADDRESS.matcher(editable.toString()).matches() ? View.INVISIBLE : View.VISIBLE);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+        });
+
         return view;
     }
 
@@ -72,10 +108,30 @@ public class LoginFragment extends Fragment {
         activity.showForgotPasswordFragment();
     }
 
-    // TODO: change submit logic
     private void submit(View v) {
         if (etLoginEmail == null) return;
         String email = etLoginEmail.getText().toString();
+        String password = etLoginPassword.getText().toString();
+
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etLoginEmail.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()) {
+            etLoginPassword.requestFocus();
+            return;
+        }
+
+        if (!LoginData.login(email, password)) {
+            Snackbar.make(
+                    v,
+                    R.string.loginWrongLoginData,
+                    Snackbar.LENGTH_LONG
+            ).show();
+            return;
+        }
+
         
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);

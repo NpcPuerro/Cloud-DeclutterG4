@@ -27,7 +27,6 @@ public class AccountActivity extends AppCompatActivity {
     private EditText etNewPwdConf;
     private ImageView ivBtEditConf;
     private Button btChangePwd;
-    private String theEMail = "rainer.winkler@gmail.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +49,7 @@ public class AccountActivity extends AppCompatActivity {
         ivBtEditConf = findViewById(R.id.ivBtEditConf);
         btChangePwd = findViewById(R.id.btAccChangePwd);
 
-
-        etEmail.setText(theEMail);
+        etEmail.setText(LoginData.getLogin());
         etEmail.setEnabled(false);
 
         btChangePwd.setOnClickListener(this::changePwd);
@@ -61,52 +59,43 @@ public class AccountActivity extends AppCompatActivity {
 
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 updateEditButton();
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         });
 
         etOldPwd.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void afterTextChanged(Editable editable) {
                 updatePwdBtn();
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         });
 
         etNewPwd.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void afterTextChanged(Editable editable) {
                 updatePwdConfirm();
                 updatePwdBtn();
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
         });
@@ -128,7 +117,9 @@ public class AccountActivity extends AppCompatActivity {
 
     private void updatePwdConfirm() {
         txPwMatch.setVisibility(View.VISIBLE);
-        if (etNewPwd.getText().toString().equals(etNewPwdConf.getText().toString())) {
+        String newPwd = etNewPwd.getText().toString();
+        String newPwdConf = etNewPwdConf.getText().toString();
+        if (!newPwd.isEmpty() && !newPwdConf.isEmpty() && newPwd.equals(newPwdConf)) {
             txPwMatch.setText(R.string.loginPwdYesMatch);
         }
         else {
@@ -150,7 +141,8 @@ public class AccountActivity extends AppCompatActivity {
 
     private void editButton(View v) {
         if (etEmail.isEnabled()) {
-            if (Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString()).matches()) {
+            String email = etEmail.getText().toString();
+            if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && LoginData.changeEmail(email)) {
                 etEmail.setEnabled(false);
                 ivBtEditConf.setImageResource(android.R.drawable.ic_menu_edit);
             }
@@ -173,16 +165,30 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void changePwd(View v) {
-        etOldPwd.setText("");
-        etNewPwd.setText("");
-        etNewPwdConf.setText("");
-        txPwMatch.setVisibility(View.INVISIBLE);
+        String oldPassword = etOldPwd.getText().toString();
+        String newPassword = etNewPwd.getText().toString();
 
-        Snackbar.make(
-                v,
-                R.string.accChangedPwd,
-                Snackbar.LENGTH_SHORT
-        ).show();
+        if (LoginData.changePassword(oldPassword, newPassword)) {
+            etOldPwd.setText("");
+            etNewPwd.setText("");
+            etNewPwdConf.setText("");
+            txPwMatch.setVisibility(View.INVISIBLE);
+
+
+            Snackbar.make(
+                    v,
+                    R.string.accChangedPwd,
+                    Snackbar.LENGTH_SHORT
+            ).show();
+        }
+        else {
+            Snackbar.make(
+                    v,
+                    R.string.accWrongPassword,
+                    Snackbar.LENGTH_SHORT
+            ).show();
+        }
+
     }
 
 }

@@ -11,14 +11,20 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
+import android.util.Patterns;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import at.ac.univie.hci.clouddeclutterG4.LoginActivity;
+import at.ac.univie.hci.clouddeclutterG4.LoginData;
 import at.ac.univie.hci.clouddeclutterG4.MainActivity;
 import at.ac.univie.hci.clouddeclutterG4.R;
 
@@ -27,6 +33,7 @@ public class SignupFragment extends Fragment {
     private EditText etSignupPassword;
     private EditText etSignupPasswordConfirm;
     private TextView txPwMatch;
+    private TextView txSignupEmailMatch;
 
     public static SignupFragment newInstance() {
         return new SignupFragment();
@@ -42,6 +49,7 @@ public class SignupFragment extends Fragment {
         etSignupPassword = view.findViewById(R.id.etSignupPassword);
         etSignupPasswordConfirm = view.findViewById(R.id.etSignupPasswordConfirm);
         txPwMatch = view.findViewById(R.id.txPwMatch);
+        txSignupEmailMatch = view.findViewById(R.id.txSignupEmailMatch);
 
         Button signupButton = view.findViewById(R.id.btSignupSubmit);
         signupButton.setOnClickListener(this::submit);
@@ -55,21 +63,30 @@ public class SignupFragment extends Fragment {
         txNoAccount.setText(spannable);
         txNoAccount.setMovementMethod(LinkMovementMethod.getInstance());
 
+        etSignupEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                txSignupEmailMatch.setVisibility(Patterns.EMAIL_ADDRESS.matcher(editable.toString()).matches() ? View.INVISIBLE : View.VISIBLE);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        });
+
         etSignupPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void afterTextChanged(Editable editable) {
                 updatePwdConfirm();
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         });
 
         etSignupPasswordConfirm.addTextChangedListener(new TextWatcher() {
@@ -83,6 +100,15 @@ public class SignupFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+        etSignupPasswordConfirm.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent != null && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                if (keyEvent != null && keyEvent.getAction() == KeyEvent.ACTION_DOWN) return true;
+                submit(textView);
+                return true;
+            }
+            return false;
         });
 
         return view;
@@ -103,10 +129,35 @@ public class SignupFragment extends Fragment {
         activity.returnToPrevFragment();
     }
 
-    // TODO: change submit logic
     private void submit(View v) {
         if (etSignupEmail == null) return;
         String email = etSignupEmail.getText().toString();
+        String password = etSignupPassword.getText().toString();
+        String passwordConfirm = etSignupPasswordConfirm.getText().toString();
+
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etSignupEmail.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()) {
+            etSignupPassword.requestFocus();
+            return;
+        }
+
+        if (passwordConfirm.isEmpty() || !password.equals(passwordConfirm)) {
+            etSignupPasswordConfirm.requestFocus();
+            return;
+        }
+
+        if (!LoginData.register(email, password)) {
+            Snackbar.make(
+                    v,
+                    R.string.loginEmailAlreadyExists,
+                    Snackbar.LENGTH_LONG
+            ).show();
+            return;
+        }
         
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
