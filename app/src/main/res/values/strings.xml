@@ -9,7 +9,7 @@
     <string name="select_file_types">Dateitypen auswählen</string>
     <string name="clear_all">Alle löschen</string>
     <string name="cancel">Abbrechen</string>
-    <string name="ok">OK</string>
+    <string name="ok"><font color="#FF0000">Löschen</font></string>
 
     <string name="scan_starten">Scan starten</string>
     <string name="scan_running">Scan läuft…</string>
@@ -65,7 +65,7 @@
     <string name="loginForgotPasswordLink">Passwort zurücksetzen</string>
     <string name="loginWrongLoginData">Falsche Email oder Passwort. Versuche es erneut.</string>
     <string name="loginEmailNoMatch">&#x2718; Keine gültige Email Adresse</string>
-    <string name="loginEmailAlreadyExists">Email Adresse Existiert bereits, wähle eine andere.</string>
+    <string name="loginEmailAlreadyExists">Email Adresse existiert bereits, wähle eine andere.</string>
 
     <string name="accChangeEmail">Email ändern</string>
     <string name="accChangePassword">Passwort ändern</string>
@@ -96,8 +96,8 @@
 
     <string name="msg_no_files_selected">Keine Dateien ausgewählt</string>
     <string name="msg_restored">Dateien wiederhergestellt</string>
-    <string name="msg_deleted_forever">Dateien endgültig gelöscht</string>
-    <string name="trash_empty_confirm_msg">Möchten Sie alle Dateien endgültig löschen?</string>
+    <string name="msg_deleted_forever">Dateien wurden in den Papierkorb verschoben</string>
+    <string name="trash_empty_confirm_msg">Möchten Sie die ausgewählten Dateien in den Papierkorb verschieben?</string>
     <string name="btn_cancel">Abbrechen</string>
     <string name="account_label">Konto: %1$s</string>
     <string name="msg_no_files_found">Keine Dateien gefunden.</string>
