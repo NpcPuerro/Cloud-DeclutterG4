@@ -86,7 +86,7 @@
     <string name="nav_faq">FAQ</string>
 
     <string name="status_label">Status:</string>
-    <string name="status_ok">Alles ist Funktionsbereit!</string>
+    <string name="status_ok"><font color="#008000">Funktionsbereit!</font></string>
 
     <string name="trash_title">Papierkorb</string>
     <string name="trash_info_14_days">Dateien werden nach 14 Tagen gelöscht.</string>
@@ -161,6 +161,6 @@
     <string name="btn_scan_settings">Scan Einstellungen</string>
     <string name="btn_cloud_dienste">Cloud Dienste Einstellungen</string>
     <string name="settings_title">Einstellungen</string>
-    <string name="welcome_label">Wilkommen zum Cloud Decultter User</string>
+    <string name="welcome_label">Willkommen zum\nCloud Declutter</string>
 
 </resources>
