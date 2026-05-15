@@ -10,5 +10,6 @@ public class SetupApp extends Application {
 
         LoginData.addLogin("rainer.winkler@gmail.com", "unbesigt");
         LoginData.addLogin("hcim3.t412@clouddeclutter.at", "hci");
+        LoginData.addLogin("t@t.t", "t");
     }
 }
