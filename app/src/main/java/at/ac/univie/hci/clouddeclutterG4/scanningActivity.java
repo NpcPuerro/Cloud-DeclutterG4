@@ -132,6 +132,8 @@ public class scanningActivity extends AppCompatActivity {
                     
                     // Start ReportActivity and finish this one so it doesn't stay in backstack
                     Intent intent = new Intent(this, CleanupActivity.class);
+                    // Forward all extras from ScanSettings to CleanupActivity
+                    intent.putExtras(getIntent());
                     startActivity(intent);
                     finish(); 
                     return;

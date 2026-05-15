@@ -76,7 +76,7 @@
     <string name="accWrongPassword">Altes Passwort ist nicht korrekt.</string>
     <string name="accDeleteAccount">Account Löschen</string>
 
-    <string name="nav_main">Main Page</string>
+    <string name="nav_main">Hauptseite</string>
     <string name="nav_cloud">Cloud Dienste</string>
     <string name="nav_usage">Speichernutzung</string>
     <string name="nav_cleanup">Schneller Scan</string>
@@ -85,7 +85,7 @@
     <string name="nav_settings">Einstellungen</string>
     <string name="nav_faq">FAQ</string>
 
-    <string name="status_label">Der Status ist:</string>
+    <string name="status_label">Status:</string>
     <string name="status_ok">Alles ist Funktionsbereit!</string>
 
     <string name="trash_title">Papierkorb</string>
@@ -110,12 +110,15 @@
     <string name="type_videos">Videos: 15 GB (23%)</string>
     <string name="type_apps">Apps: 10 GB (16%)</string>
     <string name="type_other">Sonstiges: 3 GB (5%)</string>
+    <string name="usage_total_capacity">Gesamtkapazität: %1$s</string>
+    <string name="usage_used_capacity">Belegt: %1$s (%2$d%%)</string>
+    <string name="usage_type_breakdown">%1$s: %2$s (%3$d%%)</string>
     <string name="btn_add_cloud">Cloud-Dienst hinzufügen</string>
 
     <string name="cloud_title">Cloud Dienste</string>
     <string name="status_connected">Status: Verbunden</string>
     <string name="status_not_connected">Status: Nicht verbunden</string>
-    <string name="active_for_scans">Aktiv für Scans</string>
+    <string name="active_for_scans">Für Scans aktivieren:</string>
     <string name="btn_connect">Verbinden</string>
 
     <string name="dropbox_login_title">Dropbox Login</string>
@@ -158,5 +161,6 @@
     <string name="btn_scan_settings">Scan Einstellungen</string>
     <string name="btn_cloud_dienste">Cloud Dienste Einstellungen</string>
     <string name="settings_title">Einstellungen</string>
+    <string name="welcome_label">Wilkommen zum Cloud Decultter User</string>
 
 </resources>

@@ -1,5 +1,3 @@
-//new File Naomi
-
 package at.ac.univie.hci.clouddeclutterG4;
 
 import android.content.Intent;
@@ -31,10 +29,13 @@ public class CleanupActivity extends AppCompatActivity {
     private final List<View> itemViews = new ArrayList<>();
     private List<FileItem> currentDisplayedItems = new ArrayList<>();
 
+    private List<String> selectedClouds = new ArrayList<>();
     private String filterNameContains = "";
-    private String filterType = "Alle";
+    private List<String> filterTypes = new ArrayList<>();
     private long filterMinSize = 0;
     private long filterMaxSize = Long.MAX_VALUE;
+    private long filterMinDate = 0;
+    private long filterMaxDate = Long.MAX_VALUE;
     private int currentSortIdx = 0;
 
     @Override
@@ -50,17 +51,77 @@ public class CleanupActivity extends AppCompatActivity {
         });
 
         container = findViewById(R.id.cleanup_container);
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("clouds")) {
+            applyScanSettings(intent);
+        }
+
         refreshList();
 
         findViewById(R.id.btn_delete).setOnClickListener(v -> deleteSelectedItems());
         findViewById(R.id.btn_filter).setOnClickListener(v -> showFilterDialog());
         findViewById(R.id.btn_sort).setOnClickListener(v -> showSortDialog());
         findViewById(R.id.btn_done).setOnClickListener(v -> {
-            Intent intent = new Intent(this, ReportActivity.class);
-            startActivity(intent);
+            Intent reportIntent = new Intent(this, ReportActivity.class);
+            startActivity(reportIntent);
             finish();
         });
         findViewById(R.id.toolbar).setOnClickListener(v -> finish());
+    }
+
+    private void applyScanSettings(Intent intent) {
+        selectedClouds = intent.getStringArrayListExtra("clouds");
+        filterNameContains = intent.getStringExtra("nameContains");
+        if (filterNameContains == null) filterNameContains = "";
+
+        String typesStr = intent.getStringExtra("fileTypes");
+        filterTypes = new ArrayList<>();
+        if (typesStr != null && !typesStr.equals(getString(R.string.select_all))) {
+            String[] split = typesStr.split(", ");
+            for (String s : split) {
+                filterTypes.add(mapToInternalType(s));
+            }
+        }
+
+        String minSizeStr = intent.getStringExtra("minSize");
+        String minUnit = intent.getStringExtra("minUnit");
+        long min = convertToBytes(minSizeStr, minUnit);
+        if (min != -1) filterMinSize = min;
+
+        String maxSizeStr = intent.getStringExtra("maxSize");
+        String maxUnit = intent.getStringExtra("maxUnit");
+        long max = convertToBytes(maxSizeStr, maxUnit);
+        if (max != -1) filterMaxSize = max;
+
+        filterMinDate = intent.getLongExtra("startDateMillis", 0);
+        filterMaxDate = intent.getLongExtra("endDateMillis", Long.MAX_VALUE);
+        if (filterMaxDate == 0) filterMaxDate = Long.MAX_VALUE;
+    }
+
+    private String mapToInternalType(String displayName) {
+        if (displayName.equals("Bilder")) return "Bild";
+        if (displayName.equals("Videos")) return "Video";
+        if (displayName.equals("Dokumente")) return "Dokument";
+        if (displayName.equals("Audio")) return "Audio";
+        if (displayName.equals("Archive")) return "Backup";
+        return displayName;
+    }
+
+    private long convertToBytes(String valueStr, String unit) {
+        if (valueStr == null || valueStr.isEmpty()) return -1;
+        try {
+            long val = Long.parseLong(valueStr);
+            if (unit == null) return val;
+            switch (unit) {
+                case "kB": return val * 1024;
+                case "MB": return val * 1024 * 1024;
+                case "GB": return val * 1024 * 1024 * 1024;
+                default: return val;
+            }
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 
     private void deleteSelectedItems() {
@@ -106,7 +167,11 @@ public class CleanupActivity extends AppCompatActivity {
         spType.setAdapter(adapter);
 
         etName.setText(filterNameContains);
-        for(int i=0; i<types.length; i++) if(types[i].equals(filterType)) spType.setSelection(i);
+        if (!filterTypes.isEmpty()) {
+            for (int i = 0; i < types.length; i++) {
+                if (types[i].equals(filterTypes.get(0))) spType.setSelection(i);
+            }
+        }
         if(filterMinSize > 0) etMin.setText(String.valueOf(filterMinSize / (1024*1024)));
         if(filterMaxSize < Long.MAX_VALUE) etMax.setText(String.valueOf(filterMaxSize / (1024*1024)));
 
@@ -115,7 +180,11 @@ public class CleanupActivity extends AppCompatActivity {
                 .setView(dialogView)
                 .setPositiveButton(R.string.ok, (dialog, which) -> {
                     filterNameContains = etName.getText().toString();
-                    filterType = spType.getSelectedItem().toString();
+                    String selectedType = spType.getSelectedItem().toString();
+                    filterTypes = new ArrayList<>();
+                    if (!selectedType.equals("Alle")) {
+                        filterTypes.add(selectedType);
+                    }
                     try {
                         String minStr = etMin.getText().toString();
                         filterMinSize = minStr.isEmpty() ? 0 : Long.parseLong(minStr) * 1024 * 1024;
@@ -128,7 +197,7 @@ public class CleanupActivity extends AppCompatActivity {
                 })
                 .setNeutralButton(R.string.clear_all, (dialog, which) -> {
                     filterNameContains = "";
-                    filterType = "Alle";
+                    filterTypes = new ArrayList<>();
                     filterMinSize = 0;
                     filterMaxSize = Long.MAX_VALUE;
                     refreshList();
@@ -153,14 +222,26 @@ public class CleanupActivity extends AppCompatActivity {
         itemViews.clear();
 
         MockDataManager dm = MockDataManager.getInstance();
-        List<FileItem> filtered = dm.getFilteredCleanupItems();
+        List<FileItem> allItems = dm.cleanupItems;
         currentDisplayedItems = new ArrayList<>();
 
-        for (FileItem item : filtered) {
+        for (FileItem item : allItems) {
             boolean matches = true;
-            if (!filterNameContains.isEmpty() && !item.name.toLowerCase().contains(filterNameContains.toLowerCase())) matches = false;
-            if (!filterType.equals("Alle") && !item.type.equals(filterType)) matches = false;
-            if (item.sizeBytes < filterMinSize || item.sizeBytes > filterMaxSize) matches = false;
+            
+            // Filter by selected clouds if provided
+            if (selectedClouds != null && !selectedClouds.isEmpty()) {
+                if (!selectedClouds.contains(item.source)) matches = false;
+            } else {
+                // Otherwise fallback to MockDataManager's default filtering (isConnected & isActive)
+                MockDataManager.CloudService service = dm.cloudServices.get(item.source);
+                if (service == null || !service.isConnected || !service.isActive) matches = false;
+            }
+
+            if (matches && !filterNameContains.isEmpty() && !item.name.toLowerCase().contains(filterNameContains.toLowerCase())) matches = false;
+            if (matches && !filterTypes.isEmpty() && !filterTypes.contains(item.type)) matches = false;
+            if (matches && (item.sizeBytes < filterMinSize || item.sizeBytes > filterMaxSize)) matches = false;
+            if (matches && (item.dateMillis < filterMinDate || item.dateMillis > filterMaxDate)) matches = false;
+
             if (matches) currentDisplayedItems.add(item);
         }
 

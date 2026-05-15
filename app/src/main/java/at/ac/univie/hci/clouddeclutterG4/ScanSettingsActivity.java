@@ -38,6 +38,8 @@ public class ScanSettingsActivity extends AppCompatActivity {
     private Spinner maxUnit;
     private EditText nameContains;
     private TextView dateRangeSelector;
+    private long startDateMillis = 0;
+    private long endDateMillis = Long.MAX_VALUE;
     private String selectedDateRange = "";
     private CheckBox iCloud;
     private CheckBox googleDrive;
@@ -124,9 +126,11 @@ public class ScanSettingsActivity extends AppCompatActivity {
                     .build();
 
             picker.addOnPositiveButtonClickListener(selection -> {
+                startDateMillis = selection.first;
+                endDateMillis = selection.second;
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
-                String startDate = sdf.format(new Date(selection.first));
-                String endDate = sdf.format(new Date(selection.second));
+                String startDate = sdf.format(new Date(startDateMillis));
+                String endDate = sdf.format(new Date(endDateMillis));
                 selectedDateRange = startDate + " - " + endDate;
                 dateRangeSelector.setText(selectedDateRange);
             });
@@ -168,6 +172,8 @@ public class ScanSettingsActivity extends AppCompatActivity {
             intent.putExtra("fileTypes", fileTypeSelector.getText().toString()); //Comma separated list, has to be converted to real list or parsed
             intent.putExtra("nameContains", nameContains.getText().toString()); //Comma separated list, has to be converted to real list or parsed
             intent.putExtra("dateRange", selectedDateRange);
+            intent.putExtra("startDateMillis", startDateMillis);
+            intent.putExtra("endDateMillis", endDateMillis);
             startActivity(intent);
         }
     }

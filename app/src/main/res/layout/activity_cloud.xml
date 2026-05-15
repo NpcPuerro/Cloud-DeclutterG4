@@ -96,12 +96,21 @@
                         android:text="@string/status_not_connected"
                         android:textColor="#666666" />
 
+                    <TextView
+                        android:id="@+id/account_dropbox"
+                        style="@style/BigTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Konto: user@gmail.com"
+                        android:visibility="gone" />
+
                     <Button
                         android:id="@+id/btn_connect_dropbox"
                         style="@style/BigButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/btn_connect" />
+
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switch_dropbox"
@@ -139,6 +148,12 @@
                         android:layout_height="wrap_content"
                         android:text="@string/status_connected" />
 
+                    <TextView
+                        style="@style/BigTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Konto: user@gmail.com" />
+
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switch_onedrive"
                         android:layout_width="match_parent"
@@ -173,6 +188,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/status_connected" />
+
+                    <TextView
+                        style="@style/BigTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Konto: user@gmail.com" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switch_icloud"

@@ -35,6 +35,14 @@
                 style="@style/HeaderTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/welcome_label"
+                android:textAlignment="center"
+                android:layout_marginBottom="40dp" />
+
+            <TextView
+                style="@style/HeaderTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/status_label" />
 
             <TextView
@@ -65,7 +73,10 @@
                 style="@style/BigButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/nav_usage" />
 
         </LinearLayout>
@@ -75,10 +86,11 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="start"
         app:itemTextAppearanceActive="@style/NavMenuItemStyle"
         app:itemTextAppearanceInactive="@style/NavMenuItemStyle"
+        app:itemVerticalPadding="12dp"
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

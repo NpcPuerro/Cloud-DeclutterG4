@@ -21,6 +21,7 @@ public class CloudActivity extends AppCompatActivity {
     private MaterialSwitch dropboxSwitch;
     private Button connectDropbox;
     private TextView statusDropbox;
+    private TextView accountDropbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class CloudActivity extends AppCompatActivity {
         dropboxSwitch = findViewById(R.id.switch_dropbox);
         connectDropbox = findViewById(R.id.btn_connect_dropbox);
         statusDropbox = findViewById(R.id.status_dropbox);
+        accountDropbox = findViewById(R.id.account_dropbox);
 
         setupSwitch("Google Drive", R.id.switch_google);
         setupSwitch("OneDrive", R.id.switch_onedrive);
@@ -69,11 +71,15 @@ public class CloudActivity extends AppCompatActivity {
             if (dropbox.isConnected) {
                 connectDropbox.setVisibility(View.GONE);
                 dropboxSwitch.setVisibility(View.VISIBLE);
+                accountDropbox.setVisibility(View.VISIBLE);
                 statusDropbox.setText(R.string.status_connected);
+                statusDropbox.setTextColor(getResources().getColor(android.R.color.black, getTheme()));
             } else {
                 connectDropbox.setVisibility(View.VISIBLE);
                 dropboxSwitch.setVisibility(View.GONE);
+                accountDropbox.setVisibility(View.GONE);
                 statusDropbox.setText(R.string.status_not_connected);
+                statusDropbox.setTextColor(0xFF666666);
             }
         }
     }
