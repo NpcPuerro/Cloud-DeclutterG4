@@ -108,7 +108,8 @@ public class TrashActivity extends AppCompatActivity {
 
             icon.setImageResource(item.iconResId);
             title.setText(item.name);
-            info.setText(getString(R.string.account_label, item.source));
+            String infoText = String.format("%s | %s | %s", item.sizeDisplay, item.source, getString(R.string.trash_item_days_left));
+            info.setText(infoText);
 
             itemViews.add(itemView);
             container.addView(itemView);

@@ -20,8 +20,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CleanupActivity extends AppCompatActivity {
 
@@ -68,6 +71,22 @@ public class CleanupActivity extends AppCompatActivity {
             finish();
         });
         findViewById(R.id.toolbar).setOnClickListener(v -> finish());
+    }
+
+    private void selectAllItems() {
+        boolean allChecked = true;
+        for (View v : itemViews) {
+            CheckBox cb = v.findViewById(R.id.item_checkbox);
+            if (!cb.isChecked()) {
+                allChecked = false;
+                break;
+            }
+        }
+
+        for (View v : itemViews) {
+            CheckBox cb = v.findViewById(R.id.item_checkbox);
+            cb.setChecked(!allChecked);
+        }
     }
 
     private void applyScanSettings(Intent intent) {
@@ -141,14 +160,14 @@ public class CleanupActivity extends AppCompatActivity {
         MockDataManager dm = MockDataManager.getInstance();
         new AlertDialog.Builder(this)
                 .setTitle(R.string.btn_delete)
-                .setMessage(getString(R.string.trash_empty_confirm_msg)) // Reusing string for now
+                .setMessage(getString(R.string.msg_confirm_move_to_trash, selectedItems.size()))
                 .setPositiveButton(R.string.ok, (dialog, which) -> {
                     for (FileItem item : selectedItems) {
                         dm.cleanupItems.remove(item);
                         dm.trashItems.add(item);
                     }
                     refreshList();
-                    Toast.makeText(this, R.string.msg_deleted_forever, Toast.LENGTH_SHORT).show(); // Reusing string
+                    Toast.makeText(this, R.string.msg_moved_to_trash, Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
@@ -176,7 +195,7 @@ public class CleanupActivity extends AppCompatActivity {
         if(filterMaxSize < Long.MAX_VALUE) etMax.setText(String.valueOf(filterMaxSize / (1024*1024)));
 
         new AlertDialog.Builder(this)
-                .setTitle(R.string.select_file_types) // Reusing string
+                .setTitle(R.string.filter_title)
                 .setView(dialogView)
                 .setPositiveButton(R.string.ok, (dialog, which) -> {
                     filterNameContains = etName.getText().toString();
@@ -195,7 +214,10 @@ public class CleanupActivity extends AppCompatActivity {
                     }
                     refreshList();
                 })
-                .setNeutralButton(R.string.clear_all, (dialog, which) -> {
+                .setNeutralButton(R.string.select_all, (dialog, which) -> {
+                    selectAllItems();
+                })
+                .setNegativeButton(R.string.btn_reset, (dialog, which) -> {
                     filterNameContains = "";
                     filterTypes = new ArrayList<>();
                     filterMinSize = 0;
@@ -227,7 +249,7 @@ public class CleanupActivity extends AppCompatActivity {
 
         for (FileItem item : allItems) {
             boolean matches = true;
-            
+
             // Filter by selected clouds if provided
             if (selectedClouds != null && !selectedClouds.isEmpty()) {
                 if (!selectedClouds.contains(item.source)) matches = false;
@@ -258,6 +280,7 @@ public class CleanupActivity extends AppCompatActivity {
         });
 
         LayoutInflater inflater = LayoutInflater.from(this);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         for (FileItem item : currentDisplayedItems) {
             View itemView = inflater.inflate(R.layout.item_file, container, false);
             ImageView icon = itemView.findViewById(R.id.item_icon);
@@ -266,7 +289,8 @@ public class CleanupActivity extends AppCompatActivity {
 
             icon.setImageResource(item.iconResId);
             title.setText(item.name);
-            info.setText(String.format("%s | %s | %s", item.sizeDisplay, item.type, item.source));
+            String dateStr = sdf.format(new Date(item.dateMillis));
+            info.setText(String.format("%s | %s | %s | %s", item.sizeDisplay, item.type, item.source, dateStr));
 
             itemViews.add(itemView);
             container.addView(itemView);

@@ -164,5 +164,5 @@
     <string name="btn_cloud_dienste">Cloud Dienste Einstellungen</string>
     <string name="settings_title">Einstellungen</string>
     <string name="welcome_label">Willkommen zum\nCloud Declutter</string>
-
+    <string name="trash_item_days_left">Löscht in 14 Tagen</string>
 </resources>
