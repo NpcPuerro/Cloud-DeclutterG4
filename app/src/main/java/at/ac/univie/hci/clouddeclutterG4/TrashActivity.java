@@ -1,38 +1,51 @@
-//new File Naomi
-
 package at.ac.univie.hci.clouddeclutterG4;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import com.google.android.material.navigation.NavigationView;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrashActivity extends AppCompatActivity {
+public class TrashActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private LinearLayout container;
     private final List<View> itemViews = new ArrayList<>();
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_trash);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_main, R.string.nav_main);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -45,7 +58,17 @@ public class TrashActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_restore).setOnClickListener(v -> restoreSelectedItems());
         findViewById(R.id.btn_delete_forever).setOnClickListener(v -> deleteSelectedItemsForever());
-        findViewById(R.id.toolbar).setOnClickListener(v -> finish());
+        findViewById(R.id.btn_empty_trash).setOnClickListener(v -> emptyTrash());
+    }
+
+    private void emptyTrash() {
+        for (View itemView : itemViews) {
+            CheckBox cb = itemView.findViewById(R.id.item_checkbox);
+            if (cb != null) {
+                cb.setChecked(true);
+            }
+        }
+        deleteSelectedItemsForever();
     }
 
     private void restoreSelectedItems() {
@@ -110,14 +133,11 @@ public class TrashActivity extends AppCompatActivity {
 
             icon.setImageResource(item.iconResId);
             title.setText(item.name);
-            int days_until_deleted = 30; // Für Prototyp Variable nicht notwendig da jeder Cloud Dienst gleich; Für weitere Cloud Dienste anpassen.
-            String trashed_item_info = getString(R.string.trashed_item_info, item.sizeDisplay, item.source, days_until_deleted);
-            Spanned infoText = Html.fromHtml(
-                    trashed_item_info,
-                    Html.FROM_HTML_MODE_LEGACY
+            CharSequence infoText = android.text.TextUtils.concat(
+                    item.sizeDisplay + " | " + item.source + " | ",
+                    getText(R.string.trash_item_days_left)
             );
             info.setText(infoText);
-
             itemViews.add(itemView);
             container.addView(itemView);
         }
@@ -129,5 +149,29 @@ public class TrashActivity extends AppCompatActivity {
             emptyText.setTextSize(22);
             container.addView(emptyText);
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_cloud) {
+            startActivity(new Intent(this, CloudActivity.class));
+        } else if (id == R.id.nav_usage) {
+            startActivity(new Intent(this, UsageActivity.class));
+        } else if (id == R.id.nav_cleanup) {
+            startActivity(new Intent(this, scanningActivity.class));
+        } else if (id == R.id.nav_trash) {
+            startActivity(new Intent(this, TrashActivity.class));
+        } else if (id == R.id.nav_faq) {
+            startActivity(new Intent(this, FAQActivity.class));
+        } else if (id == R.id.nav_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+        } else if (id == R.id.nav_account) {
+            startActivity(new Intent(this, AccountActivity.class));
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

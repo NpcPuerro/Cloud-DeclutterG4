@@ -99,7 +99,7 @@
 
     <string name="msg_no_files_selected">Keine Dateien ausgewählt</string>
     <string name="msg_restored">Dateien wiederhergestellt</string>
-    <string name="msg_deleted_forever">Dateien endgültig löschen?</string>
+    <string name="msg_deleted_forever">Dateien endgültig gelöscht</string>
     <string name="trash_empty_confirm_msg">Möchten Sie die ausgewählten Dateien endgültig aus dem Papierkorb löschen?\nAchtung: Die gelöschten Dateien können nicht(!) wiederhergestellt werden.</string>
     <string name="btn_cancel">Abbrechen</string>
     <string name="account_label">Konto: %1$s</string>
@@ -160,7 +160,7 @@
     <string name="btn_next">Weiter</string>
 
     <string name="btn_main_scan">Erweiterter Scan</string>
-
+    <string name="trash_item_days_left"><font color="#FF0000">30 Tagen</font></string>
     <string name="btn_scan_settings">Scan Einstellungen</string>
     <string name="btn_cloud_dienste">Cloud Dienste Einstellungen</string>
     <string name="settings_title">Einstellungen</string>
