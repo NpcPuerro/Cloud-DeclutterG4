@@ -69,15 +69,6 @@ public class LoginFragment extends Fragment {
         txForgotPassword.setText(fpwdSpannable);
         txForgotPassword.setMovementMethod(LinkMovementMethod.getInstance());
 
-        etLoginEmail.setOnEditorActionListener((textView, i, keyEvent) -> {
-            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent != null && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                if (keyEvent != null && keyEvent.getAction() == KeyEvent.ACTION_DOWN) return true;
-                submit(textView);
-                return true;
-            }
-            return false;
-        });
-
         etLoginEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable editable) {
@@ -93,6 +84,15 @@ public class LoginFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
+        });
+
+        etLoginPassword.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE || (keyEvent != null && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                if (keyEvent != null && keyEvent.getAction() == KeyEvent.ACTION_DOWN) return true;
+                submit(textView);
+                return true;
+            }
+            return false;
         });
 
         return view;
