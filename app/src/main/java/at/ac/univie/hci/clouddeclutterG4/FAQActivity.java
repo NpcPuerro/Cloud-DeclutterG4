@@ -23,8 +23,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
+import at.ac.univie.hci.clouddeclutterG4.ui.faq.ContactFragment;
 import at.ac.univie.hci.clouddeclutterG4.ui.faq.FAQCategoryAdapter;
 import at.ac.univie.hci.clouddeclutterG4.ui.faq.FAQCategory;
+import at.ac.univie.hci.clouddeclutterG4.ui.faq.FAQFragment;
+import at.ac.univie.hci.clouddeclutterG4.ui.login.LoginFragment;
+import at.ac.univie.hci.clouddeclutterG4.ui.login.SignupFragment;
 
 public class FAQActivity extends AppCompatActivity {
     private static final String FAQ_FILENAME = "faqdata.json";
@@ -35,37 +39,26 @@ public class FAQActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_faq);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.fragment_container_faq), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        findViewById(R.id.toolbar).setOnClickListener(v -> finish());
-
-        rvFAQCategoryList = findViewById(R.id.rvFAQCategoryList);
-
-        FAQCategory[] arrFAQ = loadFAQ();
-        assert arrFAQ != null; // TODO: maybe proper error handling is better
-        List<FAQCategory> faqdata = Arrays.stream(arrFAQ).toList();
-
-        rvFAQCategoryList.setLayoutManager(new LinearLayoutManager(this));
-        FAQCategoryAdapter adapter = new FAQCategoryAdapter(faqdata);
-        rvFAQCategoryList.setAdapter(adapter);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container_faq, FAQFragment.newInstance())
+                    .commitNow();
+        }
     }
 
-    private FAQCategory[] loadFAQ() {
-        FAQCategory[] arr = null;
-
-        try {
-            InputStream stream = getAssets().open(FAQ_FILENAME, AssetManager.ACCESS_BUFFER);
-            Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8);
-            arr = new Gson().fromJson(reader, FAQCategory[].class);
-        }
-        catch (IOException e) {
-            Log.e("FAQ", e.toString());
-        }
-
-        return arr;
+    public void showContact() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(
+                        R.id.fragment_container_faq,
+                        new ContactFragment()
+                )
+                .addToBackStack(null)
+                .commit();
     }
 }

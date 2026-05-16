@@ -88,6 +88,14 @@
     <string name="nav_settings">Einstellungen</string>
     <string name="nav_faq">FAQ</string>
 
+    <string name="faqContact">Kontaktformular</string>
+    <string name="faqName">Name</string>
+    <string name="faqEmail">E-Mail</string>
+    <string name="faqSubject">Thema</string>
+    <string name="faqText">Nachricht</string>
+    <string name="faqSend">Senden</string>
+    <string name="faqSendConfigmMsg">Deine Nachricht wurde versendet!</string>
+
     <string name="status_label">Status:</string>
     <string name="status_ok"><font color="#008000">Funktionsbereit!</font></string>
 
