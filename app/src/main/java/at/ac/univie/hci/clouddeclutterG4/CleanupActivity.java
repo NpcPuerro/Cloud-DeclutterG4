@@ -161,7 +161,7 @@ public class CleanupActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.btn_delete)
                 .setMessage(getString(R.string.msg_confirm_move_to_trash, selectedItems.size()))
-                .setPositiveButton(R.string.ok, (dialog, which) -> {
+                .setPositiveButton(R.string.delete_confirm, (dialog, which) -> {
                     for (FileItem item : selectedItems) {
                         dm.cleanupItems.remove(item);
                         dm.trashItems.add(item);

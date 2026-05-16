@@ -9,7 +9,8 @@
     <string name="select_file_types">Dateitypen auswählen</string>
     <string name="clear_all">Alle löschen</string>
     <string name="cancel">Abbrechen</string>
-    <string name="ok"><font color="#FF0000">Löschen</font></string>
+    <string name="ok">Ok</string>
+    <string name="delete_confirm"><font color="#FF0000">Löschen</font></string>
 
     <string name="scan_starten">Scan starten</string>
     <string name="scan_running">Scan läuft…</string>
