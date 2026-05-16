@@ -40,6 +40,34 @@
             android:text="@string/btn_cloud_dienste"
             />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switch_automatic_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_automatic_scan"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_periodic_scan"
+            android:textSize="20sp"/>
+
+        <Spinner
+            android:id="@+id/spinner_periodic_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

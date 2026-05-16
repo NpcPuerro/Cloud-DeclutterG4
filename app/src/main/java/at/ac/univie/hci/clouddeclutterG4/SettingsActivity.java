@@ -1,9 +1,10 @@
-//new File Naomi
-
 package at.ac.univie.hci.clouddeclutterG4;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -27,5 +28,12 @@ public class SettingsActivity extends AppCompatActivity {
         findViewById(R.id.btn_cloud_dienste).setOnClickListener(v -> startActivity(new Intent(this, CloudActivity.class)));
 
         findViewById(R.id.toolbar).setOnClickListener(v -> finish());
+
+        Spinner spinner_periodic_scan = findViewById(R.id.spinner_periodic_scan);
+        String[] ps_options = getResources().getStringArray(R.array.settings_periodic_scan_options);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ps_options);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_periodic_scan.setAdapter(adapter);
+
     }
 }

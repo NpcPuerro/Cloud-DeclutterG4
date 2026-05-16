@@ -166,4 +166,13 @@
     <string name="settings_title">Einstellungen</string>
     <string name="welcome_label">Willkommen zum\nCloud Declutter</string>
     <string name="trash_item_days_left">Löscht in 14 Tagen</string>
+
+    <string name="settings_automatic_scan">Automatischer Scan bei App-Start</string>
+    <string name="settings_periodic_scan">Periodischer Scan</string>
+    <string-array name="settings_periodic_scan_options">
+        <item>Nie</item>
+        <item>7 Tage</item>
+        <item>14 Tage</item>
+        <item>30 Tage</item>
+    </string-array>
 </resources>
