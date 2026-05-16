@@ -3,6 +3,8 @@
 package at.ac.univie.hci.clouddeclutterG4;
 
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -108,7 +110,12 @@ public class TrashActivity extends AppCompatActivity {
 
             icon.setImageResource(item.iconResId);
             title.setText(item.name);
-            String infoText = String.format("%s | %s | %s", item.sizeDisplay, item.source, getString(R.string.trash_item_days_left));
+            int days_until_deleted = 30; // Für Prototyp Variable nicht notwendig da jeder Cloud Dienst gleich; Für weitere Cloud Dienste anpassen.
+            String trashed_item_info = getString(R.string.trashed_item_info, item.sizeDisplay, item.source, days_until_deleted);
+            Spanned infoText = Html.fromHtml(
+                    trashed_item_info,
+                    Html.FROM_HTML_MODE_LEGACY
+            );
             info.setText(infoText);
 
             itemViews.add(itemView);
