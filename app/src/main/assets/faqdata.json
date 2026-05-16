@@ -1,19 +1,61 @@
 [
   {
-    "title": "Category1",
+    "title": "Account",
     "questions": [
       {
-        "question": "Question1",
-        "answer": "Answer1"
+        "question": "Welche Daten werden von mir gespeichert?",
+        "answer": "Um Ihnen die Möglichkeit zu bieten von mehreren Geräten Ihren Account und die verlinkten Cloud-Dienste zu verwenden, werden entsprechend die Account-Details gespeichert. Diese liegen selbstverständlich verschlüsselt und unangetastet in Sicherheit auf unseren Servern. Abseits davon, werden keine (!) weiteren Daten von Ihnen gespeichert."
       },
       {
-        "question": "Question2",
-        "answer": "Answer2"
+        "question": "Wie ändere ich meine E-Mail-Adresse?",
+        "answer": "Unter dem Menü-Punkt „Account“ haben Sie die Möglichkeit Ihre aktuelle E-Mail-Adresse einzusehen und zu ändern. Sie erhalten nach erfolgreichem Änderungsvorgang eine E-Mail als Benachrichtigung für diese Veränderung und eine weitere, in welcher Sie gebeten werden die neue E-Mail-Adresse zu bestätigen."
+      },
+      {
+        "question": "Wie ändere ich mein Passwort?",
+        "answer": "Unter dem Menü-Punkt „Account“ haben Sie die Möglichkeit durch die Eingabe Ihres bisherigen und Ihrem neuen Passwort die gewünschte Veränderung vorzunehmen."
+      },
+      {
+        "question": "Ich habe mein Passwort vergessen, was kann ich jetzt machen?",
+        "answer": "Sollten Sie Ihr Passwort mal vergessen haben, dann können Sie problemlos auf der Login-Seite durch Drücken auf „Passwort zurücksetzen“ eine E-Mail mit dem Link zum Zurücksetzen Ihres Passworts anfordern. Die weitere Vorgehensweise wird in der entsprechenden E-Mail erklärt."
       }
     ]
   },
   {
-    "title": "Category2",
-    "questions": []
+    "title": "Cloud-Dienste",
+    "questions": [
+      {
+        "question": "Wie füge ich Cloud-Dienste hinzu?",
+        "answer": "Cloud-Dienste können Sie ganz einfach hinzufügen, indem Sie unter dem Side-Menü Punkt „Cloud-Dienste“ Ihren gewünschten Cloud-Dienst suchen und auf „Verbinden“ drücken. Im Anschluss werden Sie aufgefordert sich bei dem Dienst anzumelden und Cloud-Declutter die nötigen Berechtigungen zu erteilen. Ist das erfolgt, werden Sie im Menü „Cloud-Dienste“ nun die aktive Verbindung zu dem Dienst sehen.\nSollte es zu Problemen kommen, stehen wir Ihnen gerne nach Schilderung des Problems per Kontaktformular zur Verfügung!"
+      },
+      {
+        "question": "Wie entferne ich Cloud-Dienste?",
+        "answer": "Cloud-Dienste zu entfernen, ist (MOMENTAN NICHT MÖGLICH!!!!!!!!!!!) ganz einfach möglich, indem Sie.. PLATZHALTER"
+      },
+      {
+        "question": "Ich möchte einen Cloud-Dienst vorübergehend deaktivieren (Scans)?",
+        "answer": "Cloud-Dienste können Sie temporär deaktivieren, indem Sie im Menü „Cloud-Dienste“ auf den Button neben „Aktiv:“ drücken. Ist dieser ausgeschalten, wird der jeweilige Cloud-Dienst aus sämtlichen Scans rausgehalten bis Sie ihn wieder aktivieren."
+      },
+      {
+        "question": "Der Status eines Cloud-Dienstes zeigt „nicht verfügbar“ – was bedeutet das?",
+        "answer": "Sollte unter einem Cloud-Dienst „Status: Keine Verbindung“ stehen, dann liegt entweder Seitens des Cloud Anbieters oder mit der Verbindung zu diesem ein Problem vor. Mögliche Gründe könnten unzureichende bzw. widerrufene Berechtigungen sein, neue Richtlinien, Updates, Fehler, oder anderes.\nAm besten versuchen Sie das Problem zu beheben, indem Sie den entsprechenden Cloud-Dienst kurz aus der App entfernen und erneut hinzufügen. Sollte das Problem dadurch nicht behoben worden sein, helfen wir Ihnen gerne. Dazu bitte einfach kurz Ihr Problem im Kontaktformular schildern."
+      }
+    ]
+  },
+  {
+    "title": "Dateien",
+    "questions": [
+      {
+        "question": "Wie kann ich gezielt nach Dateien scannen?",
+        "answer": "PLATZHALTER"
+      },
+      {
+        "question": "Was passiert mit den entfernten Dateien?",
+        "answer": "Die entfernten Dateien wandern in dem jeweiligen Cloud-Dienst in den entsprechenden Papierkorb. Sowohl in „Cloud-Declutter“ als auch im Cloud-Dienst können Sie dort die gewünschten Dateien endgültig löschen oder wiederherstellen."
+      },
+      {
+        "question": "Was passiert mit den entfernten Dateien?",
+        "answer": "Sollten Sie eine Datei wiederherstellen wollen, können Sie dies problemlos im Papierkorb tun. Diesen finden Sie über das Side-Menü (3 Striche, obere linke Ecke). Wählen Sie dort die gewünschte Datei(en) aus und drücken Sie auf den „Wiederherstellen“ Button. Die wiederhergestellten Dateien befinden sich nun wieder dort, wo Sie zum Zeitpunkt des Löschens gespeichert waren."
+      }
+    ]
   }
 ]
