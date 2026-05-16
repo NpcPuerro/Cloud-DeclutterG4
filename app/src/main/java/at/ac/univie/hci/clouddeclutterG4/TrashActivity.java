@@ -161,8 +161,8 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
             startActivity(new Intent(this, UsageActivity.class));
         } else if (id == R.id.nav_cleanup) {
             startActivity(new Intent(this, scanningActivity.class));
-        } else if (id == R.id.nav_trash) {
-            startActivity(new Intent(this, TrashActivity.class));
+        } else if (id == R.id.nav_main) {
+            startActivity(new Intent(this, MainActivity.class));
         } else if (id == R.id.nav_faq) {
             startActivity(new Intent(this, FAQActivity.class));
         } else if (id == R.id.nav_settings) {
