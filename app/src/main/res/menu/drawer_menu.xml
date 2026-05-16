@@ -13,8 +13,8 @@
         android:id="@+id/nav_cleanup"
         android:title="@string/nav_cleanup" />
     <item
-        android:id="@+id/nav_thrash"
-        android:title="@string/nav_thrash" />
+        android:id="@+id/nav_trash"
+        android:title="@string/nav_trash" />
     <item
         android:id="@+id/nav_account"
         android:title="@string/nav_account" />

@@ -83,7 +83,7 @@
     <string name="nav_cloud">Cloud Dienste</string>
     <string name="nav_usage">Speichernutzung</string>
     <string name="nav_cleanup">Schneller Scan</string>
-    <string name="nav_thrash">Papierkorb</string>
+    <string name="nav_trash">Papierkorb</string>
     <string name="nav_account">Account</string>
     <string name="nav_settings">Einstellungen</string>
     <string name="nav_faq">FAQ</string>
