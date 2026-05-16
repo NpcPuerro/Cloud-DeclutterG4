@@ -64,7 +64,8 @@ public class scanningActivity extends AppCompatActivity {
         if (clouds == null || clouds.isEmpty()) {
             clouds = new ArrayList<>();
             for (String cloudName : dm.cloudServices.keySet()) {  //new File Naomi
-                if (dm.cloudServices.get(cloudName).isConnected) {
+                MockDataManager.CloudService cl = dm.cloudServices.get(cloudName);
+                if (cl != null && cl.isConnected && cl.isActive) {
                     clouds.add(cloudName);
                 }
             }
