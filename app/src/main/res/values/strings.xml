@@ -96,7 +96,8 @@
     <string name="btn_empty_trash">Papierkorb leeren</string>
     <string name="btn_restore">Wiederherstellen</string>
     <string name="btn_delete">Löschen</string>
-
+    <string name="btn_select_all">Alles auswählen</string>
+    <string name="btn_deselect_all">Auswahl aufheben</string>
     <string name="msg_no_files_selected">Keine Dateien ausgewählt</string>
     <string name="msg_restored">Dateien wiederhergestellt</string>
     <string name="msg_deleted_forever">Dateien endgültig gelöscht</string>
@@ -160,7 +161,7 @@
     <string name="btn_next">Weiter</string>
 
     <string name="btn_main_scan">Erweiterter Scan</string>
-    <string name="trash_item_days_left"><font color="#FF0000">30 Tagen</font></string>
+    <string name="trash_item_days_left"><font color="#FF0000">30 Tage</font></string>
     <string name="btn_scan_settings">Scan Einstellungen</string>
     <string name="btn_cloud_dienste">Cloud Dienste Einstellungen</string>
     <string name="settings_title">Einstellungen</string>

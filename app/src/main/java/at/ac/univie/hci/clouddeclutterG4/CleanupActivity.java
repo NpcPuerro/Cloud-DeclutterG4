@@ -12,26 +12,31 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 
-public class CleanupActivity extends AppCompatActivity {
+public class CleanupActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private LinearLayout container;
-    private final List<View> itemViews = new ArrayList<>();
     private List<FileItem> currentDisplayedItems = new ArrayList<>();
-
+    private Set<FileItem> selectedFiles = new HashSet<>();
     private List<String> selectedClouds = new ArrayList<>();
     private String filterNameContains = "";
     private List<String> filterTypes = new ArrayList<>();
@@ -40,6 +45,7 @@ public class CleanupActivity extends AppCompatActivity {
     private long filterMinDate = 0;
     private long filterMaxDate = Long.MAX_VALUE;
     private int currentSortIdx = 0;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,15 @@ public class CleanupActivity extends AppCompatActivity {
             return insets;
         });
 
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_main, R.string.nav_main);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
         container = findViewById(R.id.cleanup_container);
 
         Intent intent = getIntent();
@@ -62,6 +77,7 @@ public class CleanupActivity extends AppCompatActivity {
 
         refreshList();
 
+        findViewById(R.id.btn_select_all).setOnClickListener(v -> selectAllItems());
         findViewById(R.id.btn_delete).setOnClickListener(v -> deleteSelectedItems());
         findViewById(R.id.btn_filter).setOnClickListener(v -> showFilterDialog());
         findViewById(R.id.btn_sort).setOnClickListener(v -> showSortDialog());
@@ -70,23 +86,42 @@ public class CleanupActivity extends AppCompatActivity {
             startActivity(reportIntent);
             finish();
         });
-        findViewById(R.id.toolbar).setOnClickListener(v -> finish());
+        findViewById(R.id.toolbar).setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
     }
 
     private void selectAllItems() {
-        boolean allChecked = true;
-        for (View v : itemViews) {
-            CheckBox cb = v.findViewById(R.id.item_checkbox);
-            if (!cb.isChecked()) {
-                allChecked = false;
+        if (currentDisplayedItems.isEmpty()) return;
+
+        boolean allVisibleChecked = true;
+        for (FileItem item : currentDisplayedItems) {
+            if (!selectedFiles.contains(item)) {
+                allVisibleChecked = false;
                 break;
             }
         }
 
-        for (View v : itemViews) {
-            CheckBox cb = v.findViewById(R.id.item_checkbox);
-            cb.setChecked(!allChecked);
+        if (allVisibleChecked) {
+            selectedFiles.removeAll(currentDisplayedItems);
+        } else {
+            selectedFiles.addAll(currentDisplayedItems);
         }
+
+        refreshList();
+    }
+
+    private void updateSelectAllButtonText() {
+        android.widget.Button btn = findViewById(R.id.btn_select_all);
+        if (btn == null || currentDisplayedItems.isEmpty()) return;
+
+        boolean allVisibleChecked = true;
+        for (FileItem item : currentDisplayedItems) {
+            if (!selectedFiles.contains(item)) {
+                allVisibleChecked = false;
+                break;
+            }
+        }
+
+        btn.setText(allVisibleChecked ? R.string.btn_deselect_all : R.string.btn_select_all);
     }
 
     private void applyScanSettings(Intent intent) {
@@ -95,7 +130,7 @@ public class CleanupActivity extends AppCompatActivity {
         if (filterNameContains == null) filterNameContains = "";
 
         String typesStr = intent.getStringExtra("fileTypes");
-        filterTypes = new ArrayList<>();
+        filterTypes.clear();
         if (typesStr != null && !typesStr.equals(getString(R.string.select_all))) {
             String[] split = typesStr.split(", ");
             for (String s : split) {
@@ -144,15 +179,7 @@ public class CleanupActivity extends AppCompatActivity {
     }
 
     private void deleteSelectedItems() {
-        List<FileItem> selectedItems = new ArrayList<>();
-        for (int i = 0; i < itemViews.size(); i++) {
-            CheckBox cb = itemViews.get(i).findViewById(R.id.item_checkbox);
-            if (cb.isChecked()) {
-                selectedItems.add(currentDisplayedItems.get(i));
-            }
-        }
-
-        if (selectedItems.isEmpty()) {
+        if (selectedFiles.isEmpty()) {
             Toast.makeText(this, R.string.msg_no_files_selected, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -160,12 +187,13 @@ public class CleanupActivity extends AppCompatActivity {
         MockDataManager dm = MockDataManager.getInstance();
         new AlertDialog.Builder(this)
                 .setTitle(R.string.btn_delete)
-                .setMessage(getString(R.string.msg_confirm_move_to_trash, selectedItems.size()))
+                .setMessage(getString(R.string.msg_confirm_move_to_trash, selectedFiles.size()))
                 .setPositiveButton(R.string.delete_confirm, (dialog, which) -> {
-                    for (FileItem item : selectedItems) {
+                    for (FileItem item : selectedFiles) {
                         dm.cleanupItems.remove(item);
                         dm.trashItems.add(item);
                     }
+                    selectedFiles.clear();
                     refreshList();
                     Toast.makeText(this, R.string.msg_moved_to_trash, Toast.LENGTH_SHORT).show();
                 })
@@ -180,6 +208,7 @@ public class CleanupActivity extends AppCompatActivity {
         EditText etMin = dialogView.findViewById(R.id.filter_min_size);
         EditText etMax = dialogView.findViewById(R.id.filter_max_size);
 
+        final long MB = 1024 * 1024;
         String[] types = {"Alle", "Bild", "Video", "Dokument", "Backup", "Audio"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -191,8 +220,8 @@ public class CleanupActivity extends AppCompatActivity {
                 if (types[i].equals(filterTypes.get(0))) spType.setSelection(i);
             }
         }
-        if(filterMinSize > 0) etMin.setText(String.valueOf(filterMinSize / (1024*1024)));
-        if(filterMaxSize < Long.MAX_VALUE) etMax.setText(String.valueOf(filterMaxSize / (1024*1024)));
+        if(filterMinSize > 0) etMin.setText(String.valueOf(filterMinSize / MB));
+        if(filterMaxSize < Long.MAX_VALUE) etMax.setText(String.valueOf(filterMaxSize / MB));
 
         new AlertDialog.Builder(this)
                 .setTitle(R.string.filter_title)
@@ -200,26 +229,23 @@ public class CleanupActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.ok, (dialog, which) -> {
                     filterNameContains = etName.getText().toString();
                     String selectedType = spType.getSelectedItem().toString();
-                    filterTypes = new ArrayList<>();
+                    filterTypes.clear();
                     if (!selectedType.equals("Alle")) {
                         filterTypes.add(selectedType);
                     }
                     try {
                         String minStr = etMin.getText().toString();
-                        filterMinSize = minStr.isEmpty() ? 0 : Long.parseLong(minStr) * 1024 * 1024;
+                        filterMinSize = minStr.isEmpty() ? 0 : Long.parseLong(minStr) * MB;
                         String maxStr = etMax.getText().toString();
-                        filterMaxSize = maxStr.isEmpty() ? Long.MAX_VALUE : Long.parseLong(maxStr) * 1024 * 1024;
+                        filterMaxSize = maxStr.isEmpty() ? Long.MAX_VALUE : Long.parseLong(maxStr) * MB;
                     } catch (Exception e) {
                         Toast.makeText(this, "Ungültige Größe", Toast.LENGTH_SHORT).show();
                     }
                     refreshList();
                 })
-                .setNeutralButton(R.string.select_all, (dialog, which) -> {
-                    selectAllItems();
-                })
                 .setNegativeButton(R.string.btn_reset, (dialog, which) -> {
                     filterNameContains = "";
-                    filterTypes = new ArrayList<>();
+                    filterTypes.clear();
                     filterMinSize = 0;
                     filterMaxSize = Long.MAX_VALUE;
                     refreshList();
@@ -241,7 +267,6 @@ public class CleanupActivity extends AppCompatActivity {
 
     private void refreshList() {
         container.removeAllViews();
-        itemViews.clear();
 
         MockDataManager dm = MockDataManager.getInstance();
         List<FileItem> allItems = dm.cleanupItems;
@@ -249,12 +274,9 @@ public class CleanupActivity extends AppCompatActivity {
 
         for (FileItem item : allItems) {
             boolean matches = true;
-
-            // Filter by selected clouds if provided
             if (selectedClouds != null && !selectedClouds.isEmpty()) {
                 if (!selectedClouds.contains(item.source)) matches = false;
             } else {
-                // Otherwise fallback to MockDataManager's default filtering (isConnected & isActive)
                 MockDataManager.CloudService service = dm.cloudServices.get(item.source);
                 if (service == null || !service.isConnected || !service.isActive) matches = false;
             }
@@ -292,9 +314,20 @@ public class CleanupActivity extends AppCompatActivity {
             String dateStr = sdf.format(new Date(item.dateMillis));
             info.setText(String.format("%s | %s | %s | %s", item.sizeDisplay, item.type, item.source, dateStr));
 
-            itemViews.add(itemView);
+            CheckBox cb = itemView.findViewById(R.id.item_checkbox);
+            cb.setChecked(selectedFiles.contains(item));
+            cb.setOnClickListener(v -> {
+                if (cb.isChecked()) {
+                    selectedFiles.add(item);
+                } else {
+                    selectedFiles.remove(item);
+                }
+                updateSelectAllButtonText();
+            });
+
             container.addView(itemView);
         }
+        updateSelectAllButtonText();
 
         if (currentDisplayedItems.isEmpty()) {
             TextView emptyText = new TextView(this);
@@ -304,5 +337,29 @@ public class CleanupActivity extends AppCompatActivity {
             emptyText.setTextSize(22);
             container.addView(emptyText);
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_cloud) {
+            startActivity(new Intent(this, CloudActivity.class));
+        } else if (id == R.id.nav_usage) {
+            startActivity(new Intent(this, UsageActivity.class));
+        } else if (id == R.id.nav_trash) {
+            startActivity(new Intent(this, TrashActivity.class));
+        } else if (id == R.id.nav_main) {
+            startActivity(new Intent(this, MainActivity.class));
+        } else if (id == R.id.nav_faq) {
+            startActivity(new Intent(this, FAQActivity.class));
+        } else if (id == R.id.nav_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+        } else if (id == R.id.nav_account) {
+            startActivity(new Intent(this, AccountActivity.class));
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

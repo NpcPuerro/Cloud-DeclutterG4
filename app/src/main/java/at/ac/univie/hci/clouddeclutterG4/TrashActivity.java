@@ -59,6 +59,7 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
         findViewById(R.id.btn_restore).setOnClickListener(v -> restoreSelectedItems());
         findViewById(R.id.btn_delete_forever).setOnClickListener(v -> deleteSelectedItemsForever());
         findViewById(R.id.btn_empty_trash).setOnClickListener(v -> emptyTrash());
+        findViewById(R.id.toolbar).setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
     }
 
     private void emptyTrash() {
