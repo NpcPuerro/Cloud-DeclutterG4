@@ -24,26 +24,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <Button
-            android:id="@+id/btn_scan_settings"
-            style="@style/BigButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_scan_settings"
-            android:layout_marginBottom="16dp" />
-
-        <Button
-            android:id="@+id/btn_cloud_dienste"
-            style="@style/BigButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_cloud_dienste"
-            />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="32dp" />
-
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switch_automatic_scan"
             android:layout_width="match_parent"
@@ -60,12 +40,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_periodic_scan"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <Spinner
             android:id="@+id/spinner_periodic_scan"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <Button
+            android:id="@+id/btn_scan_settings"
+            style="@style/BigButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/btn_scan_settings"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btn_cloud_dienste"
+            style="@style/BigButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_cloud_dienste"
             />
 
     </LinearLayout>
