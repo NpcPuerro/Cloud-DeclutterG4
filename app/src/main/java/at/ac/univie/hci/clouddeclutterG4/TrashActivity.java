@@ -133,6 +133,7 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
             TextView info = itemView.findViewById(R.id.item_info);
 
             icon.setImageResource(item.iconResId);
+            icon.setOnClickListener(v -> showImagePreview(item));
             title.setText(item.name);
             CharSequence infoText = android.text.TextUtils.concat(
                     item.sizeDisplay + " | " + item.source + " | ",
@@ -150,6 +151,19 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
             emptyText.setTextSize(22);
             container.addView(emptyText);
         }
+    }
+
+    private void showImagePreview(FileItem item) {
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(item.iconResId);
+        imageView.setAdjustViewBounds(true);
+        imageView.setPadding(32, 32, 32, 32);
+
+        new AlertDialog.Builder(this)
+                .setTitle(item.name)
+                .setView(imageView)
+                .setPositiveButton(R.string.ok, null)
+                .show();
     }
 
     @Override
