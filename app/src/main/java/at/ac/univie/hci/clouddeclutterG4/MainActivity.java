@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         btnCleanup.setEnabled(anyActive);
-        btnCleanup.setAlpha(anyActive ? 1.0f : 0.5f); // Optional: dim it when disabled
+        btnCleanup.setAlpha(anyActive ? 1.0f : 0.5f);
         btnMainScan.setEnabled(anyActive);
-        btnMainScan.setAlpha(anyActive ? 1.0f : 0.5f); // Optional: dim it when disabled
+        btnMainScan.setAlpha(anyActive ? 1.0f : 0.5f);
 
 
         // Also update the navigation drawer menu item

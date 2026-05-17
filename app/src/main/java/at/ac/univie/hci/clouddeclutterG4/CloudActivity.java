@@ -81,13 +81,11 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
     }
 
     private void refreshAllUI() {
-        // Hide all hardcoded cards first
         findViewById(R.id.card_google).setVisibility(View.GONE);
         findViewById(R.id.card_dropbox).setVisibility(View.GONE);
         findViewById(R.id.card_onedrive).setVisibility(View.GONE);
         findViewById(R.id.card_icloud).setVisibility(View.GONE);
 
-        // Clear dynamic container
         dynamicContainer.removeAllViews();
         
         MockDataManager dm = MockDataManager.getInstance();
@@ -198,14 +196,13 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
     }
 
     private void updateCardUI(MockDataManager.CloudService service, TextView statusTv, TextView accountTv, Button connectBtn, Button disconnectBtn, MaterialSwitch s) {
-        disconnectBtn.setVisibility(View.VISIBLE); // Always visible as per request
+        disconnectBtn.setVisibility(View.VISIBLE);
 
         if (service.isConnected) {
             if (statusTv != null) {
                 statusTv.setVisibility(View.VISIBLE);
-                // Set text and make sure it's green
                 statusTv.setText(android.text.Html.fromHtml(getString(R.string.status_connected), android.text.Html.FROM_HTML_MODE_COMPACT));
-                statusTv.setTextColor(0xFF008000); // Dark Green
+                statusTv.setTextColor(0xFF008000);
             }
             accountTv.setVisibility(View.VISIBLE);
             accountTv.setText(getString(R.string.account_label, service.accountName));
@@ -215,7 +212,7 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
             s.setChecked(service.isActive);
         } else {
             if (statusTv != null) {
-                statusTv.setVisibility(View.GONE); // Invisible when connect button is visible
+                statusTv.setVisibility(View.GONE);
             }
             accountTv.setVisibility(View.GONE);
             connectBtn.setVisibility(View.VISIBLE);
@@ -247,8 +244,7 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
         }
 
         String accountName = "user" + (dm.cloudServices.size() + 1) + "@gmail.com";
-        
-        // Find capacity from existing service of same type if possible
+
         long cap = 5L * 1024 * 1024 * 1024;
         for (MockDataManager.CloudService s : dm.cloudServices.values()) {
             if (s.name.equals(provider)) {
