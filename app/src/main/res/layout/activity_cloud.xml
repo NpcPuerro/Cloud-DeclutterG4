@@ -37,212 +37,290 @@
 
             <!-- Google Drive -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_google"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/header_google"
                         style="@style/HeaderTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Google Drive" />
 
-
-                    <TextView
-                        android:id="@+id/account_google"
-                        style="@style/BigTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Konto: user@gmail.com" />
-
-                    <Button
-                        android:id="@+id/btn_connect_google"
-                        style="@style/BigButtonStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/btn_connect"
-                        android:visibility="gone" />
-
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_google"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/active_for_scans"
-                        android:textSize="20sp" />
-
                     <Button
                         android:id="@+id/btn_disconnect_google"
                         style="@style/BigButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/btn_disconnect"
-                        android:backgroundTint="#FF4444" />
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:backgroundTint="#FF4444"
+                        android:minHeight="0dp"
+                        android:padding="0dp"
+                        android:text="X"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/header_google"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/status_google"
+                            style="@style/BigTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/status_not_connected"
+                            android:textColor="#666666" />
+
+                        <TextView
+                            android:id="@+id/account_google"
+                            style="@style/BigTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Konto: user@gmail.com" />
+
+                        <Button
+                            android:id="@+id/btn_connect_google"
+                            style="@style/BigButtonStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/btn_connect"
+                            android:visibility="gone" />
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch_google"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/active_for_scans"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- Dropbox -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_dropbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/header_dropbox"
                         style="@style/HeaderTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dropbox" />
 
-                    <TextView
-                        android:id="@+id/status_dropbox"
-                        style="@style/BigTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/status_not_connected"
-                        android:textColor="#666666" />
-
-                    <TextView
-                        android:id="@+id/account_dropbox"
-                        style="@style/BigTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Konto: user@gmail.com"
-                        android:visibility="gone" />
-
-                    <Button
-                        android:id="@+id/btn_connect_dropbox"
-                        style="@style/BigButtonStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/btn_connect" />
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_dropbox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/active_for_scans"
-                        android:textSize="20sp"
-                        android:visibility="gone" />
-
                     <Button
                         android:id="@+id/btn_disconnect_dropbox"
                         style="@style/BigButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/btn_disconnect"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
                         android:backgroundTint="#FF4444"
-                        android:visibility="gone" />
+                        android:minHeight="0dp"
+                        android:padding="0dp"
+                        android:text="X"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/header_dropbox"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/status_dropbox"
+                            style="@style/BigTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/status_not_connected"
+                            android:textColor="#666666" />
+
+                        <TextView
+                            android:id="@+id/account_dropbox"
+                            style="@style/BigTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Konto: user@gmail.com"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/btn_connect_dropbox"
+                            style="@style/BigButtonStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/btn_connect" />
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch_dropbox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/active_for_scans"
+                            android:textSize="20sp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- OneDrive -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_onedrive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/header_onedrive"
                         style="@style/HeaderTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="OneDrive" />
 
-                    <TextView
-                        android:id="@+id/account_onedrive"
-                        style="@style/BigTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Konto: user@gmail.com" />
-
-                    <Button
-                        android:id="@+id/btn_connect_onedrive"
-                        style="@style/BigButtonStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/btn_connect"
-                        android:visibility="gone" />
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_onedrive"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/active_for_scans"
-                        android:textSize="20sp" />
-
                     <Button
                         android:id="@+id/btn_disconnect_onedrive"
                         style="@style/BigButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/btn_disconnect"
-                        android:backgroundTint="#FF4444" />
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:backgroundTint="#FF4444"
+                        android:minHeight="0dp"
+                        android:padding="0dp"
+                        android:text="X"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/header_onedrive"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/status_onedrive"
+                            style="@style/BigTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/status_not_connected"
+                            android:textColor="#666666" />
+
+                        <TextView
+                            android:id="@+id/account_onedrive"
+                            style="@style/BigTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Konto: user@gmail.com" />
+
+                        <Button
+                            android:id="@+id/btn_connect_onedrive"
+                            style="@style/BigButtonStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/btn_connect"
+                            android:visibility="gone" />
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switch_onedrive"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/active_for_scans"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- iCloud -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_icloud"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/header_icloud"
                         style="@style/HeaderTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="iCloud" />
 
-                    <TextView
-                        android:id="@+id/account_icloud"
-                        style="@style/BigTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Konto: user@gmail.com" />
-
                     <Button
-                        android:id="@+id/btn_connect_icloud"
+                        android:id="@+id/btn_disconnect_icloud"
                         style="@style/BigButtonStyle"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:backgroundTint="#FF4444"
+                        android:minHeight="0dp"
+                        android:padding="0dp"
+                        android:text="X"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/btn_connect"
-                        android:visibility="gone" />
+                        android:layout_below="@id/header_icloud"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/status_icloud"
+                            style="@style/BigTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/status_not_connected"
+                            android:textColor="#666666" />
+
+                        <TextView
+                            android:id="@+id/account_icloud"
+                            style="@style/BigTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Konto: user@gmail.com" />
+
+                        <Button
+                            android:id="@+id/btn_connect_icloud"
+                            style="@style/BigButtonStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/btn_connect"
+                            android:visibility="gone" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switch_icloud"
@@ -250,60 +328,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/active_for_scans"
                         android:textSize="20sp" />
-
-                    <Button
-                        android:id="@+id/btn_disconnect_icloud"
-                        style="@style/BigButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/btn_disconnect"
-                        android:backgroundTint="#FF4444" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- iCloud #2-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        style="@style/HeaderTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="iCloud" />
-
-                    <TextView
-                        style="@style/BigTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/status_not_available"
-                        android:textColor="#666666" />
-
-                    <TextView
-                        style="@style/BigTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Konto: user2@gmail.com" />
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:enabled="false"
-                        android:text="@string/active_for_scans"
-                        android:textSize="20sp" />
-                </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <LinearLayout

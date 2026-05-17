@@ -83,50 +83,62 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
     }
 
     private void refreshAllUI() {
+        // Hide all hardcoded cards first
+        findViewById(R.id.card_google).setVisibility(View.GONE);
+        findViewById(R.id.card_dropbox).setVisibility(View.GONE);
+        findViewById(R.id.card_onedrive).setVisibility(View.GONE);
+        findViewById(R.id.card_icloud).setVisibility(View.GONE);
+
         // Clear dynamic container
         dynamicContainer.removeAllViews();
         
         MockDataManager dm = MockDataManager.getInstance();
-        int index = 0;
         for (java.util.Map.Entry<String, MockDataManager.CloudService> entry : dm.cloudServices.entrySet()) {
             String name = entry.getKey();
             MockDataManager.CloudService service = entry.getValue();
             
-            // The first 4 are hardcoded in XML (Google, Dropbox, OneDrive, iCloud)
-            if (index < 4) {
+            if (isHardcoded(name)) {
                 updateHardcodedCard(name, service);
             } else {
                 addDynamicCloudCard(name, service);
             }
-            index++;
         }
     }
 
+    private boolean isHardcoded(String name) {
+        return name.equals("Google Drive") || name.equals("Dropbox") || 
+               name.equals("OneDrive") || name.equals("iCloud");
+    }
+
     private void updateHardcodedCard(String name, MockDataManager.CloudService service) {
-        int statusId = 0, accountId = 0, connectBtnId = 0, disconnectBtnId = 0, switchId = 0;
+        int cardId = 0, statusId = 0, accountId = 0, connectBtnId = 0, disconnectBtnId = 0, switchId = 0;
         
         switch (name) {
             case "Google Drive":
+                cardId = R.id.card_google; statusId = R.id.status_google; 
                 accountId = R.id.account_google; connectBtnId = R.id.btn_connect_google; 
                 disconnectBtnId = R.id.btn_disconnect_google; switchId = R.id.switch_google;
                 break;
             case "Dropbox":
-                statusId = R.id.status_dropbox; accountId = R.id.account_dropbox; 
-                connectBtnId = R.id.btn_connect_dropbox; disconnectBtnId = R.id.btn_disconnect_dropbox; 
-                switchId = R.id.switch_dropbox;
+                cardId = R.id.card_dropbox; statusId = R.id.status_dropbox; 
+                accountId = R.id.account_dropbox; connectBtnId = R.id.btn_connect_dropbox; 
+                disconnectBtnId = R.id.btn_disconnect_dropbox; switchId = R.id.switch_dropbox;
                 break;
             case "OneDrive":
+                cardId = R.id.card_onedrive; statusId = R.id.status_onedrive; 
                 accountId = R.id.account_onedrive; connectBtnId = R.id.btn_connect_onedrive; 
                 disconnectBtnId = R.id.btn_disconnect_onedrive; switchId = R.id.switch_onedrive;
                 break;
             case "iCloud":
+                cardId = R.id.card_icloud; statusId = R.id.status_icloud; 
                 accountId = R.id.account_icloud; connectBtnId = R.id.btn_connect_icloud; 
                 disconnectBtnId = R.id.btn_disconnect_icloud; switchId = R.id.switch_icloud;
                 break;
         }
         
-        if (accountId != 0) {
-            setupCloudCardLogic(name, service, statusId != 0 ? findViewById(statusId) : null, 
+        if (cardId != 0) {
+            findViewById(cardId).setVisibility(View.VISIBLE);
+            setupCloudCardLogic(name, service, findViewById(statusId), 
                 findViewById(accountId), findViewById(connectBtnId), 
                 findViewById(disconnectBtnId), findViewById(switchId));
         }
@@ -168,16 +180,16 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
             container.addView(input);
             
             new AlertDialog.Builder(this)
-                    .setTitle("Verbindung trennen")
-                    .setMessage("Geben Sie LÖSCHEN ein, um die Verbindung zu trennen.")
+                    .setTitle("Cloud Dienst entfernen")
+                    .setMessage("Geben Sie LÖSCHEN ein, um diesen Cloud Dienst zu entfernen.")
                     .setView(container)
-                    .setPositiveButton("Trennen", (dialog, which) -> {
+                    .setPositiveButton("Entfernen", (dialog, which) -> {
                         if (input.getText().toString().equals("LÖSCHEN")) {
-                            service.isConnected = false;
-                            service.isActive = false;
-                            updateCardUI(service, statusTv, accountTv, connectBtn, disconnectBtn, s);
+                            MockDataManager.getInstance().cloudServices.remove(key);
+                            refreshAllUI();
+                            updateMenuState();
                         } else {
-                            Toast.makeText(this, "Falsche Eingabe. Verbindung wurde nicht getrennt.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Falsche Eingabe. Dienst wurde nicht entfernt.", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton(R.string.btn_cancel, null)
@@ -188,28 +200,25 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
     }
 
     private void updateCardUI(MockDataManager.CloudService service, TextView statusTv, TextView accountTv, Button connectBtn, Button disconnectBtn, MaterialSwitch s) {
+        disconnectBtn.setVisibility(View.VISIBLE); // Always visible as per request
+
         if (service.isConnected) {
-            if (statusTv != null) statusTv.setVisibility(View.GONE);
+            if (statusTv != null) {
+                statusTv.setVisibility(View.VISIBLE);
+                statusTv.setText(android.text.Html.fromHtml(getString(R.string.status_connected), android.text.Html.FROM_HTML_MODE_COMPACT));
+            }
             accountTv.setVisibility(View.VISIBLE);
             accountTv.setText(getString(R.string.account_label, service.accountName));
             accountTv.setTextColor(getResources().getColor(android.R.color.black, getTheme()));
             connectBtn.setVisibility(View.GONE);
-            disconnectBtn.setVisibility(View.VISIBLE);
             s.setVisibility(View.VISIBLE);
             s.setChecked(service.isActive);
         } else {
             if (statusTv != null) {
-                statusTv.setVisibility(View.VISIBLE);
-                statusTv.setText(R.string.status_not_connected);
-                statusTv.setTextColor(0xFF666666);
-                accountTv.setVisibility(View.GONE);
-            } else {
-                accountTv.setVisibility(View.VISIBLE);
-                accountTv.setText(R.string.status_not_connected);
-                accountTv.setTextColor(0xFF666666);
+                statusTv.setVisibility(View.GONE); // Invisible when connect button is visible
             }
+            accountTv.setVisibility(View.GONE);
             connectBtn.setVisibility(View.VISIBLE);
-            disconnectBtn.setVisibility(View.GONE);
             s.setVisibility(View.GONE);
         }
     }
@@ -227,11 +236,17 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
 
     private void addNewCloud(String provider) {
         MockDataManager dm = MockDataManager.getInstance();
-        int userNum = dm.cloudServices.size() - 2; 
-        if (userNum < 2) userNum = 2;
-        String accountName = "user" + userNum + "@gmail.com";
         
-        String uniqueKey = provider + " #" + userNum;
+        String keyToAdd = provider;
+        if (dm.cloudServices.containsKey(provider)) {
+            int userNum = 2;
+            while (dm.cloudServices.containsKey(provider + " #" + userNum)) {
+                userNum++;
+            }
+            keyToAdd = provider + " #" + userNum;
+        }
+
+        String accountName = "user" + (dm.cloudServices.size() + 1) + "@gmail.com";
         
         // Find capacity from existing service of same type if possible
         long cap = 5L * 1024 * 1024 * 1024;
@@ -242,7 +257,7 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
             }
         }
         
-        dm.cloudServices.put(uniqueKey, new MockDataManager.CloudService(provider, accountName, false, false, cap, 0));
+        dm.cloudServices.put(keyToAdd, new MockDataManager.CloudService(provider, accountName, false, false, cap, 0));
         refreshAllUI();
     }
 
