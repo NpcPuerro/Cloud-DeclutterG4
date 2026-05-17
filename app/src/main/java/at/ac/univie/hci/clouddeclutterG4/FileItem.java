@@ -1,5 +1,3 @@
-//new File Naomi AI MADE
-
 package at.ac.univie.hci.clouddeclutterG4;
 
 import java.io.Serializable;

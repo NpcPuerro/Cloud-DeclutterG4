@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_main, R.string.nav_main); //new File Naomi
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_main, R.string.nav_main); 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         btnCleanup = findViewById(R.id.btn_cleanup);
-        btnCleanup.setOnClickListener(v -> startActivity(new Intent(this, scanningActivity.class))); //new File Naomi
-        findViewById(R.id.btn_usage).setOnClickListener(v -> startActivity(new Intent(this, UsageActivity.class))); //new File Naomi
+        btnCleanup.setOnClickListener(v -> startActivity(new Intent(this, scanningActivity.class))); 
+        findViewById(R.id.btn_usage).setOnClickListener(v -> startActivity(new Intent(this, UsageActivity.class))); 
         btnMainScan = findViewById(R.id.btn_main_scan);
         btnMainScan.setOnClickListener(v -> startActivity(new Intent(this, ScanSettingsActivity.class)));
     }
