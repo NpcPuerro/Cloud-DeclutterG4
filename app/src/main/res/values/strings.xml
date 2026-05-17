@@ -186,6 +186,7 @@
 
     <string name="btn_scan_settings">Scan Einstellungen</string>
     <string name="btn_cloud_dienste">Cloud Dienste Einstellungen</string>
+    <string name="btn_account_settings">Account Einstelungen</string>
     <string name="settings_title">Einstellungen</string>
     <string name="welcome_label">Willkommen zum\nCloud Declutter</string>
     <string name="trash_item_days_left"><font color="#FF0000">30 Tage</font></string>

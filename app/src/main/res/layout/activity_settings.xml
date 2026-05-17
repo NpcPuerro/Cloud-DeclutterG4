@@ -76,12 +76,22 @@
             android:layout_marginBottom="16dp" />
 
         <Button
+            android:id="@+id/btn_account_settings"
+            style="@style/BigButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_account_settings"
+            android:layout_marginBottom="16dp"
+            />
+
+        <Button
             android:id="@+id/btn_cloud_dienste"
             style="@style/BigButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_cloud_dienste"
             />
+
 
     </LinearLayout>
 
