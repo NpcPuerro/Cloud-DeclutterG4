@@ -1,7 +1,7 @@
 package at.ac.univie.hci.clouddeclutterG4;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,13 +10,15 @@ public class MockDataManager {
 
     public static class CloudService {
         public String name;
+        public String accountName;
         public boolean isConnected;
         public boolean isActive;
         public long totalCapacity; // in bytes
         public long baseUsedCapacity; // in bytes
 
-        public CloudService(String name, boolean isConnected, boolean isActive, long totalCapacity, long baseUsedCapacity) {
+        public CloudService(String name, String accountName, boolean isConnected, boolean isActive, long totalCapacity, long baseUsedCapacity) {
             this.name = name;
+            this.accountName = accountName;
             this.isConnected = isConnected;
             this.isActive = isActive;
             this.totalCapacity = totalCapacity;
@@ -36,13 +38,13 @@ public class MockDataManager {
 
     public List<FileItem> cleanupItems = new ArrayList<>();
     public List<FileItem> trashItems = new ArrayList<>();
-    public Map<String, CloudService> cloudServices = new HashMap<>();
+    public Map<String, CloudService> cloudServices = new LinkedHashMap<>();
 
     private MockDataManager() {
-        cloudServices.put("Google Drive", new CloudService("Google Drive", true, true, 15L * 1024 * 1024 * 1024, 0));
-        cloudServices.put("Dropbox", new CloudService("Dropbox", false, false, 2L * 1024 * 1024 * 1024, 0));
-        cloudServices.put("OneDrive", new CloudService("OneDrive", true, false, 5L * 1024 * 1024 * 1024, 0));
-        cloudServices.put("iCloud", new CloudService("iCloud", true, true, 5L * 1024 * 1024 * 1024, 0));
+        cloudServices.put("Google Drive", new CloudService("Google Drive", "user@gmail.com", true, true, 15L * 1024 * 1024 * 1024, 0));
+        cloudServices.put("Dropbox", new CloudService("Dropbox", "user@gmail.com", false, false, 2L * 1024 * 1024 * 1024, 0));
+        cloudServices.put("OneDrive", new CloudService("OneDrive", "user@gmail.com", true, false, 5L * 1024 * 1024 * 1024, 0));
+        cloudServices.put("iCloud", new CloudService("iCloud", "user@gmail.com", true, true, 5L * 1024 * 1024 * 1024, 0));
 
         long now = System.currentTimeMillis();
         long day = 24 * 60 * 60 * 1000L;
