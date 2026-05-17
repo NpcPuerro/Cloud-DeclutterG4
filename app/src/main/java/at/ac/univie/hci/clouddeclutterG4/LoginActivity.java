@@ -33,11 +33,6 @@ public class LoginActivity extends AppCompatActivity {
                     .replace(R.id.fragment_container_login, LoginFragment.newInstance())
                     .commitNow();
         }
-
-        LoginData.login("t@t.t", "t");
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     public void returnToPrevFragment() {
