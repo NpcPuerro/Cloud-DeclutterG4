@@ -118,6 +118,7 @@
     <string name="btn_cancel">Abbrechen</string>
     <string name="account_label">Konto: %1$s</string>
     <string name="msg_no_files_found">Keine Dateien gefunden.</string>
+    <string name="cloud_remove_confirm"><font color="#FF0000">Entfernen</font></string>
 
     <string name="usage_title">Speichernutzung</string>
     <string name="storage_internal">Gerätespeicher</string>

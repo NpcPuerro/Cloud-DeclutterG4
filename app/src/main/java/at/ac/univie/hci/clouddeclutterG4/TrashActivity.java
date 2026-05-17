@@ -122,7 +122,7 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
         new AlertDialog.Builder(this)
                 .setTitle(R.string.msg_deleted_forever)
                 .setMessage(R.string.trash_empty_confirm_msg)
-                .setPositiveButton(R.string.btn_delete, (dialog, which) -> {
+                .setPositiveButton(R.string.delete_confirm, (dialog, which) -> {
                     for (FileItem item : selectedItems) {
                         dm.trashItems.remove(item);
                     }

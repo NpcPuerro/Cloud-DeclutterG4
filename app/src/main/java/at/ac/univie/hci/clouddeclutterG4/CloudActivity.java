@@ -179,7 +179,7 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
                     .setTitle("Cloud Dienst entfernen")
                     .setMessage("Geben Sie LÖSCHEN ein, um diesen Cloud Dienst zu entfernen.")
                     .setView(container)
-                    .setPositiveButton("Entfernen", (dialog, which) -> {
+                    .setPositiveButton(R.string.cloud_remove_confirm, (dialog, which) -> {
                         if (input.getText().toString().equals("LÖSCHEN")) {
                             MockDataManager.getInstance().cloudServices.remove(key);
                             refreshAllUI();
