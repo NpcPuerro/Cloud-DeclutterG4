@@ -83,10 +83,17 @@
     <string name="nav_cloud">Cloud Dienste</string>
     <string name="nav_usage">Speichernutzung</string>
     <string name="nav_cleanup">Schneller Scan</string>
-    <string name="nav_thrash">Papierkorb</string>
+    <string name="nav_trash">Papierkorb</string>
     <string name="nav_account">Account</string>
     <string name="nav_settings">Einstellungen</string>
     <string name="nav_faq">FAQ</string>
+    <string name="faqContact">Kontaktformular</string>
+    <string name="faqName">Name</string>
+    <string name="faqEmail">E-Mail</string>
+    <string name="faqSubject">Thema</string>
+    <string name="faqText">Nachricht</string>
+    <string name="faqSend">Senden</string>
+    <string name="faqSendConfigmMsg">Deine Nachricht wurde versendet!</string>
 
     <string name="status_label">Status:</string>
     <string name="status_ok"><font color="#008000">Funktionsbereit!</font></string>
@@ -96,6 +103,8 @@
     <string name="btn_empty_trash">Papierkorb jetzt leeren</string>
     <string name="btn_restore">Wiederherstellen</string>
     <string name="btn_delete">Löschen</string>
+    <string name="btn_select_all">Alles auswählen</string>
+    <string name="btn_deselect_all">Auswahl aufheben</string>
 
     <string name="msg_no_files_selected">Keine Dateien ausgewählt</string>
     <string name="msg_restored">Dateien wiederhergestellt</string>

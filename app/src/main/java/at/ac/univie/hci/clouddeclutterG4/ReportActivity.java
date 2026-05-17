@@ -21,6 +21,7 @@ import com.anychart.charts.Pie;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ReportActivity extends AppCompatActivity {
@@ -70,12 +71,32 @@ public class ReportActivity extends AppCompatActivity {
 
         List<DataEntry> data = new ArrayList<>();
         for (Map.Entry<String, Long> entry : typeBytesMap.entrySet()) {
-            data.add(new ValueDataEntry(entry.getKey(), entry.getValue()));
+            ValueDataEntry vde = new ValueDataEntry(entry.getKey(), entry.getValue());
+            // Add a custom field with the formatted size string
+            vde.setValue("formattedValue", formatSize(entry.getValue()));
+            data.add(vde);
         }
 
         pie.data(data);
+        // Configure the labels and tooltips to use the formatted string
+        pie.labels().position("outside");
+        pie.labels().format("{%x}: {%formattedValue}");
+        pie.tooltip().format("Größe: {%formattedValue}");
+
         anyChartView.setChart(pie);
 
+    }
+
+    private String formatSize(long bytes) {
+        if (bytes >= 1024L * 1024L * 1024L) {
+            return String.format(Locale.getDefault(), "%.2f GB", bytes / (1024.0 * 1024.0 * 1024.0));
+        } else if (bytes >= 1024L * 1024L) {
+            return String.format(Locale.getDefault(), "%.2f MB", bytes / (1024.0 * 1024.0));
+        } else if (bytes >= 1024L) {
+            return String.format(Locale.getDefault(), "%.2f KB", bytes / 1024.0);
+        } else {
+            return bytes + " B";
+        }
     }
 
     public void done(View v){
