@@ -60,6 +60,14 @@
             android:layout_height="32dp" />
 
         <Button
+            android:id="@+id/btn_blacklist"
+            style="@style/BigButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_blacklist_btn"
+            android:layout_marginBottom="16dp" />
+
+        <Button
             android:id="@+id/btn_scan_settings"
             style="@style/BigButtonStyle"
             android:layout_width="match_parent"

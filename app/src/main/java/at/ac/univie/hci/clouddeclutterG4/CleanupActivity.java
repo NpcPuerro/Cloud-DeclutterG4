@@ -28,6 +28,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
@@ -269,7 +272,13 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
         container.removeAllViews();
 
         MockDataManager dm = MockDataManager.getInstance();
-        List<FileItem> allItems = dm.cleanupItems;
+        List<Pattern> patterns = dm.blacklistFilters.stream()
+                .map(MockDataManager::convertPattern)
+                .collect(Collectors.toList());
+        List<FileItem> allItems = dm.cleanupItems.stream()
+                .filter(item -> patterns.stream()
+                        .noneMatch(pattern -> pattern.matcher(item.name).matches()))
+                .collect(Collectors.toList());
         currentDisplayedItems = new ArrayList<>();
 
         for (FileItem item : allItems) {

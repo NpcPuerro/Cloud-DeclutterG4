@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class MockDataManager {
     private static MockDataManager instance;
@@ -39,6 +40,7 @@ public class MockDataManager {
     public List<FileItem> cleanupItems = new ArrayList<>();
     public List<FileItem> trashItems = new ArrayList<>();
     public Map<String, CloudService> cloudServices = new LinkedHashMap<>();
+    public List<String> blacklistFilters = new ArrayList<>();
 
     private MockDataManager() {
         cloudServices.put("Google Drive", new CloudService("Google Drive", "user@gmail.com", true, true, 15L * 1024 * 1024 * 1024, 0));
@@ -98,5 +100,11 @@ public class MockDataManager {
             }
         }
         return filtered;
+    }
+
+    public static Pattern convertPattern(String str) {
+        return Pattern.compile(
+                "^" + str.replace(".", "\\.").replace("*", ".*") + "$"
+        );
     }
 }

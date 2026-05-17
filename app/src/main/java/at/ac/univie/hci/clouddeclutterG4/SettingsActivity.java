@@ -3,18 +3,27 @@ package at.ac.univie.hci.clouddeclutterG4;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -52,6 +61,52 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ps_options);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_periodic_scan.setAdapter(adapter);
+
+        Button btBlacklist = findViewById(R.id.btn_blacklist);
+        btBlacklist.setOnClickListener(this::showBlacklistDialog);
+
+    }
+
+    private void showBlacklistDialog(View v) {
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_blacklist, null);
+        EditText etBLFilterAdd = dialogView.findViewById(R.id.etBLFilterAdd);
+        Button btBLFilterAdd = dialogView.findViewById(R.id.btBLFilterAdd);
+        btBLFilterAdd.setEnabled(false);
+        etBLFilterAdd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                btBLFilterAdd.setEnabled(!editable.toString().isEmpty());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+        });
+
+        RecyclerView rvBLFilters = dialogView.findViewById(R.id.rvBLFilters);
+        rvBLFilters.setLayoutManager(new LinearLayoutManager(this));
+        MockDataManager dm = MockDataManager.getInstance();
+        BlacklistAdapter adapter = new BlacklistAdapter(dm.blacklistFilters);
+        rvBLFilters.setAdapter(adapter);
+
+        btBLFilterAdd.setOnClickListener(v2 -> {
+            dm.blacklistFilters.add(etBLFilterAdd.getText().toString());
+            etBLFilterAdd.setText("");
+            adapter.notifyDataSetChanged();
+
+        });
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.blacklist_title)
+                .setView(dialogView)
+                .setPositiveButton(R.string.blacklist_ok, null)
+                .show();
 
     }
 
