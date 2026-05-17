@@ -37,6 +37,9 @@
             android:name=".scanningActivity"
             android:exported="false" />
         <activity
+            android:name=".CloudConnectActivity"
+            android:exported="false" />
+        <activity
             android:name=".DropboxLoginActivity"
             android:exported="false" />
         <activity
