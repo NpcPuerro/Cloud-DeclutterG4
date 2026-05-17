@@ -15,6 +15,8 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
+    private android.widget.Button btnCleanup;
+    private android.widget.Button btnMainScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +33,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        findViewById(R.id.btn_cleanup).setOnClickListener(v -> startActivity(new Intent(this, scanningActivity.class))); //new File Naomi
+        btnCleanup = findViewById(R.id.btn_cleanup);
+        btnCleanup.setOnClickListener(v -> startActivity(new Intent(this, scanningActivity.class))); //new File Naomi
         findViewById(R.id.btn_usage).setOnClickListener(v -> startActivity(new Intent(this, UsageActivity.class))); //new File Naomi
-        findViewById(R.id.btn_main_scan).setOnClickListener(v -> startActivity(new Intent(this, ScanSettingsActivity.class)));
+        btnMainScan = findViewById(R.id.btn_main_scan);
+        btnMainScan.setOnClickListener(v -> startActivity(new Intent(this, ScanSettingsActivity.class)));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateButtonStates();
+    }
+
+    private void updateButtonStates() {
+        MockDataManager dm = MockDataManager.getInstance();
+        boolean anyActive = false;
+        for (MockDataManager.CloudService service : dm.cloudServices.values()) {
+            if (service.isConnected && service.isActive) {
+                anyActive = true;
+                break;
+            }
+        }
+        btnCleanup.setEnabled(anyActive);
+        btnCleanup.setAlpha(anyActive ? 1.0f : 0.5f); // Optional: dim it when disabled
+        btnMainScan.setEnabled(anyActive);
+        btnMainScan.setAlpha(anyActive ? 1.0f : 0.5f); // Optional: dim it when disabled
+
+
+        // Also update the navigation drawer menu item
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            MenuItem cleanupItem = navigationView.getMenu().findItem(R.id.nav_cleanup);
+            if (cleanupItem != null) {
+                cleanupItem.setEnabled(anyActive);
+            }
+        }
     }
 
     @Override
@@ -45,7 +80,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_usage) {
             startActivity(new Intent(this, UsageActivity.class));
         } else if (id == R.id.nav_cleanup) {
-            startActivity(new Intent(this, scanningActivity.class));
+            if (btnCleanup.isEnabled()) {
+                startActivity(new Intent(this, scanningActivity.class));
+            }
         } else if (id == R.id.nav_trash) {
             startActivity(new Intent(this, TrashActivity.class));
         } else if (id == R.id.nav_faq) {

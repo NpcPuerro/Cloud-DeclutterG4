@@ -71,9 +71,12 @@ public class scanningActivity extends AppCompatActivity {
             }
         }
 
+        /* no integration for local storage
         if (clouds.isEmpty()) {
             clouds.add("Gerätespeicher");
         }
+        */
+
 
         filesPerCloud = new int[clouds.size()];
         for (int i = 0; i < clouds.size(); i++) {
