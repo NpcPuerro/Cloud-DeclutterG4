@@ -62,6 +62,31 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
         findViewById(R.id.toolbar).setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateMenuState();
+    }
+
+    private void updateMenuState() {
+        MockDataManager dm = MockDataManager.getInstance();
+        boolean anyActive = false;
+        for (MockDataManager.CloudService service : dm.cloudServices.values()) {
+            if (service.isConnected && service.isActive) {
+                anyActive = true;
+                break;
+            }
+        }
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            MenuItem cleanupItem = navigationView.getMenu().findItem(R.id.nav_cleanup);
+            if (cleanupItem != null) {
+                cleanupItem.setEnabled(anyActive);
+            }
+        }
+    }
+
     private void emptyTrash() {
         for (View itemView : itemViews) {
             CheckBox cb = itemView.findViewById(R.id.item_checkbox);
@@ -175,7 +200,17 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
         } else if (id == R.id.nav_usage) {
             startActivity(new Intent(this, UsageActivity.class));
         } else if (id == R.id.nav_cleanup) {
-            startActivity(new Intent(this, scanningActivity.class));
+            MockDataManager dm = MockDataManager.getInstance();
+            boolean anyActive = false;
+            for (MockDataManager.CloudService service : dm.cloudServices.values()) {
+                if (service.isConnected && service.isActive) {
+                    anyActive = true;
+                    break;
+                }
+            }
+            if (anyActive) {
+                startActivity(new Intent(this, scanningActivity.class));
+            }
         } else if (id == R.id.nav_main) {
             startActivity(new Intent(this, MainActivity.class));
         } else if (id == R.id.nav_faq) {
