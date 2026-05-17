@@ -25,11 +25,11 @@
     "questions": [
       {
         "question": "Wie füge ich Cloud-Dienste hinzu?",
-        "answer": "Cloud-Dienste können Sie ganz einfach hinzufügen, indem Sie unter dem Side-Menü Punkt „Cloud-Dienste“ Ihren gewünschten Cloud-Dienst suchen und auf „Verbinden“ drücken. Im Anschluss werden Sie aufgefordert sich bei dem Dienst anzumelden und Cloud-Declutter die nötigen Berechtigungen zu erteilen. Ist das erfolgt, werden Sie im Menü „Cloud-Dienste“ nun die aktive Verbindung zu dem Dienst sehen.\nSollte es zu Problemen kommen, stehen wir Ihnen gerne nach Schilderung des Problems per Kontaktformular zur Verfügung!"
+        "answer": "Cloud-Dienste können Sie ganz einfach hinzufügen, indem Sie unter dem Side-Menü Punkt „Cloud-Dienste“ Ihren gewünschten Cloud-Dienst suchen und auf „Verbinden“ drücken. Sollten Sie eine weitere Verbindung von einem bereits genutzten Anbieter einstellen wollten, können Sie das über den Button „Cloud-Dienst hinzufügen“ machen. \nHaben Sie auf „Verbinden“ gedrückt, werden Sie aufgefordert sich bei dem Dienst anzumelden und Cloud-Declutter die nötigen Berechtigungen zu erteilen. Ist das erfolgt, werden Sie im Menü „Cloud-Dienste“ nun die aktive Verbindung zu dem Dienst sehen. Sollte es zu Problemen kommen, stehen wir Ihnen gerne nach Schilderung des Problems per Kontaktformular zur Verfügung!"
       },
       {
         "question": "Wie entferne ich Cloud-Dienste?",
-        "answer": "Cloud-Dienste zu entfernen, ist (MOMENTAN NICHT MÖGLICH!!!!!!!!!!!) ganz einfach möglich, indem Sie.. PLATZHALTER"
+        "answer": "Cloud-Dienste zu entfernen, ist ganz einfach möglich, indem Sie bei dem gewünschten Cloud-Dienst auf das rote X drücken und eine Lösch-Bestätigung eintippen. Danach wird die Verbindung zu diesem Dient getrennt und der entsprechende Cloud-Dienst aus Ihrer App entfernt."
       },
       {
         "question": "Ich möchte einen Cloud-Dienst vorübergehend deaktivieren (Scans)?",
@@ -37,7 +37,7 @@
       },
       {
         "question": "Der Status eines Cloud-Dienstes zeigt „nicht verfügbar“ – was bedeutet das?",
-        "answer": "Sollte unter einem Cloud-Dienst „Status: Keine Verbindung“ stehen, dann liegt entweder Seitens des Cloud Anbieters oder mit der Verbindung zu diesem ein Problem vor. Mögliche Gründe könnten unzureichende bzw. widerrufene Berechtigungen sein, neue Richtlinien, Updates, Fehler, oder anderes.\nAm besten versuchen Sie das Problem zu beheben, indem Sie den entsprechenden Cloud-Dienst kurz aus der App entfernen und erneut hinzufügen. Sollte das Problem dadurch nicht behoben worden sein, helfen wir Ihnen gerne. Dazu bitte einfach kurz Ihr Problem im Kontaktformular schildern."
+        "answer": "Sollte unter einem Cloud-Dienst „Status: Keine Verbindung“ stehen, dann liegt entweder Seitens des Cloud Anbieters oder mit der Verbindung zu diesem ein Problem vor. Mögliche Gründe könnten unzureichende bzw. widerrufene Berechtigungen sein, neue Richtlinien, Updates, Fehler, oder anderes. Am besten versuchen Sie das Problem zu beheben, indem Sie den entsprechenden Cloud-Dienst kurz aus der App entfernen und erneut hinzufügen.\nSollte das Problem dadurch nicht behoben worden sein, helfen wir Ihnen gerne. Dazu bitte einfach kurz Ihr Problem im Kontaktformular schildern."
       }
     ]
   },
@@ -46,7 +46,7 @@
     "questions": [
       {
         "question": "Wie kann ich gezielt nach Dateien scannen?",
-        "answer": "PLATZHALTER"
+        "answer": "Erweiterter Scan“ bietet Ihnen die Möglichkeit gewisse Parameter für den Scan zu setzen. Neben der Auswahl der gewünschten Cloud(s) können Sie bspw. auch nach Dateityp filtern. Unter „Dateiname enthält“ können Sie Begriffe reinschreiben, nach welchen gezielt gescannt werden soll. Achtung: Hierbei ist es wichtig, dass Sie mehrere Begriffe mit einem Minus / Bindestrich trennen; z.B. Version-Lampe (Es werden alle Dateien die Version oder Lampe in ihrem Namen haben gescannt)"
       },
       {
         "question": "Was passiert mit den entfernten Dateien?",
@@ -55,6 +55,10 @@
       {
         "question": "Wie kann ich eine Datei wiederherstellen?",
         "answer": "Sollten Sie eine Datei wiederherstellen wollen, können Sie dies problemlos im Papierkorb tun. Diesen finden Sie über das Side-Menü (3 Striche, obere linke Ecke). Wählen Sie dort die gewünschte Datei(en) aus und drücken Sie auf den „Wiederherstellen“ Button. Die wiederhergestellten Dateien befinden sich nun wieder dort, wo Sie zum Zeitpunkt des Löschens gespeichert waren."
+      },
+      {
+        "question": "Wie nutze ich die Blacklist?",
+        "answer": "Die Blacklist können Sie nutzen, indem Sie in „Einstellungen“ auf den Button „Blacklist“ drücken und in dem auftauchenden Menü den gewünschten Filter eingeben, auf welchem basierend die Dateien nicht mehr zur Auswahl bei der Speicherbereinigung angezeigt werden.\nAls mögliche Blacklist Filter können Sie bspw. „*.png“ eingeben, wodurch alle .png (Bilddateien) ausgeschlossen werden. \nWeitere Beispiele: „*asd*“ (alles, das „asd“ beinhält), „Rechnung.*“ (Jede Datei, unabhängig vom Typ, die Rechnung heißt)"
       }
     ]
   }

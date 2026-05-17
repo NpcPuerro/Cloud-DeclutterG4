@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Cloud Declutter</string>
-    <string name="app_title_login">Döner\nKebab</string>
+    <string name="app_title_login">Cloud \nDeclutter</string>
     <string name="wird_gescannt">%s wird gescannt.</string>
     <string name="file_progress">Datei %d von %d</string>
     <string name="files_deleted">Du hast heute %d Dateien mit einer Gesamtgröße von %.2f %s gelöscht.</string>
@@ -52,9 +52,9 @@
     <string name="loginConfirmPasswordHint">Passwort bestätigen</string>
     <string name="loginSubmitLogin">Anmelden</string>
     <string name="loginSubmitSignup">Registrieren</string>
-    <string name="loginNoAccount">Du hast noch kein Konto? %s</string>
+    <string name="loginNoAccount">Du hast noch keinen Account?\n%s</string>
     <string name="loginNoAccountLink">Jetzt Registrieren</string>
-    <string name="loginYesAccount">Du hast bereits ein Konto? %s</string>
+    <string name="loginYesAccount">Du hast bereits einen Account? %s</string>
     <string name="loginYesAccountLink">Anmelden</string>
     <string name="loginPwdNoMatch"><font color="#FF0000">&#x2718; Passwörter stimmen nicht überein</font></string>
     <string name="loginPwdYesMatch"><font color="#008000">&#x2714; Passwörter stimmen überein</font></string>
@@ -93,7 +93,7 @@
     <string name="nav_settings">Einstellungen</string>
     <string name="nav_faq">FAQ</string>
     <string name="faqContact">Kontaktformular</string>
-    <string name="faqName">Name</string>
+    <string name="faqName">Name(Optional)</string>
     <string name="faqEmail">E-Mail</string>
     <string name="faqSubject">Thema</string>
     <string name="faqText">Nachricht</string>
@@ -186,7 +186,7 @@
 
     <string name="btn_scan_settings">Scan Einstellungen</string>
     <string name="btn_cloud_dienste">Cloud Dienste Einstellungen</string>
-    <string name="btn_account_settings">Account Einstelungen</string>
+    <string name="btn_account_settings">Account Einstellungen</string>
     <string name="settings_title">Einstellungen</string>
     <string name="welcome_label">Willkommen zum\nCloud Declutter</string>
     <string name="trash_item_days_left"><font color="#FF0000">30 Tage</font></string>
