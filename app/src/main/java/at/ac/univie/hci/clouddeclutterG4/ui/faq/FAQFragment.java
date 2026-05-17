@@ -41,6 +41,9 @@ public class FAQFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_faq, container, false);
 
+        FAQActivity activity = (FAQActivity) requireActivity();
+        activity.setToolbarTitle(R.string.nav_faq);
+
         rvFAQCategoryList = view.findViewById(R.id.rvFAQCategoryList);
         btFaqContact = view.findViewById(R.id.btFaqContact);
 

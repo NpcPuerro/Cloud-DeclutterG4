@@ -27,6 +27,9 @@ public class ContactFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
+        FAQActivity activity = (FAQActivity) requireActivity();
+        activity.setToolbarTitle(R.string.faqContact);
+
         btFaqContactSend = view.findViewById(R.id.btFaqContactSend);
         btFaqContactSend.setOnClickListener(this::submit);
 

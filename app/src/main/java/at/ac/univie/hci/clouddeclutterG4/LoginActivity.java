@@ -2,6 +2,7 @@ package at.ac.univie.hci.clouddeclutterG4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -32,6 +33,11 @@ public class LoginActivity extends AppCompatActivity {
                     .replace(R.id.fragment_container_login, LoginFragment.newInstance())
                     .commitNow();
         }
+
+        LoginData.login("t@t.t", "t");
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void returnToPrevFragment() {

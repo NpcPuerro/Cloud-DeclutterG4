@@ -1,11 +1,8 @@
 package at.ac.univie.hci.clouddeclutterG4;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,31 +13,19 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
 
 import at.ac.univie.hci.clouddeclutterG4.ui.faq.ContactFragment;
-import at.ac.univie.hci.clouddeclutterG4.ui.faq.FAQCategoryAdapter;
-import at.ac.univie.hci.clouddeclutterG4.ui.faq.FAQCategory;
 import at.ac.univie.hci.clouddeclutterG4.ui.faq.FAQFragment;
-import at.ac.univie.hci.clouddeclutterG4.ui.login.LoginFragment;
-import at.ac.univie.hci.clouddeclutterG4.ui.login.SignupFragment;
 
 public class FAQActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final String FAQ_FILENAME = "faqdata.json";
     private RecyclerView rvFAQCategoryList;
     private DrawerLayout drawerLayout;
+    private MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +37,12 @@ public class FAQActivity extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_main, R.string.nav_main);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        toolbar.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.fragment_container_faq), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -67,7 +54,6 @@ public class FAQActivity extends AppCompatActivity implements NavigationView.OnN
                     .replace(R.id.fragment_container_faq, FAQFragment.newInstance())
                     .commitNow();
         }
-        findViewById(R.id.toolbar).setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
     }
 
     public void showContact() {
@@ -79,6 +65,10 @@ public class FAQActivity extends AppCompatActivity implements NavigationView.OnN
                 )
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public void setToolbarTitle(int id) {
+        toolbar.setTitle(id);
     }
 
     @Override
