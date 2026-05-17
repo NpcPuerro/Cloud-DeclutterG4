@@ -226,16 +226,33 @@
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <Button
+            android:id="@+id/button_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="40dp"
+            android:backgroundTint="#FA4537"
+            android:onClick="clearAll"
+            android:text="@string/reset_filter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button5"
+            app:layout_constraintHorizontal_bias="0.46"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateRangeSelector" />
+
+        <Button
             android:id="@+id/button5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:backgroundTint="#5271ff"
             android:onClick="startScan"
             android:text="@string/scan_starten"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_clear"
             app:layout_constraintTop_toBottomOf="@+id/dateRangeSelector" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

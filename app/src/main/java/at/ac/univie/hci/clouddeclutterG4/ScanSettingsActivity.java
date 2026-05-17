@@ -177,4 +177,23 @@ public class ScanSettingsActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void clearAll(View v) {
+        minNumber.setText("");
+        maxNumber.setText("");
+        minUnit.setSelection(0);
+        maxUnit.setSelection(0);
+        nameContains.setText("");
+
+        // Clear file type selection
+        Arrays.fill(selectedFileTypes, false);
+        typeList.clear();
+        fileTypeSelector.setText(R.string.select_all);
+
+        // Clear date range selection
+        startDateMillis = 0;
+        endDateMillis = Long.MAX_VALUE;
+        selectedDateRange = "";
+        dateRangeSelector.setText(R.string.zeitraum_waehlen);
+    }
 }

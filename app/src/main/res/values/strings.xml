@@ -184,4 +184,7 @@
         <item>14 Tage</item>
         <item>30 Tage</item>
     </string-array>
+
+    <string name="reset_filter">Filter zurücksetzen</string>
 </resources>
+
