@@ -1,15 +1,14 @@
-//new File Naomi
-
 package at.ac.univie.hci.clouddeclutterG4;
 
 import android.os.Bundle;
-import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class DropboxLoginActivity extends AppCompatActivity {
     @Override
@@ -36,7 +35,7 @@ public class DropboxLoginActivity extends AppCompatActivity {
                 dropbox.isConnected = true;
                 dropbox.isActive = true;
             }
-            Toast.makeText(this, R.string.msg_dropbox_success, Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.main), R.string.msg_dropbox_success, Snackbar.LENGTH_LONG).show();
             finish();
         });
 

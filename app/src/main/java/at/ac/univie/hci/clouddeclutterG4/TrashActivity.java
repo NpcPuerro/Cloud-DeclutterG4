@@ -9,13 +9,13 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -100,7 +100,7 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
     private void restoreSelectedItems() {
         List<FileItem> selectedItems = getSelectedItems();
         if (selectedItems.isEmpty()) {
-            Toast.makeText(this, R.string.msg_no_files_selected, Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.main), R.string.msg_no_files_selected, Snackbar.LENGTH_LONG).show();
             return;
         }
         MockDataManager dm = MockDataManager.getInstance();
@@ -109,13 +109,13 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
             dm.cleanupItems.add(item);
         }
         refreshList();
-        Toast.makeText(this, R.string.msg_restored, Toast.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(R.id.main), R.string.msg_restored, Snackbar.LENGTH_LONG).show();
     }
 
     private void deleteSelectedItemsForever() {
         List<FileItem> selectedItems = getSelectedItems();
         if (selectedItems.isEmpty()) {
-            Toast.makeText(this, R.string.msg_no_files_selected, Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.main), R.string.msg_no_files_selected, Snackbar.LENGTH_LONG).show();
             return;
         }
         MockDataManager dm = MockDataManager.getInstance();
@@ -127,7 +127,7 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
                         dm.trashItems.remove(item);
                     }
                     refreshList();
-                    Toast.makeText(this, R.string.msg_deleted_forever, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.main), R.string.msg_deleted_forever, Snackbar.LENGTH_LONG).show();
                 })
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();

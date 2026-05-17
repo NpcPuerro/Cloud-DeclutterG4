@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -183,7 +183,7 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
 
     private void deleteSelectedItems() {
         if (selectedFiles.isEmpty()) {
-            Toast.makeText(this, R.string.msg_no_files_selected, Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.main), R.string.msg_no_files_selected, Snackbar.LENGTH_SHORT).show();
             return;
         }
 
@@ -198,7 +198,7 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
                     }
                     selectedFiles.clear();
                     refreshList();
-                    Toast.makeText(this, R.string.msg_moved_to_trash, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.main), R.string.msg_moved_to_trash, Snackbar.LENGTH_SHORT).show();
                 })
                 .setNegativeButton(R.string.btn_cancel, null)
                 .show();
@@ -242,7 +242,7 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
                         String maxStr = etMax.getText().toString();
                         filterMaxSize = maxStr.isEmpty() ? Long.MAX_VALUE : Long.parseLong(maxStr) * MB;
                     } catch (Exception e) {
-                        Toast.makeText(this, "Ungültige Größe", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(R.id.main), "Ungültige Größe", Snackbar.LENGTH_SHORT).show();
                     }
                     refreshList();
                 })

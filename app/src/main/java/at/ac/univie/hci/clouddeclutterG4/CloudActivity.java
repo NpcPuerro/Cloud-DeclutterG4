@@ -1,5 +1,3 @@
-//new File Naomi
-
 package at.ac.univie.hci.clouddeclutterG4;
 
 import android.content.Intent;
@@ -9,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -23,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 public class CloudActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -189,7 +187,7 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
                             refreshAllUI();
                             updateMenuState();
                         } else {
-                            Toast.makeText(this, "Falsche Eingabe. Dienst wurde nicht entfernt.", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(findViewById(R.id.main), "Falsche Eingabe. Dienst wurde nicht entfernt.", Snackbar.LENGTH_LONG).show();
                         }
                     })
                     .setNegativeButton(R.string.btn_cancel, null)

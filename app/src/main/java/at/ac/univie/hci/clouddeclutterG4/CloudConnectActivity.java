@@ -1,13 +1,13 @@
 package at.ac.univie.hci.clouddeclutterG4;
 
 import android.os.Bundle;
-import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.google.android.material.snackbar.Snackbar;
 
 public class CloudConnectActivity extends AppCompatActivity {
     @Override
@@ -48,8 +48,8 @@ public class CloudConnectActivity extends AppCompatActivity {
             if (finalCloudKey.contains("Google Drive")) msgRes = R.string.msg_google_success;
             else if (finalCloudKey.contains("OneDrive")) msgRes = R.string.msg_onedrive_success;
             else if (finalCloudKey.contains("iCloud")) msgRes = R.string.msg_icloud_success;
-            
-            Toast.makeText(this, msgRes, Toast.LENGTH_SHORT).show();
+
+            Snackbar.make(findViewById(R.id.main), msgRes, Snackbar.LENGTH_LONG).show();
             finish();
         });
 
