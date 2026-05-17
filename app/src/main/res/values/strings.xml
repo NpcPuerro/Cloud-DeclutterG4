@@ -177,7 +177,7 @@
     <string name="btn_next">Weiter</string>
 
     <string name="btn_main_scan">Erweiterter Scan</string>
-
+    <string name="status_not_available"><font color="#FF0000">Nicht verfügbar</font></string>
     <string name="btn_scan_settings">Scan Einstellungen</string>
     <string name="btn_cloud_dienste">Cloud Dienste Einstellungen</string>
     <string name="settings_title">Einstellungen</string>

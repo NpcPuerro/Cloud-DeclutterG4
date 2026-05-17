@@ -14,7 +14,7 @@ public class CloudConnectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_dropbox_login); // Reusing the same layout
+        setContentView(R.layout.activity_dropbox_login);
 
         String cloudKey = getIntent().getStringExtra("cloud_name");
         if (cloudKey == null) cloudKey = "Cloud";
@@ -28,8 +28,7 @@ public class CloudConnectActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setNavigationOnClickListener(v -> finish());
-            
-            // Set dynamic title
+
             if (cloudKey.contains("Google Drive")) toolbar.setTitle(R.string.google_login_title);
             else if (cloudKey.contains("OneDrive")) toolbar.setTitle(R.string.onedrive_login_title);
             else if (cloudKey.contains("iCloud")) toolbar.setTitle(R.string.icloud_login_title);
