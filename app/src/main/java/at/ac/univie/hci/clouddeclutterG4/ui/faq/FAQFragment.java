@@ -48,7 +48,7 @@ public class FAQFragment extends Fragment {
         btFaqContact = view.findViewById(R.id.btFaqContact);
 
         FAQCategory[] arrFAQ = loadFAQ();
-        assert arrFAQ != null; // TODO: maybe proper error handling is better
+        assert arrFAQ != null;
         List<FAQCategory> faqdata = Arrays.stream(arrFAQ).toList();
 
         rvFAQCategoryList.setLayoutManager(new LinearLayoutManager(view.getContext()));
