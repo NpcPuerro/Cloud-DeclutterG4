@@ -59,4 +59,9 @@ public class LoginData {
     public static void logout() {
         currentLogin = "";
     }
+
+    public static void deleteAccount() {
+        loginData.remove(currentLogin);
+        logout();
+    }
 }

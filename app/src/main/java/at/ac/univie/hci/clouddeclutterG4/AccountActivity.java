@@ -66,6 +66,7 @@ public class AccountActivity extends AppCompatActivity {
         btEditConf.setOnClickListener(this::editButton);
 
         btAccLogout.setOnClickListener(this::logout);
+        btAccDelAccount.setOnClickListener(this::deleteAccount);
 
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -205,10 +206,24 @@ public class AccountActivity extends AppCompatActivity {
 
     private void logout(View v) {
         new AlertDialog.Builder(this)
-                .setTitle("Logout")
-                .setMessage("Möchtest du dich wirklich ausloggen?")
-                .setPositiveButton("Logout", (dialog, which) -> {
+                .setTitle(R.string.accLogout)
+                .setMessage(R.string.accLogoutMsg)
+                .setPositiveButton(R.string.accLogoutConfirm, (dialog, which) -> {
                     LoginData.logout();
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                })
+                .setNegativeButton(R.string.btn_cancel, null)
+                .show();
+    }
+
+    private void deleteAccount(View v) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.accDeleteAccount)
+                .setMessage(R.string.accDeleteAccountMsg)
+                .setPositiveButton(R.string.accDeleteAccountConfirm, (dialog, which) -> {
+                    LoginData.deleteAccount();
                     Intent intent = new Intent(this, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

@@ -76,7 +76,11 @@
     <string name="accChangedPwd">Passwort geändert</string>
     <string name="accWrongPassword">Altes Passwort ist nicht korrekt.</string>
     <string name="accLogout">Logout</string>
+    <string name="accLogoutMsg">Möchtest du dich wirklich ausloggen?</string>
+    <string name="accLogoutConfirm"><font color="#FF0000">Logout</font></string>
     <string name="accDeleteAccount">Account Löschen</string>
+    <string name="accDeleteAccountConfirm"><font color="#FF0000">Account Löschen</font></string>
+    <string name="accDeleteAccountMsg">Möchtest du wirklich deinen Account löschen?\n<b>Diese Aktion kann nicht rückgängig gemacht werden!</b></string>
     <string name="accEditEmail">E-Mail ändern</string>
     <string name="accSaveEmail">Speichern</string>
 
