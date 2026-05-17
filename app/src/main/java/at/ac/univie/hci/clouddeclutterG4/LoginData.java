@@ -55,4 +55,8 @@ public class LoginData {
         currentLogin = email;
         return true;
     }
+
+    public static void logout() {
+        currentLogin = "";
+    }
 }

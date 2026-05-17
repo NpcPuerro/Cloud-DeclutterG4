@@ -75,6 +75,7 @@
     <string name="accConfirmNewPwd">Neues Passwort bestätigen</string>
     <string name="accChangedPwd">Passwort geändert</string>
     <string name="accWrongPassword">Altes Passwort ist nicht korrekt.</string>
+    <string name="accLogout">Logout</string>
     <string name="accDeleteAccount">Account Löschen</string>
     <string name="accEditEmail">Email ändern</string>
     <string name="accSaveEmail">Speichern</string>

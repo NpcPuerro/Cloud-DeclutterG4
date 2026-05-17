@@ -117,10 +117,21 @@
 
         <Space
             android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
+        <Button
+            android:id="@+id/btAccLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red"
+            android:text="@string/accLogout" />
+
+        <Space
+            android:layout_width="match_parent"
             android:layout_height="24dp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btAccDelAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/red"

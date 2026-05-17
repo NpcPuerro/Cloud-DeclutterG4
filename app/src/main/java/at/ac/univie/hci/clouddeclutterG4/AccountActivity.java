@@ -1,5 +1,6 @@
 package at.ac.univie.hci.clouddeclutterG4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,8 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -27,6 +30,8 @@ public class AccountActivity extends AppCompatActivity {
     private EditText etNewPwdConf;
     private Button btEditConf;
     private Button btChangePwd;
+    private Button btAccLogout;
+    private Button btAccDelAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,8 @@ public class AccountActivity extends AppCompatActivity {
         btEditConf = findViewById(R.id.btEditConf);
         btChangePwd = findViewById(R.id.btAccChangePwd);
         txAccEmailMatch = findViewById(R.id.txAccEmailMatch);
+        btAccLogout = findViewById(R.id.btAccLogout);
+        btAccDelAccount = findViewById(R.id.btAccDelAccount);
 
         etEmail.setText(LoginData.getLogin());
         etEmail.setEnabled(false);
@@ -57,6 +64,8 @@ public class AccountActivity extends AppCompatActivity {
         btChangePwd.setEnabled(false);
 
         btEditConf.setOnClickListener(this::editButton);
+
+        btAccLogout.setOnClickListener(this::logout);
 
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -192,6 +201,20 @@ public class AccountActivity extends AppCompatActivity {
             ).show();
         }
 
+    }
+
+    private void logout(View v) {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Möchtest du dich wirklich ausloggen?")
+                .setPositiveButton("Logout", (dialog, which) -> {
+                    LoginData.logout();
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                })
+                .setNegativeButton(R.string.btn_cancel, null)
+                .show();
     }
 
 }
