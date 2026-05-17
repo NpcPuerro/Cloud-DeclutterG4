@@ -39,6 +39,7 @@
         android:layout_gravity="start"
         app:itemTextAppearanceActive="@style/NavMenuItemStyle"
         app:itemTextAppearanceInactive="@style/NavMenuItemStyle"
+        app:headerLayout="@layout/nav_header"
         app:itemVerticalPadding="12dp"
         app:menu="@menu/drawer_menu" />
 
