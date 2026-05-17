@@ -2,6 +2,7 @@ package at.ac.univie.hci.clouddeclutterG4;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -9,14 +10,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.util.Pair;
+import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
@@ -26,8 +32,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
-public class ScanSettingsActivity extends AppCompatActivity {
+public class ScanSettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private DrawerLayout drawerLayout;
     private TextView fileTypeSelector;
     private boolean[] selectedFileTypes;
     private final ArrayList<Integer> typeList = new ArrayList<>();
@@ -52,7 +59,16 @@ public class ScanSettingsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_scan_settings);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_main, R.string.nav_main);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main_content), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -137,6 +153,33 @@ public class ScanSettingsActivity extends AppCompatActivity {
 
             picker.show(getSupportFragmentManager(), "DATE_RANGE_PICKER");
         });
+
+        findViewById(R.id.toolbar).setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateMenuState();
+    }
+
+    private void updateMenuState() {
+        MockDataManager dm = MockDataManager.getInstance();
+        boolean anyActive = false;
+        for (MockDataManager.CloudService service : dm.cloudServices.values()) {
+            if (service.isConnected && service.isActive) {
+                anyActive = true;
+                break;
+            }
+        }
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            MenuItem cleanupItem = navigationView.getMenu().findItem(R.id.nav_cleanup);
+            if (cleanupItem != null) {
+                cleanupItem.setEnabled(anyActive);
+            }
+        }
     }
 
     private void setupCloudCheckbox(CheckBox cb, String name) {
@@ -195,5 +238,41 @@ public class ScanSettingsActivity extends AppCompatActivity {
         endDateMillis = Long.MAX_VALUE;
         selectedDateRange = "";
         dateRangeSelector.setText(R.string.zeitraum_waehlen);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_trash) {
+            startActivity(new Intent(this, TrashActivity.class));
+        } else if (id == R.id.nav_usage) {
+            startActivity(new Intent(this, UsageActivity.class));
+        } else if (id == R.id.nav_cleanup) {
+            MockDataManager dm = MockDataManager.getInstance();
+            boolean anyActive = false;
+            for (MockDataManager.CloudService service : dm.cloudServices.values()) {
+                if (service.isConnected && service.isActive) {
+                    anyActive = true;
+                    break;
+                }
+            }
+            if (anyActive) {
+                startActivity(new Intent(this, scanningActivity.class));
+            }
+        } else if (id == R.id.nav_main) {
+            startActivity(new Intent(this, MainActivity.class));
+        } else if (id == R.id.nav_faq) {
+            startActivity(new Intent(this, FAQActivity.class));
+        } else if (id == R.id.nav_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+        } else if (id == R.id.nav_account) {
+            startActivity(new Intent(this, AccountActivity.class));
+        } else if (id == R.id.nav_cloud) {
+            startActivity(new Intent(this, CloudActivity.class));
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
