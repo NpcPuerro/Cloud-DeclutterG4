@@ -27,8 +27,6 @@ public class ContactFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
-        view.findViewById(R.id.toolbar).setOnClickListener(v -> requireActivity().getOnBackPressedDispatcher().onBackPressed()); // TODO: maybe change it to side menu
-
         btFaqContactSend = view.findViewById(R.id.btFaqContactSend);
         btFaqContactSend.setOnClickListener(this::submit);
 

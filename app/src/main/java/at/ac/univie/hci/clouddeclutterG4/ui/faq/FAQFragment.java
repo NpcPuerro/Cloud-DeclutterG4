@@ -41,8 +41,6 @@ public class FAQFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_faq, container, false);
 
-        view.findViewById(R.id.toolbar).setOnClickListener(v -> requireActivity().getOnBackPressedDispatcher().onBackPressed()); // TODO: maybe change it to side menu
-
         rvFAQCategoryList = view.findViewById(R.id.rvFAQCategoryList);
         btFaqContact = view.findViewById(R.id.btFaqContact);
 
