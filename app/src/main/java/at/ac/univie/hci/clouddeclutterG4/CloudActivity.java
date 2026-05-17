@@ -205,7 +205,9 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
         if (service.isConnected) {
             if (statusTv != null) {
                 statusTv.setVisibility(View.VISIBLE);
+                // Set text and make sure it's green
                 statusTv.setText(android.text.Html.fromHtml(getString(R.string.status_connected), android.text.Html.FROM_HTML_MODE_COMPACT));
+                statusTv.setTextColor(0xFF008000); // Dark Green
             }
             accountTv.setVisibility(View.VISIBLE);
             accountTv.setText(getString(R.string.account_label, service.accountName));
