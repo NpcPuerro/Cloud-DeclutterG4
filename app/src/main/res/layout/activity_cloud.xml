@@ -334,6 +334,7 @@
 
             <!-- iCloud #2-->
             <androidx.cardview.widget.CardView
+                android:id="@+id/icloud_hidden"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"

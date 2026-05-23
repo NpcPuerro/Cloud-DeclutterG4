@@ -41,6 +41,7 @@ public class MockDataManager {
     public List<FileItem> trashItems = new ArrayList<>();
     public Map<String, CloudService> cloudServices = new LinkedHashMap<>();
     public List<String> blacklistFilters = new ArrayList<>();
+    public boolean hideBrokenIcloud = true; //should hide the "broken" iCloud if register is taken instead of Login
 
     private MockDataManager() {
         cloudServices.put("Google Drive", new CloudService("Google Drive", "user@gmail.com", true, true, 15L * 1024 * 1024 * 1024, 0));
@@ -106,5 +107,9 @@ public class MockDataManager {
         return Pattern.compile(
                 "^" + str.replace(".", "\\.").replace("*", ".*") + "$"
         );
+    }
+
+    public void clearCloudNewAccount() {
+        cloudServices.clear();
     }
 }

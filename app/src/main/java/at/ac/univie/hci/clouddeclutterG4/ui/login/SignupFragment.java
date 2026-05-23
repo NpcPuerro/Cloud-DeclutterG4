@@ -26,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 import at.ac.univie.hci.clouddeclutterG4.LoginActivity;
 import at.ac.univie.hci.clouddeclutterG4.LoginData;
 import at.ac.univie.hci.clouddeclutterG4.MainActivity;
+import at.ac.univie.hci.clouddeclutterG4.MockDataManager;
 import at.ac.univie.hci.clouddeclutterG4.R;
 
 public class SignupFragment extends Fragment {
@@ -158,7 +159,9 @@ public class SignupFragment extends Fragment {
             ).show();
             return;
         }
-        
+
+        MockDataManager.getInstance().clearCloudNewAccount();
+        MockDataManager.getInstance().hideBrokenIcloud = false;
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
         getActivity().finish();
