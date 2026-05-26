@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private android.widget.Button btnCleanup;
     private android.widget.Button btnMainScan;
+    private android.widget.Button btnAddCloud;
+    private android.widget.Button btnUsage;
+    private android.widget.TextView statusOk;
+    private android.widget.TextView statusBad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +39,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         btnCleanup = findViewById(R.id.btn_cleanup);
         btnCleanup.setOnClickListener(v -> startActivity(new Intent(this, scanningActivity.class))); 
-        findViewById(R.id.btn_usage).setOnClickListener(v -> startActivity(new Intent(this, UsageActivity.class))); 
+        btnUsage = findViewById(R.id.btn_usage);
+        btnUsage.setOnClickListener(v -> startActivity(new Intent(this, UsageActivity.class)));
         btnMainScan = findViewById(R.id.btn_main_scan);
         btnMainScan.setOnClickListener(v -> startActivity(new Intent(this, ScanSettingsActivity.class)));
+        btnAddCloud = findViewById(R.id.btn_add_cloud);
+        btnAddCloud.setOnClickListener(view -> startActivity(new Intent(this, CloudActivity.class)));
+        statusOk = findViewById(R.id.status_for_the_app_good);
+        statusBad = findViewById(R.id.status_for_the_app_bad);
     }
 
     @Override
@@ -55,10 +64,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
         }
-        btnCleanup.setEnabled(anyActive);
-        btnCleanup.setAlpha(anyActive ? 1.0f : 0.5f);
-        btnMainScan.setEnabled(anyActive);
-        btnMainScan.setAlpha(anyActive ? 1.0f : 0.5f);
+        int mainButtonsVisibility = anyActive ? android.view.View.VISIBLE : android.view.View.GONE;
+        int btnAddCloudVisibility = anyActive ? android.view.View.GONE : android.view.View.VISIBLE;
+
+        btnCleanup.setVisibility(mainButtonsVisibility);
+        btnMainScan.setVisibility(mainButtonsVisibility);
+        statusOk.setVisibility(mainButtonsVisibility);
+        btnUsage.setVisibility(mainButtonsVisibility);
+
+        if (btnAddCloud != null) {
+            btnAddCloud.setVisibility(btnAddCloudVisibility);
+            statusBad.setVisibility(btnAddCloudVisibility);
+        }
+        //btnCleanup.setEnabled(anyActive);
+        //btnCleanup.setAlpha(anyActive ? 1.0f : 0.5f);
+        //.setEnabled(anyActive);
+        //btnMainScan.setAlpha(anyActive ? 1.0f : 0.5f);
 
 
         // Also update the navigation drawer menu item
