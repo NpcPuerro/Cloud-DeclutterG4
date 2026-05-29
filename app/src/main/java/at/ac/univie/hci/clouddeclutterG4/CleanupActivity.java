@@ -21,6 +21,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.ortiz.touchview.TouchImageView;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -350,16 +352,19 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
     }
 
     private void showImagePreview(FileItem item) {
-        ImageView imageView = new ImageView(this);
-        imageView.setImageResource(item.iconResId);
-        imageView.setAdjustViewBounds(true);
-        imageView.setPadding(32, 32, 32, 32);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View preview = inflater.inflate(R.layout.file_preview, null);
 
-        new AlertDialog.Builder(this)
+        TouchImageView imageView = preview.findViewById(R.id.ivImageView);
+        imageView.setImageResource(item.iconResId);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(item.name)
-                .setView(imageView)
+                .setView(preview)
                 .setPositiveButton(R.string.ok, null)
-                .show();
+                .create();
+
+        dialog.show();
     }
 
     @Override
