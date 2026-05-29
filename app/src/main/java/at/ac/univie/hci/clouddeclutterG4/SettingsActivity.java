@@ -51,7 +51,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             return insets;
         });
 
-        findViewById(R.id.btn_scan_settings).setOnClickListener(v -> startActivity(new Intent(this, ScanSettingsActivity.class))); //new File Naomi
         findViewById(R.id.btn_account_settings).setOnClickListener(v -> startActivity(new Intent(this, AccountActivity.class)));
         findViewById(R.id.btn_cloud_dienste).setOnClickListener(v -> startActivity(new Intent(this, CloudActivity.class)));
 

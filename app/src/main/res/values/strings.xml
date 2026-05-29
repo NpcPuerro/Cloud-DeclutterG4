@@ -67,7 +67,7 @@
     <string name="loginWrongLoginData">Falsche E-Mail oder Passwort. Versuche es erneut.</string>
     <string name="loginEmailNoMatch">&#x2718; Keine gültige E-Mail Adresse</string>
     <string name="loginEmailAlreadyExists">E-Mail Adresse existiert bereits, wähle eine andere.</string>
-
+    <string name="buttonAddACloud">Füge eine Cloud hinzu</string>
     <string name="accChangeEmail">E-Mail ändern</string>
     <string name="accChangePassword">Passwort ändern</string>
     <string name="accOldPwd">Altes Passwort</string>
@@ -83,7 +83,7 @@
     <string name="accDeleteAccountMsg">Möchtest du wirklich deinen Account löschen?\n<b>Diese Aktion kann nicht rückgängig gemacht werden!</b></string>
     <string name="accEditEmail">E-Mail ändern</string>
     <string name="accSaveEmail">Speichern</string>
-
+    <string name="status_bad"><font color="#FF0000">Nicht Funktionsbereit!</font></string>
     <string name="nav_main">Hauptseite</string>
     <string name="nav_cloud">Cloud Dienste</string>
     <string name="nav_usage">Speichernutzung</string>

@@ -38,6 +38,7 @@
 
             <Button
                 android:id="@+id/btn_filter"
+                app:icon="@drawable/baseline_filter_alt_24"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -46,6 +47,7 @@
 
             <Button
                 android:id="@+id/btn_sort"
+                app:icon="@drawable/outline_filter_list_24"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

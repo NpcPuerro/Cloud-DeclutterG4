@@ -89,6 +89,7 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
         dynamicContainer.removeAllViews();
         
         MockDataManager dm = MockDataManager.getInstance();
+        findViewById(R.id.icloud_hidden).setVisibility(dm.hideBrokenIcloud ? View.VISIBLE : View.GONE);
         for (java.util.Map.Entry<String, MockDataManager.CloudService> entry : dm.cloudServices.entrySet()) {
             String name = entry.getKey();
             MockDataManager.CloudService service = entry.getValue();

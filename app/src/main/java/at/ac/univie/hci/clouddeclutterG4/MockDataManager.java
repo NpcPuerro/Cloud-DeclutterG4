@@ -41,6 +41,7 @@ public class MockDataManager {
     public List<FileItem> trashItems = new ArrayList<>();
     public Map<String, CloudService> cloudServices = new LinkedHashMap<>();
     public List<String> blacklistFilters = new ArrayList<>();
+    public boolean hideBrokenIcloud = true; //should hide the "broken" iCloud if register is taken instead of Login
 
     private MockDataManager() {
         cloudServices.put("Google Drive", new CloudService("Google Drive", "user@gmail.com", true, true, 15L * 1024 * 1024 * 1024, 0));
@@ -52,12 +53,14 @@ public class MockDataManager {
         long day = 24 * 60 * 60 * 1000L;
 
         cleanupItems.add(new FileItem("Urlaub_2023.jpg", 1200000000L, "1.2 GB", "Google Drive", "Bild", now - 10 * day, android.R.drawable.ic_menu_gallery));
-        cleanupItems.add(new FileItem("Filmprojekt.mp4", 5400000000L, "5.4 GB", "Google Drive", "Video", now - 5 * day, android.R.drawable.ic_menu_save));
+        cleanupItems.add(new FileItem("Hochzeit_Kinder.mp4", 2400000000L, "2.4 GB", "Google Drive", "Video", now - 5 * day, android.R.drawable.ic_menu_save));
         cleanupItems.add(new FileItem("Rechnung.pdf", 800000000L, "0.8 GB", "Google Drive", "Dokument", now - 30 * day, android.R.drawable.ic_menu_agenda));
         cleanupItems.add(new FileItem("Backup_SamsungA25.zip", 2100000000L, "2.1 GB", "Google Drive", "Backup", now - 2 * day, android.R.drawable.ic_menu_save));
         cleanupItems.add(new FileItem("Party_Foto_1.png", 5000000L, "5 MB", "Google Drive", "Bild", now - day, android.R.drawable.ic_menu_gallery));
         cleanupItems.add(new FileItem("Meeting_Audio.mp3", 15000000L, "15 MB", "Google Drive", "Audio", now - 12 * day, android.R.drawable.ic_menu_gallery));
         cleanupItems.add(new FileItem("Hochzeit_2015.mp4", 3450000000L, "3.45 GB", "Google Drive", "Video", now - 1000 * day, android.R.drawable.ic_menu_gallery));
+        cleanupItems.add(new FileItem("Hochzeit_Kirche.mp3", 1200000000L, "1.2 GB", "Google Drive", "Audio", now - 678 * day, android.R.drawable.ic_menu_save));
+        cleanupItems.add(new FileItem("Hochzeit_Blumen.png", 800000000L, "0.8 GB", "Google Drive", "Bild", now - 17 * day, android.R.drawable.ic_menu_save));
 
         cleanupItems.add(new FileItem("Sommerurlaub_Kroatien.jpg", 95000000L, "95 MB", "Dropbox", "Bild", now - 5 * day, android.R.drawable.ic_menu_gallery));
         cleanupItems.add(new FileItem("Tutorial_Final.mp4", 1100000000L, "1.1 GB", "Dropbox", "Video", now - 10 * day, android.R.drawable.ic_menu_save));
@@ -106,5 +109,9 @@ public class MockDataManager {
         return Pattern.compile(
                 "^" + str.replace(".", "\\.").replace("*", ".*") + "$"
         );
+    }
+
+    public void clearCloudNewAccount() {
+        cloudServices.clear();
     }
 }
