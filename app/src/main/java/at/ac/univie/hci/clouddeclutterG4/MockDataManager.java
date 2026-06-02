@@ -38,6 +38,7 @@ public class MockDataManager {
     }
 
     public List<FileItem> cleanupItems = new ArrayList<>();
+    public List<FileItem> currentDeleteItems = new ArrayList<>();
     public List<FileItem> trashItems = new ArrayList<>();
     public Map<String, CloudService> cloudServices = new LinkedHashMap<>();
     public List<String> blacklistFilters = new ArrayList<>();

@@ -55,7 +55,7 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
     private long filterMaxDate = Long.MAX_VALUE;
     private int currentSortIdx = 0;
     private DrawerLayout drawerLayout;
-
+    MockDataManager dm = MockDataManager.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +96,8 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
             finish();
         });
         findViewById(R.id.toolbar).setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+
+        dm.currentDeleteItems.clear();
     }
 
     private void selectAllItems() {
@@ -193,13 +195,14 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
             return;
         }
 
-        MockDataManager dm = MockDataManager.getInstance();
+
         new AlertDialog.Builder(this)
                 .setTitle(R.string.btn_delete)
                 .setMessage(getString(R.string.msg_confirm_move_to_trash, selectedFiles.size()))
                 .setPositiveButton(R.string.delete_confirm, (dialog, which) -> {
                     for (FileItem item : selectedFiles) {
                         dm.cleanupItems.remove(item);
+                        dm.currentDeleteItems.add(item);
                         dm.trashItems.add(item);
                     }
                     selectedFiles.clear();

@@ -43,7 +43,7 @@ public class ReportActivity extends AppCompatActivity {
         deletionData = findViewById(R.id.textView4);
         doneButton = findViewById(R.id.button2);
 
-        List<FileItem> trashItems = MockDataManager.getInstance().trashItems;
+        List<FileItem> trashItems = MockDataManager.getInstance().currentDeleteItems;
         int count = trashItems.size();
         long totalBytes = 0;
         Map<String, Long> typeBytesMap = new HashMap<>();
