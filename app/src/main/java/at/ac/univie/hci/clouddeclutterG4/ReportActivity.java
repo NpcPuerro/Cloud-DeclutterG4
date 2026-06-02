@@ -80,7 +80,7 @@ public class ReportActivity extends AppCompatActivity {
         pie.data(data);
         // Configure the labels and tooltips to use the formatted string
         pie.labels().position("outside");
-        pie.labels().format("{%x}: {%formattedValue}");
+        pie.labels().format("{%formattedValue}");
         pie.tooltip().format("Größe: {%formattedValue}");
 
         anyChartView.setChart(pie);
