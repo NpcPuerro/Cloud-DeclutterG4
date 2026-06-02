@@ -39,19 +39,29 @@
             <Button
                 android:id="@+id/btn_filter"
                 app:icon="@drawable/baseline_filter_alt_24"
+                app:iconGravity="start"
+                app:iconPadding="0dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/btn_filter"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textAlignment="center"
                 android:layout_marginEnd="4dp"/>
 
             <Button
                 android:id="@+id/btn_sort"
                 app:icon="@drawable/outline_filter_list_24"
+                app:iconGravity="start"
+                app:iconPadding="0dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/btn_sort"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textAlignment="center"
                 android:layout_marginStart="4dp"/>
         </LinearLayout>
 
@@ -60,7 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/btn_select_all" />
+            android:text="@string/btn_select_all"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
