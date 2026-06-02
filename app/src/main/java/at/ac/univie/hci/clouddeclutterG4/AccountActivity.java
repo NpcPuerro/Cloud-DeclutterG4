@@ -275,6 +275,8 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.nav_cloud) {
             startActivity(new Intent(this, CloudActivity.class));
+        } else if (id == R.id.nav_expanded_scan) {
+            startActivity(new Intent(this, ScanSettingsActivity.class));
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

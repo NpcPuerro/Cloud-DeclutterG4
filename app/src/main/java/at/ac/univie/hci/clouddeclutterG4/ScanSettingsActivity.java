@@ -270,6 +270,8 @@ public class ScanSettingsActivity extends AppCompatActivity implements Navigatio
             startActivity(new Intent(this, AccountActivity.class));
         } else if (id == R.id.nav_cloud) {
             startActivity(new Intent(this, CloudActivity.class));
+        } else if (id == R.id.nav_expanded_scan) {
+            startActivity(new Intent(this, ScanSettingsActivity.class));
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

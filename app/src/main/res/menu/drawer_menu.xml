@@ -18,6 +18,10 @@
         android:icon="@drawable/outline_autorenew_24"
         android:title="@string/nav_cleanup" />
     <item
+        android:id="@+id/nav_expanded_scan"
+        android:icon="@drawable/outline_autorenew_24"
+        android:title="@string/nav_expanded_scan" />
+    <item
         android:id="@+id/nav_trash"
         android:icon="@drawable/outline_delete_24"
         android:title="@string/nav_trash" />
@@ -33,4 +37,5 @@
         android:id="@+id/nav_faq"
         android:icon="@drawable/outline_help_24"
         android:title="@string/nav_faq" />
+
 </menu>

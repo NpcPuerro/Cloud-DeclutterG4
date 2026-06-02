@@ -398,6 +398,8 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.nav_account) {
             startActivity(new Intent(this, AccountActivity.class));
+        } else if (id == R.id.nav_expanded_scan) {
+            startActivity(new Intent(this, ScanSettingsActivity.class));
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

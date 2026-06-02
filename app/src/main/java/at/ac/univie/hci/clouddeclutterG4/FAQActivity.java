@@ -99,6 +99,8 @@ public class FAQActivity extends AppCompatActivity implements NavigationView.OnN
             startActivity(new Intent(this, AccountActivity.class));
         } else if (id == R.id.nav_cloud) {
             startActivity(new Intent(this, CloudActivity.class));
+        } else if (id == R.id.nav_expanded_scan) {
+            startActivity(new Intent(this, ScanSettingsActivity.class));
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
