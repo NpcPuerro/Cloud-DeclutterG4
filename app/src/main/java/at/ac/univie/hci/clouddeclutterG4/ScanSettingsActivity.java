@@ -90,6 +90,9 @@ public class ScanSettingsActivity extends AppCompatActivity implements Navigatio
         setupCloudCheckbox(dropbox, "Dropbox");
         setupCloudCheckbox(oneDrive, "OneDrive");
 
+        minUnit.setSelection(2);
+        maxUnit.setSelection(2);
+
         fileTypeSelector = findViewById(R.id.multi_spinner_file_types);
         fileTypesArray = getResources().getStringArray(R.array.file_types);
         selectedFileTypes = new boolean[fileTypesArray.length];
@@ -224,8 +227,8 @@ public class ScanSettingsActivity extends AppCompatActivity implements Navigatio
     public void clearAll(View v) {
         minNumber.setText("");
         maxNumber.setText("");
-        minUnit.setSelection(0);
-        maxUnit.setSelection(0);
+        minUnit.setSelection(2);
+        maxUnit.setSelection(2);
         nameContains.setText("");
 
         // Clear file type selection
