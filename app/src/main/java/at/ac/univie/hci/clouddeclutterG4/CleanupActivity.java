@@ -33,7 +33,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import android.text.Spannable;
+import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
+
+import at.ac.univie.hci.clouddeclutterG4.ui.login.LoginUtils;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 
@@ -344,7 +348,16 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
         if (currentDisplayedItems.isEmpty()) {
             TextView emptyText = new TextView(this);
             String text = dm.cleanupItems.isEmpty() ? getString(R.string.msg_no_files_found) : "Keine Dateien entsprechen den Filtern.";
-            emptyText.setText(text);
+
+            if (!dm.cleanupItems.isEmpty()) {
+                Spannable spannable = LoginUtils.getSpannable(text, "Filtern", v -> showFilterDialog());
+                emptyText.setText(spannable);
+                emptyText.setMovementMethod(LinkMovementMethod.getInstance());
+                emptyText.setHighlightColor(android.graphics.Color.TRANSPARENT);
+            } else {
+                emptyText.setText(text);
+            }
+
             emptyText.setPadding(40, 60, 40, 40);
             emptyText.setTextSize(22);
             container.addView(emptyText);
