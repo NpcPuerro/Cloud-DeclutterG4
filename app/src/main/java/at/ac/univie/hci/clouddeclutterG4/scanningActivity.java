@@ -22,6 +22,7 @@ public class scanningActivity extends AppCompatActivity {
 
     private TextView cloudText;
     private TextView fileText;
+    private TextView timeText;
     private Button buttonPause;
     private Button buttonStop;
     private ProgressBar spinner;
@@ -54,6 +55,7 @@ public class scanningActivity extends AppCompatActivity {
         spinner = findViewById(R.id.progressBar);
         cloudText = findViewById(R.id.textView2);
         fileText = findViewById(R.id.textView3);
+        timeText = findViewById(R.id.textView20);
 
         // Initialize data once in onCreate
         Intent intent = getIntent();
@@ -113,7 +115,25 @@ public class scanningActivity extends AppCompatActivity {
         if (currentCloudIdx < clouds.size()) {
             cloudText.setText(getString(R.string.wird_gescannt, clouds.get(currentCloudIdx)));
             fileText.setText(getString(R.string.file_progress, currentFile, filesPerCloud[currentCloudIdx]));
+            timeText.setText(getString(R.string.time_remaining, calculateRemainingTime()));
         }
+    }
+    
+    private int calculateRemainingTime(){
+        int remainingFiles = 0;
+
+        // Files left in the current cloud
+        if (currentCloudIdx < filesPerCloud.length) {
+            remainingFiles += (filesPerCloud[currentCloudIdx] - currentFile);
+        }
+
+        // All files in upcoming clouds
+        for (int i = currentCloudIdx + 1; i < filesPerCloud.length; i++) {
+            remainingFiles += filesPerCloud[i];
+        }
+
+        // Each file takes approx 600ms. Round down to seconds.
+        return (remainingFiles * 600) / 1000;
     }
 
     public void scan() {
