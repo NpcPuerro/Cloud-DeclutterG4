@@ -1,10 +1,12 @@
 package at.ac.univie.hci.clouddeclutterG4;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -212,7 +214,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         else {
             Snackbar.make(
                     v,
-                    R.string.accWrongPassword,
+                    R.string.accWrongOldPassword,
                     Snackbar.LENGTH_SHORT
             ).show();
         }
@@ -234,17 +236,60 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
     }
 
     private void deleteAccount(View v) {
-        new AlertDialog.Builder(this)
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_remove_account, null);
+        EditText etRmAccPwd = dialogView.findViewById(R.id.etRmAccPwd);
+        TextView txRmAccWrongPwd = dialogView.findViewById(R.id.txRmAccWrongPwd);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.accDeleteAccount)
-                .setMessage(R.string.accDeleteAccountMsg)
-                .setPositiveButton(R.string.accDeleteAccountConfirm, (dialog, which) -> {
-                    LoginData.deleteAccount();
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                })
-                .setNegativeButton(R.string.btn_cancel, null)
-                .show();
+                .setView(dialogView)
+                .setPositiveButton(R.string.accDeleteAccount, null)
+                .setNegativeButton(R.string.cancel, null)
+                .create();
+
+        dialog.setOnShowListener(d -> {
+            Button dialogPosBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            dialogPosBtn.setEnabled(false);
+
+            dialogPosBtn.setOnClickListener(view -> {
+                if (!LoginData.checkPassword(LoginData.getCurrentLogin(), etRmAccPwd.getText().toString())) {
+//                        etRmAccPwd.setText("");
+                    txRmAccWrongPwd.setVisibility(View.VISIBLE);
+                    return;
+                }
+                dialog.dismiss();
+                LoginData.deleteAccount();
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            });
+
+            etRmAccPwd.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if (editable.toString().isEmpty()) {
+                        dialogPosBtn.setEnabled(false);
+                        dialogPosBtn.setTextColor(Color.GRAY);
+                    } else {
+                        dialogPosBtn.setEnabled(true);
+                        dialogPosBtn.setTextColor(Color.RED);
+                    }
+                }
+            });
+        });
+
+
+        dialog.show();
     }
 
     @Override

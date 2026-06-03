@@ -75,7 +75,9 @@
     <string name="accNewPwd">Neues Passwort</string>
     <string name="accConfirmNewPwd">Neues Passwort bestätigen</string>
     <string name="accChangedPwd">Passwort geändert</string>
-    <string name="accWrongPassword">Altes Passwort ist nicht korrekt.</string>
+    <string name="accWrongOldPassword">Altes Passwort ist nicht korrekt.</string>
+    <string name="accWrongPassword">&#x2718; Passwort ist nicht korrekt.</string>
+    <string name="accRmAccInfo">Damit dein Account gelöscht wird musst du dein Passwort bestätigen.\nEine Bestätigung zur Löschung deines Accounts wird an deine E-Mail gesendet. Du hast <b>14 Tage</b> Zeit um deinen Account wiederherzustellen.</string>
     <string name="accLogout">Logout</string>
     <string name="accLogoutMsg">Möchtest du dich wirklich ausloggen?</string>
     <string name="accLogoutConfirm"><font color="#FF0000">Logout</font></string>

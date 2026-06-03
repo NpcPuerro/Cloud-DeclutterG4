@@ -25,6 +25,10 @@ public class LoginData {
         return true;
     }
 
+    public static String getCurrentLogin() {
+        return currentLogin;
+    }
+
     public static boolean changeEmail(String email) {
         if (currentLogin.isEmpty() || email.isEmpty()) return false;
 
