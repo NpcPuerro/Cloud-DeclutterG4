@@ -331,7 +331,21 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
                 if (service == null || !service.isConnected || !service.isActive) matches = false;
             }
 
-            if (matches && !filterNameContains.isEmpty() && !item.name.toLowerCase().contains(filterNameContains.toLowerCase())) matches = false;
+            if (matches && !filterNameContains.isEmpty()) {
+                String[] searchTerms = filterNameContains.split(",");
+                boolean foundMatch = false;
+                for (String term : searchTerms) {
+                    String trimmedTerm = term.trim().toLowerCase();
+                    String regexPattern = trimmedTerm.replace("*", ".*");
+                    if (!regexPattern.endsWith(".*")) regexPattern = regexPattern + ".*";
+                    if (item.name.toLowerCase().matches(regexPattern)) {
+                        foundMatch = true;
+                        break;
+                    }
+                }
+
+                if (!foundMatch) matches = false;
+            }
             if (matches && !filterTypes.isEmpty() && !filterTypes.contains(item.type)) matches = false;
             if (matches && (item.sizeBytes < filterMinSize || item.sizeBytes > filterMaxSize)) matches = false;
             if (matches && (item.dateMillis < filterMinDate || item.dateMillis > filterMaxDate)) matches = false;
