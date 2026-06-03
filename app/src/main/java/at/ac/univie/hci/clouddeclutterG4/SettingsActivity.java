@@ -106,7 +106,10 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                 .setTitle(R.string.blacklist_title)
                 .setView(dialogView)
                 .setPositiveButton(R.string.blacklist_ok, null)
-                .show();
+                .setNeutralButton(R.string.blacklist_help, (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                    startActivity(new Intent(this, FAQActivity.class));
+                }).show();
 
     }
 

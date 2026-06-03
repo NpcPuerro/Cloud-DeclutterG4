@@ -199,9 +199,10 @@
 
     <string name="settings_blacklist_btn">Blacklist</string>
     <string name="blacklist_title">Blacklist</string>
-    <string name="blacklist_filter_hint">Filter</string>
+    <string name="blacklist_filter_hint">Filter: z.B. *.png</string>
     <string name="blacklist_add_btn">Hinzufügen</string>
-    <string name="blacklist_ok">Anwenden</string>
+    <string name="blacklist_ok">ANWENDEN</string>
+    <string name="blacklist_help">Zur FAQ</string>
     <string name="settings_automatic_scan">Automatischer Scan bei App-Start</string>
     <string name="settings_periodic_scan">Periodischer Scan</string>
     <string-array name="settings_periodic_scan_options">
