@@ -2,6 +2,7 @@ package at.ac.univie.hci.clouddeclutterG4;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
@@ -93,6 +94,8 @@ public class FAQActivity extends AppCompatActivity implements NavigationView.OnN
             }
         } else if (id == R.id.nav_main) {
             startActivity(new Intent(this, MainActivity.class));
+        } else if (id == R.id.nav_faq) {
+            startActivity(new Intent(this, FAQActivity.class));
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.nav_account) {
