@@ -37,6 +37,8 @@ import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 
+import androidx.core.util.Pair;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import at.ac.univie.hci.clouddeclutterG4.ui.login.LoginUtils;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
@@ -219,6 +221,7 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
         Spinner spType = dialogView.findViewById(R.id.filter_type);
         EditText etMin = dialogView.findViewById(R.id.filter_min_size);
         EditText etMax = dialogView.findViewById(R.id.filter_max_size);
+        TextView dateRangeSelector = dialogView.findViewById(R.id.filter_date_range);
 
         final long MB = 1024 * 1024;
         String[] types = {"Alle", "Bild", "Video", "Dokument", "Backup", "Audio"};
@@ -234,6 +237,31 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
         }
         if(filterMinSize > 0) etMin.setText(String.valueOf(filterMinSize / MB));
         if(filterMaxSize < Long.MAX_VALUE) etMax.setText(String.valueOf(filterMaxSize / MB));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        if (filterMinDate > 0 && filterMaxDate < Long.MAX_VALUE) {
+            String startDate = sdf.format(new Date(filterMinDate));
+            String endDate = sdf.format(new Date(filterMaxDate));
+            dateRangeSelector.setText(startDate + " - " + endDate);
+        }
+
+        final long[] tempDates = {filterMinDate, filterMaxDate};
+
+        dateRangeSelector.setOnClickListener(v -> {
+            MaterialDatePicker<Pair<Long, Long>> picker = MaterialDatePicker.Builder.dateRangePicker()
+                    .setTitleText(R.string.zeitraum_waehlen)
+                    .build();
+
+            picker.addOnPositiveButtonClickListener(selection -> {
+                tempDates[0] = selection.first;
+                tempDates[1] = selection.second;
+                String startDate = sdf.format(new Date(tempDates[0]));
+                String endDate = sdf.format(new Date(tempDates[1]));
+                dateRangeSelector.setText(startDate + " - " + endDate);
+            });
+
+            picker.show(getSupportFragmentManager(), "DATE_RANGE_PICKER");
+        });
 
         new AlertDialog.Builder(this)
                 .setTitle(R.string.filter_title)
@@ -253,13 +281,17 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
                     } catch (Exception e) {
                         Snackbar.make(findViewById(R.id.main), "Ungültige Größe", Snackbar.LENGTH_SHORT).show();
                     }
+                    filterMinDate = tempDates[0];
+                    filterMaxDate = tempDates[1];
                     refreshList();
                 })
-                .setNegativeButton(R.string.btn_reset, (dialog, which) -> {
+                .setNeutralButton(R.string.reset_filter, (dialog, which) -> {
                     filterNameContains = "";
                     filterTypes.clear();
                     filterMinSize = 0;
                     filterMaxSize = Long.MAX_VALUE;
+                    filterMinDate = 0;
+                    filterMaxDate = Long.MAX_VALUE;
                     refreshList();
                 })
                 .show();

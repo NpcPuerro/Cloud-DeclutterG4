@@ -66,5 +66,21 @@
             android:textSize="20sp"
             android:importantForAutofill="no" />
 
+        <TextView
+            style="@style/BigTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/zeitraum_erstelldatum" />
+
+        <TextView
+            android:id="@+id/filter_date_range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:text="@string/zeitraum_waehlen"
+            android:textSize="20sp" />
+
     </LinearLayout>
 </ScrollView>
