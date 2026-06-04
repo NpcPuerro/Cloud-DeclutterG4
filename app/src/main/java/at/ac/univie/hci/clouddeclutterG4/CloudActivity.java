@@ -262,12 +262,13 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
 
         String accountName = "user" + (dm.cloudServices.size() + 1) + "@gmail.com";
 
-        long cap = 5L * 1024 * 1024 * 1024;
-        for (MockDataManager.CloudService s : dm.cloudServices.values()) {
-            if (s.name.equals(provider)) {
-                cap = s.totalCapacity;
-                break;
-            }
+        long cap;
+        if (provider.equals("Google Drive")) {
+            cap = 15L * 1024 * 1024 * 1024;
+        } else if (provider.equals("Dropbox")) {
+            cap = 2L * 1024 * 1024 * 1024;
+        } else {
+            cap = 5L * 1024 * 1024 * 1024;
         }
         
         dm.cloudServices.put(keyToAdd, new MockDataManager.CloudService(provider, accountName, false, false, cap, 0));
