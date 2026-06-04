@@ -8,7 +8,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.snackbar.Snackbar;
 
 public class DropboxLoginActivity extends AppCompatActivity {
     @Override
@@ -35,7 +34,18 @@ public class DropboxLoginActivity extends AppCompatActivity {
                 dropbox.isConnected = true;
                 dropbox.isActive = true;
             }
-            Snackbar.make(findViewById(R.id.main), R.string.msg_dropbox_success, Snackbar.LENGTH_LONG).show();
+
+            boolean isFirst = getIntent().getBooleanExtra("is_first_cloud", false);
+
+            String message;
+            if (isFirst) {
+                message = "Deine Erste Cloud wurde verbunden, Scan kann gestartet werden!";
+            } else {
+                message = getString(R.string.msg_dropbox_success);
+            }
+            android.content.Intent resultIntent = new android.content.Intent();
+            resultIntent.putExtra("message", message);
+            setResult(RESULT_OK, resultIntent);
             finish();
         });
 

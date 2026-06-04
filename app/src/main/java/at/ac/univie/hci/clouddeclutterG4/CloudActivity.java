@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -26,6 +28,17 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
 
     private DrawerLayout drawerLayout;
     private android.widget.LinearLayout dynamicContainer;
+    private final ActivityResultLauncher<Intent> cloudConnectLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    String message = result.getData().getStringExtra("message");
+                    if (message != null) {
+                        Snackbar.make(findViewById(R.id.main), message, Snackbar.LENGTH_LONG).show();
+                    }
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,13 +169,23 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
         updateCardUI(service, statusTv, accountTv, connectBtn, disconnectBtn, s);
 
         connectBtn.setOnClickListener(v -> {
-            if (key.equals("Dropbox")) {
-                startActivity(new Intent(this, DropboxLoginActivity.class));
-            } else {
-                Intent loginIntent = new Intent(this, CloudConnectActivity.class);
-                loginIntent.putExtra("cloud_name", key);
-                startActivity(loginIntent);
+            boolean isFirst = true;
+            for (MockDataManager.CloudService cs : MockDataManager.getInstance().cloudServices.values()) {
+                if (cs.isConnected) {
+                    isFirst = false;
+                    break;
+                }
             }
+
+            Intent loginIntent;
+            if (key.equals("Dropbox")) {
+                loginIntent = new Intent(this, DropboxLoginActivity.class);
+            } else {
+                loginIntent = new Intent(this, CloudConnectActivity.class);
+                loginIntent.putExtra("cloud_name", key);
+            }
+            loginIntent.putExtra("is_first_cloud", isFirst);
+            cloudConnectLauncher.launch(loginIntent);
         });
 
         disconnectBtn.setOnClickListener(v -> {

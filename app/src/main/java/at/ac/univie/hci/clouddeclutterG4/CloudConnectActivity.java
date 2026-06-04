@@ -1,5 +1,6 @@
 package at.ac.univie.hci.clouddeclutterG4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,7 +8,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import com.google.android.material.snackbar.Snackbar;
 
 public class CloudConnectActivity extends AppCompatActivity {
     @Override
@@ -43,13 +43,23 @@ public class CloudConnectActivity extends AppCompatActivity {
                 service.isConnected = true;
                 service.isActive = true;
             }
-            
-            int msgRes = R.string.msg_dropbox_success;
-            if (finalCloudKey.contains("Google Drive")) msgRes = R.string.msg_google_success;
-            else if (finalCloudKey.contains("OneDrive")) msgRes = R.string.msg_onedrive_success;
-            else if (finalCloudKey.contains("iCloud")) msgRes = R.string.msg_icloud_success;
 
-            Snackbar.make(findViewById(R.id.main), msgRes, Snackbar.LENGTH_LONG).show();
+            boolean isFirst = getIntent().getBooleanExtra("is_first_cloud", false);
+
+            String message;
+            if (isFirst) {
+                message = "Deine Erste Cloud wurde verbunden, Scan kann gestartet werden!";
+            } else {
+                int msgRes = R.string.msg_dropbox_success;
+                if (finalCloudKey.contains("Google Drive")) msgRes = R.string.msg_google_success;
+                else if (finalCloudKey.contains("OneDrive")) msgRes = R.string.msg_onedrive_success;
+                else if (finalCloudKey.contains("iCloud")) msgRes = R.string.msg_icloud_success;
+                message = getString(msgRes);
+            }
+
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("message", message);
+            setResult(RESULT_OK, resultIntent);
             finish();
         });
 
