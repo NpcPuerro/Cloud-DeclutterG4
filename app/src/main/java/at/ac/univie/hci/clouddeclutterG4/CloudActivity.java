@@ -189,28 +189,21 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
         });
 
         disconnectBtn.setOnClickListener(v -> {
-            final android.widget.EditText input = new android.widget.EditText(this);
-            input.setHint("LÖSCHEN");
-            
-            android.widget.FrameLayout container = new android.widget.FrameLayout(this);
-            android.widget.FrameLayout.LayoutParams params = new  android.widget.FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.leftMargin = 60; 
-            params.rightMargin = 60;
-            input.setLayoutParams(params);
-            container.addView(input);
-            
             new AlertDialog.Builder(this)
                     .setTitle("Cloud Dienst entfernen")
-                    .setMessage("Geben Sie LÖSCHEN ein, um diesen Cloud Dienst zu entfernen.")
-                    .setView(container)
+                    .setMessage("Möchten Sie diesen Cloud Dienst wirklich entfernen?")
                     .setPositiveButton(R.string.cloud_remove_confirm, (dialog, which) -> {
-                        if (input.getText().toString().equals("LÖSCHEN")) {
-                            MockDataManager.getInstance().cloudServices.remove(key);
-                            refreshAllUI();
-                            updateMenuState();
-                        } else {
-                            Snackbar.make(findViewById(R.id.main), "Falsche Eingabe. Dienst wurde nicht entfernt.", Snackbar.LENGTH_LONG).show();
-                        }
+                        new AlertDialog.Builder(this)
+                                .setTitle("Endgültige Bestätigung")
+                                .setMessage("Sind Sie sicher? Wenn sie diese Cloud wieder benutzen möchten, werden sie erfordert diese nochmal zu verbinden.")
+                                .setPositiveButton(R.string.cloud_remove_confirm, (dialog2, which2) ->{
+                                    MockDataManager.getInstance().cloudServices.remove(key);
+                                    refreshAllUI();
+                                    updateMenuState();
+                                    Snackbar.make(findViewById(R.id.main), "Dienst wurde entfernt.", Snackbar.LENGTH_LONG).show();
+                                })
+                                .setNegativeButton(R.string.btn_cancel, null)
+                                .show();
                     })
                     .setNegativeButton(R.string.btn_cancel, null)
                     .show();
