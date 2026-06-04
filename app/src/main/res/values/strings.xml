@@ -173,6 +173,7 @@
     <string name="msg_invalid_size">Ungültige Größe</string>
     <string name="btn_reset">Zurücksetzen</string>
     <string name="reset_filter">Filter zurücksetzen</string>
+    <string name="to_blacklist"><u>(zur Blacklist)</u></string>
     <string name="info_category_title">Information</string>
     <string name="info_category_text">Die hier gesetzten Filter können während der Speicherbereinigung noch angepasst werden.</string>
     <string name="sort_name_az">Name (A-Z)</string>

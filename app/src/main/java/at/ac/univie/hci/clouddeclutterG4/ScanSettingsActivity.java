@@ -90,6 +90,12 @@ public class ScanSettingsActivity extends AppCompatActivity implements Navigatio
         setupCloudCheckbox(dropbox, "Dropbox");
         setupCloudCheckbox(oneDrive, "OneDrive");
 
+        findViewById(R.id.textView22).setOnClickListener(v -> {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            intent.putExtra("show_blacklist", true);
+            startActivity(intent);
+        });
+
         minUnit.setSelection(2);
         maxUnit.setSelection(2);
 

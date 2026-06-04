@@ -65,6 +65,10 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         Button btBlacklist = findViewById(R.id.btn_blacklist);
         btBlacklist.setOnClickListener(this::showBlacklistDialog);
 
+        if (getIntent().getBooleanExtra("show_blacklist", false)) {
+            showBlacklistDialog(btBlacklist);
+        }
+
     }
 
     private void showBlacklistDialog(View v) {
