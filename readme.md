@@ -1,4 +1,4 @@
-## Readme - M3
+## Readme - M4
 
 * Gruppe:	4
 * Team-Nr.: 412
@@ -29,9 +29,11 @@ Pixel 6
   
 * androidTestImplementation libs.espresso.core  
 * androidTestImplementation libs.ext.junit  
+* implementation 'com.google.code.gson:gson:2.14.0'
+* implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
 
 **Dauer der Entwicklung:**
-117 Stunden
+146 Stunden (117 Stunden M3 + 29 Stunden M4)
 
 #### Weitere Anmerkungen:  
 Das Anmelden ist mit den folgenden Zugangsdaten möglich:  
