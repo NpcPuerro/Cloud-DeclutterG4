@@ -29,6 +29,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawerLayout;
+    private Button btBlacklist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,9 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_periodic_scan.setAdapter(adapter);
 
-        Button btBlacklist = findViewById(R.id.btn_blacklist);
+        MockDataManager dm = MockDataManager.getInstance();
+        btBlacklist = findViewById(R.id.btn_blacklist);
+        btBlacklist.setText(getString(R.string.settings_blacklist_btn, dm.blacklistFilters.size()));
         btBlacklist.setOnClickListener(this::showBlacklistDialog);
 
         if (getIntent().getBooleanExtra("show_blacklist", false)) {
@@ -113,7 +116,9 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                 .setNeutralButton(R.string.blacklist_help, (dialogInterface, i) -> {
                     dialogInterface.dismiss();
                     startActivity(new Intent(this, FAQActivity.class));
-                }).show();
+                })
+                .setOnDismissListener(dialogInterface -> btBlacklist.setText(getString(R.string.settings_blacklist_btn, dm.blacklistFilters.size())))
+                .show();
 
     }
 

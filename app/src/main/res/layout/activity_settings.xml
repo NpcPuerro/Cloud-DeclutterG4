@@ -61,28 +61,52 @@
 
         <Button
             android:id="@+id/btn_blacklist"
-            style="@style/BigButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings_blacklist_btn"
-            android:layout_marginBottom="16dp" />
+            android:textSize="20sp"
+            android:text="@string/settings_blacklist_btn" />
 
-        <Button
-            android:id="@+id/btn_account_settings"
-            style="@style/BigButtonStyle"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_account_settings"
-            android:layout_marginBottom="16dp"
-            />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/btn_cloud_dienste"
-            style="@style/BigButtonStyle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_cloud_dienste"
-            />
+            android:background="@drawable/textfield_border"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="@string/settings_other_options"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_account_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:backgroundTint="@android:color/transparent"
+                android:gravity="left|center_vertical"
+                android:padding="0dp"
+                android:text="@string/btn_account_settings"
+                android:textColor="@color/koenigsblau" />
+
+            <Button
+                android:id="@+id/btn_cloud_dienste"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:backgroundTint="@android:color/transparent"
+                android:gravity="left|center_vertical"
+                android:padding="0dp"
+                android:text="@string/btn_cloud_dienste"
+                android:textColor="@color/koenigsblau" />
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -198,7 +198,7 @@
     <string name="welcome_label">Willkommen zum\nCloud Declutter</string>
     <string name="trash_item_days_left"><font color="#FF0000">30 Tage</font></string>
 
-    <string name="settings_blacklist_btn">Blacklist</string>
+    <string name="settings_blacklist_btn">Blacklist (Filter: %d)</string>
     <string name="blacklist_title">Blacklist</string>
     <string name="blacklist_filter_hint">Filter: z.B. *.png</string>
     <string name="blacklist_add_btn">Hinzufügen</string>
@@ -212,4 +212,5 @@
         <item>14 Tage</item>
         <item>30 Tage</item>
     </string-array>
+    <string name="settings_other_options">Suchst du vielleicht etwas anderes?</string>
 </resources>
