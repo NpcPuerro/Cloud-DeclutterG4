@@ -396,11 +396,12 @@ public class CleanupActivity extends AppCompatActivity implements NavigationView
 
         if (currentDisplayedItems.isEmpty()) {
             TextView emptyText = new TextView(this);
-            String text = dm.cleanupItems.isEmpty() ? getString(R.string.msg_no_files_found) : "Keine Dateien entsprechen den Filtern.";
+            String text = dm.cleanupItems.isEmpty() ? getString(R.string.msg_no_files_found) : "Keine Dateien gefunden.\n\nÜberprüfe deine aktiven Filter.";
 
             if (!dm.cleanupItems.isEmpty()) {
-                Spannable spannable = LoginUtils.getSpannable(text, "Filtern", v -> showFilterDialog());
+                Spannable spannable = LoginUtils.getSpannable(text, "Filter", v -> showFilterDialog());
                 emptyText.setText(spannable);
+                emptyText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 emptyText.setMovementMethod(LinkMovementMethod.getInstance());
                 emptyText.setHighlightColor(android.graphics.Color.TRANSPARENT);
             } else {

@@ -194,8 +194,8 @@ public class CloudActivity extends AppCompatActivity implements NavigationView.O
                     .setMessage("Möchten Sie diesen Cloud Dienst wirklich entfernen?")
                     .setPositiveButton(R.string.cloud_remove_confirm, (dialog, which) -> {
                         new AlertDialog.Builder(this)
-                                .setTitle("Endgültige Bestätigung")
-                                .setMessage("Sind Sie sicher? Wenn sie diese Cloud wieder benutzen möchten, werden sie erfordert diese nochmal zu verbinden.")
+                                .setTitle("Sind Sie sicher?")
+                                .setMessage("Wenn Sie diese Cloud wieder benutzen möchten, müssen Sie den Cloud-Account erneut hinzufügen.")
                                 .setPositiveButton(R.string.cloud_remove_confirm, (dialog2, which2) ->{
                                     MockDataManager.getInstance().cloudServices.remove(key);
                                     refreshAllUI();

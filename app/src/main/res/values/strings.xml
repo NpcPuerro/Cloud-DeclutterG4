@@ -10,7 +10,7 @@
     <string name="select_file_types">Dateitypen auswählen</string>
     <string name="clear_all">Alle löschen</string>
     <string name="cancel">Abbrechen</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="delete_confirm"><font color="#FF0000">Löschen</font></string>
 
     <string name="scan_starten">Scan starten</string>
@@ -175,7 +175,7 @@
     <string name="reset_filter">Filter zurücksetzen</string>
     <string name="to_blacklist"><u>(zur Blacklist)</u></string>
     <string name="info_category_title">Information</string>
-    <string name="info_category_text">Die hier gesetzten Filter können während der Speicherbereinigung noch angepasst werden.</string>
+    <string name="info_category_text">Die hier gesetzten Filter können während der Speicherbereinigung angepasst werden.</string>
     <string name="sort_name_az">Name (A-Z)</string>
     <string name="sort_name_za">Name (Z-A)</string>
     <string name="sort_size_desc">Größe (Groß zuerst)</string>
