@@ -14,21 +14,18 @@
 Pixel 6
 
 #### Externe Libraries und Frameworks:  
-* implementation libs.activity.ktx  
-* implementation libs.appcompat  
-* implementation libs.constraintlayout  
-* implementation libs.legacy.support.v4  
-* implementation libs.lifecycle.livedata.ktx  
-* implementation libs.lifecycle.viewmodel.ktx  
-* implementation libs.material  
-* implementation libs.anychart  
-* implementation libs.recyclerview  
-* implementation 'com.google.code.gson:gson:2.14.0'  
-  
-* testImplementation libs.junit  
-  
-* androidTestImplementation libs.espresso.core  
-* androidTestImplementation libs.ext.junit  
+* implementation libs.activity.ktx
+* implementation libs.appcompat
+* implementation libs.constraintlayout
+* implementation libs.legacy.support.v4
+* implementation libs.lifecycle.livedata.ktx
+* implementation libs.lifecycle.viewmodel.ktx
+* implementation libs.material
+* implementation libs.anychart
+* implementation libs.recyclerview
+* testImplementation libs.junit
+* androidTestImplementation libs.espresso.core
+* androidTestImplementation libs.ext.junit
 * implementation 'com.google.code.gson:gson:2.14.0'
 * implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
 
