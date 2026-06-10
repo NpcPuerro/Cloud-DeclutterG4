@@ -58,7 +58,7 @@
       },
       {
         "question": "Wie nutze ich die Blacklist?",
-        "answer": "Die Blacklist können Sie nutzen, indem Sie in „Einstellungen“ auf den Button „Blacklist“ drücken und in dem auftauchenden Menü den gewünschten Filter eingeben, auf welchem basierend die Dateien nicht mehr zur Auswahl bei der Speicherbereinigung angezeigt werden.\nAls mögliche Blacklist Filter können Sie bspw. „*.png“ eingeben, wodurch alle .png (Bilddateien) ausgeschlossen werden. \nWeitere Beispiele: „*asd*“ (alles, das „asd“ beinhält), „Rechnung.*“ (Jede Datei, unabhängig vom Typ, die Rechnung heißt)"
+        "answer": "Die Blacklist können Sie nutzen, indem Sie in „Einstellungen“ auf „Blacklist“ drücken und in dem auftauchenden Fenster den gewünschten Filter eingeben. Basierend auf diesem werden die entsprechenden Dateien nicht mehr zur Auswahl bei der Speicherbereinigung angezeigt werden.\nAls mögliche Blacklist Filter können Sie bspw. <b>*.png</b> eingeben, wodurch alle .png (Bilddateien) ausgeschlossen werden. \nWeitere Beispiele: <b>*asd*</b> (Jede Datei, die <b>„asd“</b> beinhält), \n<b>Rechnung.*</b> (Jede Datei, unabhängig vom Typ, die <b>Rechnung</b> im Namen hat)"
       }
     ]
   }
