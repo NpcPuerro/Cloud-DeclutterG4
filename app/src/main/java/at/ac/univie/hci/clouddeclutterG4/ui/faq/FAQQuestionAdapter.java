@@ -1,5 +1,6 @@
 package at.ac.univie.hci.clouddeclutterG4.ui.faq;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +34,10 @@ public class FAQQuestionAdapter extends RecyclerView.Adapter<FAQQuestionAdapter.
     public void onBindViewHolder(@NonNull VH holder, int position) {
         FAQQuestion question = questions.get(position);
 
-        holder.txQuestion.setText(question.getQuestion());
-        holder.txAnswer.setText(question.getAnswer());
+        String qq = question.getQuestion();
+        holder.txQuestion.setText(Html.fromHtml(qq, Html.FROM_HTML_MODE_LEGACY));
+        String answer = question.getAnswer();
+        holder.txAnswer.setText(Html.fromHtml(answer, Html.FROM_HTML_MODE_LEGACY));
 
         holder.txAnswer.setVisibility(question.isExpanded() ? View.VISIBLE : View.GONE);
         holder.ivFAQExpand.setRotation(question.isExpanded() ? 180f : 0f);
