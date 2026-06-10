@@ -22,6 +22,8 @@ import androidx.core.view.GravityCompat;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.ortiz.touchview.TouchImageView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -232,16 +234,19 @@ public class TrashActivity extends AppCompatActivity implements NavigationView.O
     }
 
     private void showImagePreview(FileItem item) {
-        ImageView imageView = new ImageView(this);
-        imageView.setImageResource(item.iconResId);
-        imageView.setAdjustViewBounds(true);
-        imageView.setPadding(32, 32, 32, 32);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View preview = inflater.inflate(R.layout.file_preview, null);
 
-        new AlertDialog.Builder(this)
+        TouchImageView imageView = preview.findViewById(R.id.ivImageView);
+        imageView.setImageResource(item.iconResId);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(item.name)
-                .setView(imageView)
+                .setView(preview)
                 .setPositiveButton(R.string.ok, null)
-                .show();
+                .create();
+
+        dialog.show();
     }
 
     private void showFilterDialog() {
