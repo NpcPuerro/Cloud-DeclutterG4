@@ -48,8 +48,8 @@
                 android:textSize="20sp"
                 app:icon="@drawable/baseline_filter_alt_24"
                 app:iconGravity="start"
-                app:iconPadding="-18dp"
-                app:iconSize="18dp" />
+                app:iconPadding="-24dp"
+                app:iconSize="24dp" />
 
             <Button
                 android:id="@+id/btn_sort"
@@ -61,9 +61,10 @@
                 android:text="@string/btn_sort"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                app:icon="@drawable/outline_filter_list_24"
+                app:icon="@drawable/sort_svgrepo_com"
                 app:iconGravity="start"
-                app:iconPadding="-18dp" />
+                app:iconPadding="-24dp"
+                app:iconSize="24dp" />
         </LinearLayout>
 
         <Button

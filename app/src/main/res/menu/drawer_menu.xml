@@ -15,11 +15,11 @@
         android:title="@string/nav_usage" />
     <item
         android:id="@+id/nav_cleanup"
-        android:icon="@drawable/outline_autorenew_24"
+        android:icon="@drawable/outline_search_24"
         android:title="@string/nav_cleanup" />
     <item
         android:id="@+id/nav_expanded_scan"
-        android:icon="@drawable/outline_autorenew_24"
+        android:icon="@drawable/outline_search_gear_24"
         android:title="@string/nav_expanded_scan" />
     <item
         android:id="@+id/nav_trash"
